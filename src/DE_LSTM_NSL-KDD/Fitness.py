@@ -18,7 +18,7 @@ def fitness(data, hiddenLayer, outputLayer, epoch, batchSize, train_noStringTemp
     train_loader = torch.utils.data.DataLoader(batch_train_dataset, batch_size=batchSize, shuffle=False)
     
     # traning
-    for epoch in range(int(epoch)):
+    for eachepoch in range(int(epoch)):
         h = torch.Tensor(1, int(batchSize), data[0]).zero_() # hiddenLayerNumber, batchSize, hiddenSize
         c = torch.Tensor(1, int(batchSize), data[0]).zero_()
         for step, (batch_x, batch_y) in enumerate (train_loader):
@@ -39,8 +39,8 @@ def fitness(data, hiddenLayer, outputLayer, epoch, batchSize, train_noStringTemp
     h = torch.Tensor(1, len(x_test_tensor), 30).zero_()
     c = torch.Tensor(1, len(x_test_tensor), 30).zero_()
 
-    x_test_tensor = x_test_tensor.view(1, -1, np.size(train_noStringTemp_X, 1))
-    y_test_predic, _ = lstm(x_test_tensor, h, c)
+    x_test = x_test_tensor.view(1, -1, np.size(train_noStringTemp_X, 1))
+    y_test_predic, _ = lstm(x_test, h, c)
     pred = y_test_predic.detach().numpy()
     pred = pred.reshape(-1, int(outputLayer))
     y_test_list_predic = np.argmax(pred, axis=1)

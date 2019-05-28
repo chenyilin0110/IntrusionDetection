@@ -86,8 +86,3 @@ pred = y_test_predic.detach().numpy()#training's cannot impact testing
 y_test_list_predic = np.argmax(pred, axis=1)
 
 accuracyfunction.accuracy(y_test_tensor, y_test_list_predic)
-
-# training 
-#y_train_predict = net(x_train_tensor)
-#pred = y_train_predict.detach().numpy()# testing's cannot impact testing
-#print("The training accuracy is", accuracy_score(y_train_tensor, np.argmax(pred, axis=1)))

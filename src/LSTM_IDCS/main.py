@@ -80,7 +80,7 @@ batch_train_dataset = torch.utils.data.TensorDataset(x_train_tensor, y_train_ten
 train_loader = torch.utils.data.DataLoader(batch_train_dataset, batch_size=int(batchSize), shuffle=False)
 
 # traning
-for epoch in range(int(iteration)):
+for eachepoch in range(int(iteration)):
     h = torch.Tensor(1, int(batchSize), 64).zero_() # hiddenLayerNumber, batchSize, hiddenSize
     c = torch.Tensor(1, int(batchSize), 64).zero_()
     for step, (batch_x, batch_y) in enumerate (train_loader):        
@@ -96,7 +96,7 @@ for epoch in range(int(iteration)):
         y_prediction = y_prediction.view(np.size(batch_x.numpy(), 1), -1) # reshape from 3 dimention to 2 dimention
         loss = lossFunction(y_prediction, batch_y)
         optimizer.zero_grad()# clean optimizer
-        loss.backward()# calculate new parameters
+        loss.backward(retain_graph=True)# calculate new parameters
         optimizer.step()# update parameters
 
 h = torch.Tensor(1, len(x_test_tensor), 64).zero_()

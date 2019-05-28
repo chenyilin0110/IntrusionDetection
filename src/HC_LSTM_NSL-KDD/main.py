@@ -16,14 +16,22 @@ from transactionFunction import transaction
 import time
 
 # set filename outputLayer testing iteration
-trainData = sys.argv[1]
-testData = sys.argv[2]
-testData_21 = sys.argv[3]
-hiddenLayer = sys.argv[4]
-outputLayer = sys.argv[5]
-iteration = sys.argv[6]
-batchSize = sys.argv[7]
-epoch = sys.argv[8]
+# trainData = sys.argv[1]
+# testData = sys.argv[2]
+# testData_21 = sys.argv[3]
+# hiddenLayer = sys.argv[4]
+# outputLayer = sys.argv[5]
+# iteration = sys.argv[6]
+# batchSize = sys.argv[7]
+# epoch = sys.argv[8]
+trainData = "train.txt"
+testData = "test.txt"
+testData_21 = "test-21.txt"
+hiddenLayer = 1
+outputLayer = 5
+iteration = 2
+batchSize = 10000
+epoch = 80
 
 # load trainData
 train_temp = preprocess.loadDataset(trainData)
@@ -105,7 +113,7 @@ for eachiteration in range(int(iteration)):
     lossFunction = nn.CrossEntropyLoss()
 
     # traning
-    for epoch in range(int(epoch)):
+    for eachepoch in range(int(epoch)):
         h = torch.Tensor(1, int(batchSize), solution[0]).zero_() # hiddenLayerNumber, batchSize, hiddenSize
         c = torch.Tensor(1, int(batchSize), solution[0]).zero_()
         for step, (batch_x, batch_y) in enumerate (train_loader):
@@ -125,10 +133,10 @@ for eachiteration in range(int(iteration)):
             optimizer.step()# update parameters
     h = torch.Tensor(1, len(x_test_tensor), solution[0]).zero_()
     c = torch.Tensor(1, len(x_test_tensor), solution[0]).zero_()
-
+    
     # testing
-    x_test_tensor = x_test_tensor.view(1, -1, np.size(train_resultNormalize, 1))
-    y_test_predic, _ = lstm(x_test_tensor, h, c)
+    x_test = x_test_tensor.view(1, -1, np.size(train_resultNormalize, 1))
+    y_test_predic, _ = lstm(x_test, h, c)
     pred = y_test_predic.detach().numpy()
     pred = pred.reshape(-1, int(outputLayer))
     y_test_list_predic = np.argmax(pred, axis=1)

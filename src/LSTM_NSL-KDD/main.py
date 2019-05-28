@@ -92,7 +92,7 @@ batch_train_dataset = torch.utils.data.TensorDataset(x_train_tensor, y_train_ten
 train_loader = torch.utils.data.DataLoader(batch_train_dataset, batch_size=int(batchSize), shuffle=False)
 
 # traning
-for epoch in range(int(epoch)):
+for eachepoch in range(int(epoch)):
     h = torch.Tensor(1, int(batchSize), 80).zero_() # hiddenLayerNumber, batchSize, hiddenSize
     c = torch.Tensor(1, int(batchSize), 80).zero_()
     for step, (batch_x, batch_y) in enumerate (train_loader):

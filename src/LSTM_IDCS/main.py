@@ -11,28 +11,21 @@ import preprocess
 import accuracyfunction
 import time
 
-# finder = sys.argv[1]
-# filename = sys.argv[2]
-# outputlayer = sys.argv[3]
-# testing = sys.argv[4]
-# iteration = sys.argv[5]
-# batchSize = sys.argv[6]
-# number = sys.argv[7]
-finder = 2
-filename = "data1.csv"
-outputlayer = 2
-testing = 20
-iteration = 100
-batchSize = 100
+finder = sys.argv[1]
+filename = sys.argv[2]
+outputlayer = sys.argv[3]
+testing = sys.argv[4]
+iteration = sys.argv[5]
+batchSize = sys.argv[6]
 
 start = time.time()
 # load dataset
 if finder == "multi":
-    temp = np.loadtxt('../../dataset/IndustrialControlSystem/multiclass/'+filename, dtype=np.str, delimiter=',')
+    temp = np.loadtxt('../dataset/IndustrialControlSystem/multiclass/'+filename, dtype=np.str, delimiter=',')
 elif int(finder) == 2:
-    temp = np.loadtxt('../../dataset/IndustrialControlSystem/2class/'+filename, dtype=np.str, delimiter=',')
+    temp = np.loadtxt('../dataset/IndustrialControlSystem/2class/'+filename, dtype=np.str, delimiter=',')
 elif int(finder) == 3:
-    temp = np.loadtxt('../../dataset/IndustrialControlSystem/3class/'+filename, dtype=np.str, delimiter=',')
+    temp = np.loadtxt('../dataset/IndustrialControlSystem/3class/'+filename, dtype=np.str, delimiter=',')
 
 # preprocess
 if finder =="multi":

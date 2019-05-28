@@ -5,7 +5,7 @@ import numpy as np
 import math
 
 def loadDataset(x):
-    temp = np.loadtxt('../../dataset/NSL-KDD/' + x, dtype=np.str, delimiter=',')
+    temp = np.loadtxt('../dataset/NSL-KDD/' + x, dtype=np.str, delimiter=',')
     temp = temp[0:,:-1] # rempve final column
     return temp
 

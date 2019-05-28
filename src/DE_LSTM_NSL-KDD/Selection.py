@@ -12,7 +12,6 @@ def selection(populationDataOriginal, crossoverData, countOriginalOtherAccuracy,
         # countOriginalOtherAccuracy[3][eachPopulation] = recall
         countOriginalOtherAccuracy[0][eachPopulation] = fitness(populationDataOriginal[eachPopulation], hiddenLayer, outputLayer, epoch, batchSize, train_noStringTemp_X, x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor)
         
-
         # accuracy, local, precision, recall = fitness(crossoverData[eachPopulation], hiddenLayer, outputLayer, epoch,  train_noStringTemp_X, x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor)
         # countCrossoverOtherAccuracy[0][eachPopulation] = accuracy
         # countCrossoverOtherAccuracy[1][eachPopulation] = local

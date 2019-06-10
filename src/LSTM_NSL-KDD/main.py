@@ -28,6 +28,7 @@ train_noStringTemp_X = train_temp[0:,0:-1]
 
 # only trainData do this
 protocal_type_list = preprocess.saveProtocal_typeOrder(train_noStringTemp_X)
+print(protocal_type_list)
 service_list = preprocess.saveServiceOrder(train_noStringTemp_X)
 flag_list = preprocess.saveFlagOrder(train_noStringTemp_X)
 protocal_type_onehotencoded = preprocess.onehotencoded(protocal_type_list)

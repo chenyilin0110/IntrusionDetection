@@ -28,11 +28,11 @@ CR = sys.argv[11]
 
 # load dataset
 if finder == "multi":
-    temp = np.loadtxt('../dataset/IndustrialControlSystem/multiclass/'+filename, dtype=np.str, delimiter=',')
+    temp = np.loadtxt('dataSet/IndustrialControlSystem/multiclass/'+filename, dtype=np.str, delimiter=',')
 elif int(finder) == 2:
-    temp = np.loadtxt('../dataset/IndustrialControlSystem/2class/'+filename, dtype=np.str, delimiter=',')
+    temp = np.loadtxt('dataSet/IndustrialControlSystem/2class/'+filename, dtype=np.str, delimiter=',')
 elif int(finder) == 3:
-    temp = np.loadtxt('../dataset/IndustrialControlSystem/3class/'+filename, dtype=np.str, delimiter=',')
+    temp = np.loadtxt('dataSet/IndustrialControlSystem/3class/'+filename, dtype=np.str, delimiter=',')
 
 if finder =="multi":
     noStringTemp = temp[0:,0:] 

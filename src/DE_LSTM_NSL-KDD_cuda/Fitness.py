@@ -30,7 +30,7 @@ def fitness(data, hiddenLayer, outputLayer, epoch, batchSize, train_noStringTemp
                 c = c[:,:len(batch_x[0]),:]
                 h = torch.from_numpy(h)
                 c = torch.from_numpy(c)
-            y_prediction, (h,c) = lstm(batch_x.cuda(), h, c)
+            y_prediction, (h,c) = lstm(batch_x.cuda(), h.cuda(), c.cuda())
             y_prediction = y_prediction.view(np.size(batch_x.numpy(), 1), -1) # reshape from 3 dimention to 2 dimention
             loss = lossFunction(y_prediction, batch_y.cuda())
             optimizer.zero_grad()# clean optimizer
@@ -40,10 +40,10 @@ def fitness(data, hiddenLayer, outputLayer, epoch, batchSize, train_noStringTemp
     c = torch.Tensor(1, len(x_test_tensor), data[0].tolist()).zero_()
 
     x_test = x_test_tensor.view(1, -1, np.size(train_noStringTemp_X, 1))
-    y_test_predic, _ = lstm(x_test.cuda(), h, c)
+    y_test_predic, _ = lstm(x_test.cuda(), h.cuda(), c.cuda())
     pred = y_test_predic.detach().cpu().numpy()
     pred = pred.reshape(-1, int(outputLayer))
     y_test_list_predic = np.argmax(pred, axis=1)
     
     accuracyvalue = accuracy(y_test_tensor, y_test_list_predic)
-    return accuracyvalue
+    return accuracyvalue, lstm

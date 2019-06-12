@@ -94,6 +94,7 @@ y_test_tensor = Variable(torch.from_numpy(test_noStringTemp_Y)).long()
 # end preprocess----------------------------------------------------------------------------------------------------------
 
 best = 0
+bestModel = 0
 bestAccuracy = 0
 bestPrecision = 0
 bestRecall = 0
@@ -123,17 +124,21 @@ for eachiteration in range(int(iteration)):
     # Selection
     countOriginalOtherAccuracy = np.zeros((4, int(population)))
     countCrossoverOtherAccuracy = np.zeros((4, int(population)))
-    selectionData = selection(populationDataOriginal, crossoverData, countOriginalOtherAccuracy, countCrossoverOtherAccuracy, int(hiddenLayer), int(outputLayer), int(epoch), int(batchSize), train_noStringTemp_X, x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor)
+    crossoverModel = []
+    originalModel = []
+    selectionData = selection(crossoverModel, originalModel, populationDataOriginal, crossoverData, countOriginalOtherAccuracy, countCrossoverOtherAccuracy, int(hiddenLayer), int(outputLayer), int(epoch), int(batchSize), train_noStringTemp_X, x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor)
     
     if eachiteration == 0:
         # best = countCrossoverOtherAccuracy[1][0]
         best = countCrossoverOtherAccuracy[0][0]
+        bestModel = crossoverModel[0]
 
     for i in range(np.size(countCrossoverOtherAccuracy, 1)):
         # if best <= countCrossoverOtherAccuracy[1][i]:
             # best = countCrossoverOtherAccuracy[1][i]
         if best <= countCrossoverOtherAccuracy[0][i]:
             best = countCrossoverOtherAccuracy[0][i]
+            bestModel = crossoverModel[i]
             # bestAccuracy = countCrossoverOtherAccuracy[0][i]
             # bestPrecision = countCrossoverOtherAccuracy[2][i]
             # bestRecall = countCrossoverOtherAccuracy[3][i]
@@ -145,6 +150,7 @@ for eachiteration in range(int(iteration)):
         #     best = countOriginalOtherAccuracy[1][i]
         if best <= countOriginalOtherAccuracy[0][i]:
             best = countOriginalOtherAccuracy[0][i]
+            bestModel = originalModel[i]
             # bestAccuracy = countOriginalOtherAccuracy[0][i]
             # bestPrecision = countOriginalOtherAccuracy[2][i]
             # bestRecall = countOriginalOtherAccuracy[3][i]
@@ -184,3 +190,4 @@ print(best)
 print(bestSolution)
 # print(bestPrecision)
 # print(bestRecall)
+torch.save(bestModel, 'DE_lstm.pkl')

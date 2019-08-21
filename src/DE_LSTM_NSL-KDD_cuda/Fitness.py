@@ -6,11 +6,15 @@ import torch
 from accuracyfunction import accuracy
 import time
 def fitness(data, hiddenLayer, outputLayer, epoch, batchSize, train_noStringTemp_X, x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor):
+    neurons = int(data[0])
+    
     # bulid lstm
-    lstm = LSTM(np.size(train_noStringTemp_X,1), int(outputLayer), data[0].tolist())
+    lstm = LSTM(np.size(train_noStringTemp_X,1), int(outputLayer), neurons)
     lstm.cuda()
     # set optimizer and lossFunction
-    optimizer = optim.RMSprop(lstm.parameters(), lr=0.05)
+    
+    learningRate = data[1]
+    optimizer = optim.RMSprop(lstm.parameters(), lr = learningRate)
     lossFunction = nn.CrossEntropyLoss()
 
     # split batch
@@ -19,8 +23,8 @@ def fitness(data, hiddenLayer, outputLayer, epoch, batchSize, train_noStringTemp
 
     # traning
     for eachepoch in range(int(epoch)):
-        h = torch.Tensor(1, int(batchSize), data[0].tolist()).zero_() # hiddenLayerNumber, batchSize, hiddenSize
-        c = torch.Tensor(1, int(batchSize), data[0].tolist()).zero_()
+        h = torch.Tensor(1, int(batchSize), neurons).zero_() # hiddenLayerNumber, batchSize, hiddenSize
+        c = torch.Tensor(1, int(batchSize), neurons).zero_()
         for step, (batch_x, batch_y) in enumerate (train_loader):
             batch_x = batch_x.view(1, -1, np.size(train_noStringTemp_X, 1)) # seq_len batch_size input_dim
             if len(batch_x[0]) != int(batchSize):
@@ -36,8 +40,8 @@ def fitness(data, hiddenLayer, outputLayer, epoch, batchSize, train_noStringTemp
             optimizer.zero_grad()# clean optimizer
             loss.backward(retain_graph=True)# calculate new parameters
             optimizer.step()# update parameters
-    h = torch.Tensor(1, len(x_test_tensor), data[0].tolist()).zero_()
-    c = torch.Tensor(1, len(x_test_tensor), data[0].tolist()).zero_()
+    h = torch.Tensor(1, len(x_test_tensor), neurons).zero_()
+    c = torch.Tensor(1, len(x_test_tensor), neurons).zero_()
 
     x_test = x_test_tensor.view(1, -1, np.size(train_noStringTemp_X, 1))
     y_test_predic, _ = lstm(x_test.cuda(), h.cuda(), c.cuda())

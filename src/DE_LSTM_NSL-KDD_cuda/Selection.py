@@ -23,6 +23,6 @@ def selection(crossoverModel, originalModel, populationDataOriginal, crossoverDa
 
     for eachPopulation in range(np.size(countCrossoverOtherAccuracy, 1)):
         if countCrossoverOtherAccuracy[0][eachPopulation] >= countOriginalOtherAccuracy[0][eachPopulation]:
-            for eachDim in range(hiddenLayer):
+            for eachDim in range(2):
                 selectionPopulationData[eachPopulation][eachDim] = crossoverData[eachPopulation][eachDim]
     return selectionPopulationData

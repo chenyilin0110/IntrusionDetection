@@ -27,7 +27,7 @@ testData = "test.txt"
 hiddenLayer = 1
 outputLayer = 5
 batchSize = 10000
-iteration = 1
+iteration = 40
 epoch = 80
 population = 20
 F = 0.5
@@ -95,31 +95,43 @@ y_test_tensor = Variable(torch.from_numpy(test_noStringTemp_Y)).long()
 
 best = 0
 bestModel = 0
-bestAccuracy = 0
-bestPrecision = 0
-bestRecall = 0
-bestSolution = np.zeros(int(hiddenLayer)).astype(int)
-eachIterationLocalBest = []
+# bestAccuracy = 0
+# bestPrecision = 0
+# bestRecall = 0
+bestSolution = np.zeros(int(hiddenLayer)+1).astype(float)
+eachIterationLocalBestMetrics = []
+eachIterationLocalBestSolution = np.zeros((int(population), len(bestSolution)), dtype=np.float)
 Ud = np.size(train_noStringTemp_X, 1)
 Ld = int(outputLayer)
 
+# learning rate
+Lr_Ud = 0.01
+Lr_Ld = 0.001
+
 # Initial
-populationDataOriginal = np.zeros((int(population), len(bestSolution)), dtype=np.int)
+populationDataOriginal = np.zeros((int(population), len(bestSolution)), dtype=np.float)
 for eachpopulationData_colum in range(int(population)):
     for eachpopulationData_row in range(np.size(populationDataOriginal, 1)):
         r = rand.random()
-        populationDataOriginal[eachpopulationData_colum][eachpopulationData_row] = int(((Ud - Ld) * r) + Ld)
+        if eachpopulationData_row == 0:
+            # initial neurons
+            populationDataOriginal[eachpopulationData_colum][eachpopulationData_row] = int(((Ud - Ld) * r) + Ld)
+        elif eachpopulationData_row == 1:
+            # intial learning rate
+            r = r / 100 # learning rate [0.01 ~ 0.001]
+            populationDataOriginal[eachpopulationData_colum][eachpopulationData_row] = float(((Lr_Ud - Lr_Ld) * r) + Lr_Ld)
 populationData = populationDataOriginal.copy() # copy populationDataOriginal to populationData
 
 for eachiteration in range(int(iteration)):
     if eachiteration != 0:
         print(best)
         print(bestSolution)
+
     # Mutation
-    mutationData = mutation(populationData, float(F), Ud, Ld)
+    mutationData = mutation(populationData, float(F), Ud, Ld, Lr_Ud, Lr_Ld)
     
     # Crossover
-    crossoverData = crossover(populationDataOriginal, mutationData, float(CR), Ud, Ld)
+    crossoverData = crossover(populationDataOriginal, mutationData, float(CR), Ud, Ld, Lr_Ud, Lr_Ld)
     
     # Selection
     countOriginalOtherAccuracy = np.zeros((4, int(population)))
@@ -128,6 +140,7 @@ for eachiteration in range(int(iteration)):
     originalModel = []
     selectionData = selection(crossoverModel, originalModel, populationDataOriginal, crossoverData, countOriginalOtherAccuracy, countCrossoverOtherAccuracy, int(hiddenLayer), int(outputLayer), int(epoch), int(batchSize), train_noStringTemp_X, x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor)
     
+    # Fitness
     if eachiteration == 0:
         # best = countCrossoverOtherAccuracy[1][0]
         best = countCrossoverOtherAccuracy[0][0]
@@ -142,7 +155,7 @@ for eachiteration in range(int(iteration)):
             # bestAccuracy = countCrossoverOtherAccuracy[0][i]
             # bestPrecision = countCrossoverOtherAccuracy[2][i]
             # bestRecall = countCrossoverOtherAccuracy[3][i]
-            for j in range(int(hiddenLayer)):
+            for j in range(2):
                 bestSolution[j] = selectionData[i][j]
 
     for i in range(np.size(countCrossoverOtherAccuracy, 1)):
@@ -154,40 +167,63 @@ for eachiteration in range(int(iteration)):
             # bestAccuracy = countOriginalOtherAccuracy[0][i]
             # bestPrecision = countOriginalOtherAccuracy[2][i]
             # bestRecall = countOriginalOtherAccuracy[3][i]
-            for j in range(int(hiddenLayer)):
+            for j in range(2):
                 bestSolution[j] = selectionData[i][j]
     
-    eachIterationLocalBest.append(bestSolution[0]) # save each iteration best local
-    index = 0
-    count = 0
-    total = 0
+    # Update
+    eachIterationLocalBestMetrics.append(best) # save each iteration best local metrics
+    
+    # save each iteration best local solution
+    for dim in range(np.size(eachIterationLocalBestSolution, 1)):
+        eachIterationLocalBestSolution[eachiteration][dim] = bestSolution[dim] 
+    
     if eachiteration >= 4:
-        for j in range(len(eachIterationLocalBest)):
-            if eachIterationLocalBest[index] != eachIterationLocalBest[j]:
+        index = 0
+        count = 0
+        totalNeurons = 0
+        totalLearningRate = 0
+
+        for j in range(len(eachIterationLocalBestMetrics)):
+            if eachIterationLocalBestMetrics[index] != eachIterationLocalBestMetrics[j]:
                 count = 0
                 index = j
                 count += 1
             else:
                 count +=1
         
-        if count >= 5: # five iteration same
-            for i in range(len(eachIterationLocalBest)):
-                total += eachIterationLocalBest[i]
-            total /= (eachiteration + 1)
+        # if five iteration same
+        if count >= 5:
+            for i in range(count):
+                # calculate neurons avg
+                totalNeurons += eachIterationLocalBestSolution[i][0]
+                
+                # calculate learning rate avg
+                totalLearningRate += eachIterationLocalBestSolution[i][1]
+            totalNeurons /= (eachiteration + 1)
+            totalLearningRate /= (eachiteration + 1)
 
             # reset
             ran = rand.randint(0, int(population)-1)
             populationDataOriginal = selectionData.copy()
             populationData = selectionData.copy()
-            populationDataOriginal[ran] = int(total)
-            populationData[ran] = int(total)
+            
+            for dim in range(2):
+                # neurons
+                if dim == 0:
+                    populationDataOriginal[ran][dim] = int(totalNeurons)
+                    populationData[ran][dim] = int(totalNeurons)
+                # learning rate
+                elif dim == 1:
+                    populationDataOriginal[ran][dim] = totalLearningRate
+                    populationData[ran][dim] = totalLearningRate
     else:    
         # reset
         populationDataOriginal = selectionData.copy()
         populationData = selectionData.copy()
-# print(bestAccuracy)
+
 print(best)
 print(bestSolution)
+# print(bestAccuracy)
 # print(bestPrecision)
 # print(bestRecall)
 torch.save(bestModel, 'DE_lstm.pkl')

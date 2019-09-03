@@ -29,9 +29,12 @@ outputLayer = 5
 batchSize = 10000
 iteration = 40
 epoch = 80
-population = 20
+population = 3
 F = 0.5
 CR = 0.3
+
+# can use cuda or not
+cuda = torch.cuda.is_available()
 
 # load trainData
 train_temp = preprocess.loadDataset(trainData)
@@ -138,7 +141,7 @@ for eachiteration in range(int(iteration)):
     countCrossoverOtherAccuracy = np.zeros((4, int(population)))
     crossoverModel = []
     originalModel = []
-    selectionData = selection(crossoverModel, originalModel, populationDataOriginal, crossoverData, countOriginalOtherAccuracy, countCrossoverOtherAccuracy, int(hiddenLayer), int(outputLayer), int(epoch), int(batchSize), train_noStringTemp_X, x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor)
+    selectionData = selection(crossoverModel, originalModel, populationDataOriginal, crossoverData, countOriginalOtherAccuracy, countCrossoverOtherAccuracy, int(hiddenLayer), int(outputLayer), int(epoch), int(batchSize), train_noStringTemp_X, x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor, cuda)
     
     # Fitness
     if eachiteration == 0:

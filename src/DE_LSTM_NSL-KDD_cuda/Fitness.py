@@ -5,12 +5,14 @@ import torch.nn as nn
 import torch
 from accuracyfunction import accuracy
 import time
-def fitness(data, hiddenLayer, outputLayer, epoch, batchSize, train_noStringTemp_X, x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor):
+def fitness(data, hiddenLayer, outputLayer, epoch, batchSize, train_noStringTemp_X, x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor, cuda):
     neurons = int(data[0])
     
     # bulid lstm
     lstm = LSTM(np.size(train_noStringTemp_X,1), int(outputLayer), neurons)
-    lstm.cuda()
+    if cuda == True:
+        lstm.cuda()
+    
     # set optimizer and lossFunction
     
     learningRate = data[1]
@@ -34,9 +36,19 @@ def fitness(data, hiddenLayer, outputLayer, epoch, batchSize, train_noStringTemp
                 c = c[:,:len(batch_x[0]),:]
                 h = torch.from_numpy(h)
                 c = torch.from_numpy(c)
-            y_prediction, (h,c) = lstm(batch_x.cuda(), h.cuda(), c.cuda())
+
+            if cuda == True:
+                y_prediction, (h,c) = lstm(batch_x.cuda(), h.cuda(), c.cuda())
+            else:
+                y_prediction, (h,c) = lstm(batch_x, h, c)
+
             y_prediction = y_prediction.view(np.size(batch_x.numpy(), 1), -1) # reshape from 3 dimention to 2 dimention
-            loss = lossFunction(y_prediction, batch_y.cuda())
+
+            if cuda == True:
+                loss = lossFunction(y_prediction, batch_y.cuda())
+            else:
+                loss = lossFunction(y_prediction, batch_y)
+
             optimizer.zero_grad()# clean optimizer
             loss.backward(retain_graph=True)# calculate new parameters
             optimizer.step()# update parameters
@@ -44,7 +56,12 @@ def fitness(data, hiddenLayer, outputLayer, epoch, batchSize, train_noStringTemp
     c = torch.Tensor(1, len(x_test_tensor), neurons).zero_()
 
     x_test = x_test_tensor.view(1, -1, np.size(train_noStringTemp_X, 1))
-    y_test_predic, _ = lstm(x_test.cuda(), h.cuda(), c.cuda())
+
+    if cuda == True:
+        y_test_predic, _ = lstm(x_test.cuda(), h.cuda(), c.cuda())
+    else:
+            y_test_predic, _ = lstm(x_test, h, c)
+
     pred = y_test_predic.detach().cpu().numpy()
     pred = pred.reshape(-1, int(outputLayer))
     y_test_list_predic = np.argmax(pred, axis=1)

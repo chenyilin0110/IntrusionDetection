@@ -96,7 +96,7 @@ for eachepoch in range(int(epoch)):
     for step, (batch_x, batch_y) in enumerate (train_loader):
         # input size = (batch_size, number of channels, input_data_h, input_data_w)
         batch_x = batch_x.view(-1, 1, 1, np.size(train_resultNormalize, 1))
-        y_prediction = lstm(batch_x)
+        y_prediction = lstm(batch_x, np.size(train_resultNormalize, 1))
         y_prediction = y_prediction.view(np.size(batch_x.numpy(), 0), -1) # reshape from 3 dimention to 2 dimention
         loss = lossFunction(y_prediction, batch_y)
         optimizer.zero_grad()# clean optimizer
@@ -105,7 +105,7 @@ for eachepoch in range(int(epoch)):
 
 # testing
 x_test_tensor = x_test_tensor.view(-1, 1, 1, np.size(train_resultNormalize, 1))
-y_test_predic = lstm(x_test_tensor)
+y_test_predic = lstm(x_test_tensor, np.size(train_resultNormalize, 1))
 pred = y_test_predic.detach().numpy()
 pred = pred.reshape(-1, int(outputLayer))
 y_test_list_predic = np.argmax(pred, axis=1)

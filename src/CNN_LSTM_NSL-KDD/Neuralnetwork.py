@@ -24,10 +24,10 @@ class CNN(nn.Module):
         )        
         self.out = nn.Linear(32, outputDim)
     
-    def forward(self, x):
+    def forward(self, x, lstm_input):
         out = self.conv1(x)
         out = self.conv2(out)
-        out = out.view(-1, 1, 61)
+        out = out.view(-1, 1, int(lstm_input/2))
         r_out, _ = self.lstm(out)
         out = self.out(r_out)
         return out

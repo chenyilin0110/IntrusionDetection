@@ -93,7 +93,6 @@ def distinguishNaturalAttack(original, y, outputLayer):
     return y
 
 def replace(x, protocal_type_list, service_list, flag_list, protocal_type_onehotencoded, service_list_onehotencoded, flag_list_onehotencoded):
-    print(np.array(x).shape)
     # replace protocal_type
     for i in range(len(x)):
         for eachprotocal_type in range(len(protocal_type_list)):
@@ -103,7 +102,7 @@ def replace(x, protocal_type_list, service_list, flag_list, protocal_type_onehot
                 for q in range(len(protocal_type_list)):
                     x[i].insert(nextIndex, protocal_type_onehotencoded[eachprotocal_type][q])
                     nextIndex += 1
-    print(np.array(x).shape)
+
     # replace service
     service = 2 + len(protocal_type_list) -1
     for i in range(len(x)):
@@ -114,7 +113,7 @@ def replace(x, protocal_type_list, service_list, flag_list, protocal_type_onehot
                 for q in range(len(service_list)):
                     x[i].insert(nextIndex, service_list_onehotencoded[eachservice][q])
                     nextIndex += 1
-    print(np.array(x).shape)
+
     # replace flag
     flag = service + len(service_list)
     for i in range(len(x)):
@@ -125,7 +124,6 @@ def replace(x, protocal_type_list, service_list, flag_list, protocal_type_onehot
                 for q in range(len(flag_list)):
                     x[i].insert(nextIndex, flag_list_onehotencoded[eachflag][q])
                     nextIndex += 1
-    print(np.array(x).shape)
     
 def log(x):
     x = x.astype(float)

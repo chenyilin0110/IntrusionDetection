@@ -12,9 +12,8 @@ from accuracyfunction import accuracy
 import time
 
 # set filename outputLayer testing iteration
-trainData = "train.txt"
-testData = "test.txt"
-testData_21 = "test-21.txt"
+trainData = "test_10.txt"
+testData = "train_10.txt"
 hiddenLayer = 1
 outputLayer = 5
 epoch = 80
@@ -23,41 +22,12 @@ epoch = 80
 cuda = torch.cuda.is_available()
 
 # load trainData
-train_temp = preprocess.loadDataset(trainData)
-train_noStringTemp_X = train_temp[0:,0:-1]
-
-# start preprocess----------------------------------------------------------------------------------------------------------
-
-# only trainData do this
-protocal_type_list = preprocess.saveProtocal_typeOrder(train_noStringTemp_X)
-service_list = preprocess.saveServiceOrder(train_noStringTemp_X)
-flag_list = preprocess.saveFlagOrder(train_noStringTemp_X)
-protocal_type_onehotencoded = preprocess.onehotencoded(protocal_type_list)
-service_list_onehotencoded = preprocess.onehotencoded(service_list)
-flag_list_onehotencoded = preprocess.onehotencoded(flag_list)
+train_noStringTemp_X = np.loadtxt('dataSet/KDD99/train_x.txt', dtype=np.str, delimiter=',')
+train_noStringTemp_Y = np.loadtxt('dataSet/KDD99/train_y.txt', dtype=np.int, delimiter='\n')
 
 # load testData
-test_temp = preprocess.loadDataset(testData)
-test_noStringTemp_X = test_temp[0:,0:-1]
-
-train_noStringTemp_Y = []
-train_noStringTemp_Y = preprocess.distinguishNaturalAttack(train_temp, train_noStringTemp_Y, int(outputLayer))
-test_noStringTemp_Y = []
-test_noStringTemp_Y = preprocess.distinguishNaturalAttack(test_temp, test_noStringTemp_Y, int(outputLayer))
-
-# np can't dynamic add number so use list
-train_noStringTemp_X = train_noStringTemp_X.tolist() 
-test_noStringTemp_X = test_noStringTemp_X.tolist()
-
-# replace text with onehotencoded number
-preprocess.replace(train_noStringTemp_X, protocal_type_list, service_list, flag_list, protocal_type_onehotencoded, service_list_onehotencoded, flag_list_onehotencoded)
-preprocess.replace(test_noStringTemp_X, protocal_type_list, service_list, flag_list, protocal_type_onehotencoded, service_list_onehotencoded, flag_list_onehotencoded)
-
-# list->np
-train_noStringTemp_X = np.array(train_noStringTemp_X)
-train_noStringTemp_Y = np.array(train_noStringTemp_Y)
-test_noStringTemp_X = np.array(test_noStringTemp_X)
-test_noStringTemp_Y = np.array(test_noStringTemp_Y)
+test_noStringTemp_X = np.loadtxt('dataSet/KDD99/test_x.txt', dtype=np.str, delimiter=',')
+test_noStringTemp_Y = np.loadtxt('dataSet/KDD99/test_y.txt', dtype=np.int, delimiter='\n')
 
 # duration src_bytes
 for i in range(len(train_noStringTemp_X)):
@@ -103,11 +73,10 @@ for eachepoch in range(int(epoch)):
 
     y_prediction = y_prediction.view(np.size(batch_x.numpy(), 1), -1) # reshape from 3 dimention to 2 dimention
     loss = lossFunction(y_prediction, y_train_tensor.cuda())
-    # if cuda == True:
-    #     loss = lossFunction(y_prediction, y_train_tensor.cuda())
-    # else:
-    #     loss = lossFunction(y_prediction, y_train_tensor)
-    
+    if cuda == True:
+        loss = lossFunction(y_prediction, y_train_tensor.cuda())
+    else:
+        loss = lossFunction(y_prediction, y_train_tensor)
     optimizer.zero_grad()# clean optimizer
     loss.backward(retain_graph=True)# calculate new parameters
     optimizer.step()# update parameters

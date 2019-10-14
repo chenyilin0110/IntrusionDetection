@@ -20,6 +20,9 @@ outputLayer = sys.argv[5]
 batchSize = sys.argv[6]
 epoch = sys.argv[7]
 
+# can use cuda or not
+cuda = torch.cuda.is_available()
+
 # load trainData
 train_temp = preprocess.loadDataset(trainData)
 train_noStringTemp_X = train_temp[0:,0:-1]
@@ -82,6 +85,8 @@ y_test_tensor = Variable(torch.from_numpy(test_noStringTemp_Y)).long()
 
 # bulid lstm
 lstm = CNN(np.size(train_resultNormalize,1), int(outputLayer))
+if cuda == True:
+	lstm.cuda()
 
 # set optimizer and lossFunction
 optimizer = optim.RMSprop(lstm.parameters(), lr=0.05)
@@ -93,23 +98,38 @@ train_loader = torch.utils.data.DataLoader(batch_train_dataset, batch_size=int(b
 
 # traning
 for eachepoch in range(int(epoch)):
-    for step, (batch_x, batch_y) in enumerate (train_loader):
-        # input size = (batch_size, number of channels, input_data_h, input_data_w)
-        batch_x = batch_x.view(-1, 1, 1, np.size(train_resultNormalize, 1))
-        y_prediction = lstm(batch_x, np.size(train_resultNormalize, 1))
-        y_prediction = y_prediction.view(np.size(batch_x.numpy(), 0), -1) # reshape from 3 dimention to 2 dimention
-        loss = lossFunction(y_prediction, batch_y)
-        optimizer.zero_grad()# clean optimizer
-        loss.backward(retain_graph=True)# calculate new parameters
-        optimizer.step()# update parameters
+	for step, (batch_x, batch_y) in enumerate (train_loader):
+	# input size = (batch_size, number of channels, input_data_h, input_data_w)
+		batch_x = batch_x.view(-1, 1, 1, np.size(train_resultNormalize, 1))
+
+		if cuda == True:
+			y_prediction = lstm(batch_x.cuda(), np.size(train_resultNormalize, 1))
+		else:
+			y_prediction = lstm(batch_x, np.size(train_resultNormalize, 1))
+
+		y_prediction = y_prediction.view(np.size(batch_x.numpy(), 0), -1) # reshape from 3 dimention to 2 dimention
+		
+		if cuda == True:
+			loss = lossFunction(y_prediction, batch_y.cuda())
+		else:
+			loss = lossFunction(y_prediction, batch_y)
+
+		optimizer.zero_grad()# clean optimizer
+		loss.backward(retain_graph=True)# calculate new parameters
+		optimizer.step()# update parameters
 
 # testing
 x_test_tensor = x_test_tensor.view(-1, 1, 1, np.size(train_resultNormalize, 1))
-y_test_predic = lstm(x_test_tensor, np.size(train_resultNormalize, 1))
-pred = y_test_predic.detach().numpy()
+
+if cuda == True:
+	y_test_predic = lstm(x_test_tensor.cuda(), np.size(train_resultNormalize, 1))
+else:
+	y_test_predic = lstm(x_test_tensor, np.size(train_resultNormalize, 1))
+
+pred = y_test_predic.detach().cpu().numpy()
 pred = pred.reshape(-1, int(outputLayer))
 y_test_list_predic = np.argmax(pred, axis=1)
 
 accuracy = accuracy(y_test_tensor, y_test_list_predic)
 print(accuracy)
-# torch.save(lstm, 'lstm.pkl')
+torch.save(lstm, 'src/CNN_LSTM_NSL-KDD/result/lstm.pkl')

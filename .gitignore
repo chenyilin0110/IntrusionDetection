@@ -1,2 +1,6 @@
 __pycache__/
 .vscode/
+dataSet/KDD99/train_x.txt
+dataSet/KDD99/train_y.txt
+dataSet/KDD99/test_x.txt
+dataSet/KDD99/test_y.txt

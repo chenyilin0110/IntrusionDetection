@@ -7,8 +7,7 @@ import math
 def loadDataset(name):
     temp_x = np.loadtxt('dataSet/KDD99/' + name + '_x.txt', dtype=np.str, delimiter=',')
     temp_y = np.loadtxt('dataSet/KDD99/' + name + '_y.txt', dtype=np.int, delimiter='\n')
-
-    # temp_x = temp_x[0:,:-1] # remove final column
+    
     return temp_x, temp_y
 
 def saveProtocal_typeOrder(noStringTemp_X):

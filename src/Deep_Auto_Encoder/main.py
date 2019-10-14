@@ -12,8 +12,8 @@ from accuracyfunction import accuracy
 import time
 
 # set filename outputLayer testing iteration
-trainData = "test_10.txt"
-testData = "train_10.txt"
+trainData = "train"
+testData = "test"
 hiddenLayer = 1
 outputLayer = 5
 epoch = 80
@@ -21,13 +21,9 @@ epoch = 80
 # can use cuda or not
 cuda = torch.cuda.is_available()
 
-# load trainData
-train_noStringTemp_X = np.loadtxt('dataSet/KDD99/train_x.txt', dtype=np.str, delimiter=',')
-train_noStringTemp_Y = np.loadtxt('dataSet/KDD99/train_y.txt', dtype=np.int, delimiter='\n')
-
-# load testData
-test_noStringTemp_X = np.loadtxt('dataSet/KDD99/test_x.txt', dtype=np.str, delimiter=',')
-test_noStringTemp_Y = np.loadtxt('dataSet/KDD99/test_y.txt', dtype=np.int, delimiter='\n')
+# load dataset
+train_noStringTemp_X, train_noStringTemp_Y = preprocess.loadDataset(trainData)
+test_noStringTemp_X, test_noStringTemp_Y = preprocess.loadDataset(testData)
 
 # duration src_bytes
 for i in range(len(train_noStringTemp_X)):
@@ -94,4 +90,4 @@ y_test_list_predic = np.argmax(pred, axis=1)
 
 accuracyvalue = accuracy(y_test_tensor, y_test_list_predic)
 print(accuracyvalue)
-torch.save(autdoencoder, 'src/Deep_Auto_Encoder/result/autdoencoder.pkl')
+torch.save(autdoencoder, 'src/Deep_Auto_Encoder/result/autoencoder.pkl')

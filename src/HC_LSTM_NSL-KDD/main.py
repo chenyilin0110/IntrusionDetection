@@ -16,22 +16,14 @@ from transactionFunction import transaction
 import time
 
 # set filename outputLayer testing iteration
-# trainData = sys.argv[1]
-# testData = sys.argv[2]
-# testData_21 = sys.argv[3]
-# hiddenLayer = sys.argv[4]
-# outputLayer = sys.argv[5]
-# iteration = sys.argv[6]
-# batchSize = sys.argv[7]
-# epoch = sys.argv[8]
-trainData = "train.txt"
-testData = "test.txt"
-testData_21 = "test-21.txt"
-hiddenLayer = 1
-outputLayer = 5
-iteration = 2
-batchSize = 10000
-epoch = 80
+trainData = sys.argv[1]
+testData = sys.argv[2]
+testData_21 = sys.argv[3]
+hiddenLayer = sys.argv[4]
+outputLayer = sys.argv[5]
+iteration = sys.argv[6]
+batchSize = sys.argv[7]
+epoch = sys.argv[8]
 
 # load trainData
 train_temp = preprocess.loadDataset(trainData)

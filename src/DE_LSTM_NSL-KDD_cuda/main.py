@@ -11,27 +11,17 @@ import random as rand
 import time
 
 # set filename outputLayer testing iteration
-# trainData = sys.argv[1]
-# testData = sys.argv[2]
-# testData_21 = sys.argv[3]
-# hiddenLayer = sys.argv[4]
-# outputLayer = sys.argv[5]
-# batchSize = sys.argv[6]
-# iteration = sys.argv[7]
-# epoch = sys.argv[8]
-# population = sys.argv[9]
-# F = sys.argv[10]
-# CR = sys.argv[11]
-trainData = "train.txt"
-testData = "test.txt"
-hiddenLayer = 1
-outputLayer = 5
-batchSize = 10000
-iteration = 1
-epoch = 80
-population = 3
-F = 0.5
-CR = 0.3
+trainData = sys.argv[1]
+testData = sys.argv[2]
+testData_21 = sys.argv[3]
+hiddenLayer = sys.argv[4]
+outputLayer = sys.argv[5]
+batchSize = sys.argv[6]
+iteration = sys.argv[7]
+epoch = sys.argv[8]
+population = sys.argv[9]
+F = sys.argv[10]
+CR = sys.argv[11]
 
 # can use cuda or not
 cuda = torch.cuda.is_available()

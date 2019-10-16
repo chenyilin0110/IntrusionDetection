@@ -12,11 +12,11 @@ from accuracyfunction import accuracy
 import time
 
 # set filename outputLayer testing iteration
-trainData = "train"
-testData = "test"
-hiddenLayer = 1
-outputLayer = 5
-epoch = 80
+trainData = sys.argv[1]
+testData = sys.argv[2]
+hiddenLayer = sys.argv[3]
+outputLayer = sys.argv[4]
+epoch = sys.argv[5]
 
 # can use cuda or not
 cuda = torch.cuda.is_available()
@@ -90,4 +90,4 @@ y_test_list_predic = np.argmax(pred, axis=1)
 
 accuracyvalue = accuracy(y_test_tensor, y_test_list_predic)
 print(accuracyvalue)
-torch.save(autdoencoder, 'src/Deep_Auto_Encoder/result/autoencoder.pkl')
+torch.save(autdoencoder, 'src/Deep_Auto_Encoder/result/autoencoder' + outputLayer + '.pkl')

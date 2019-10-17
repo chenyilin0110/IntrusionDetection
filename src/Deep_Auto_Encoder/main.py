@@ -14,9 +14,8 @@ import time
 # set filename outputLayer testing iteration
 trainData = sys.argv[1]
 testData = sys.argv[2]
-hiddenLayer = sys.argv[3]
-outputLayer = sys.argv[4]
-epoch = sys.argv[5]
+outputLayer = sys.argv[3]
+epoch = sys.argv[4]
 
 # can use cuda or not
 cuda = torch.cuda.is_available()

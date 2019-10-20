@@ -21,8 +21,20 @@ epoch = sys.argv[4]
 cuda = torch.cuda.is_available()
 
 # load dataset
-train_noStringTemp_X, train_noStringTemp_Y = preprocess.loadDataset(trainData)
-test_noStringTemp_X, test_noStringTemp_Y = preprocess.loadDataset(testData)
+train_noStringTemp_X = preprocess.loadDataset(trainData)
+test_noStringTemp_X = preprocess.loadDataset(testData)
+
+train_temp = preprocess.originalDataset(trainData)
+test_temp = preprocess.originalDataset(testData)
+
+train_noStringTemp_Y = []
+train_noStringTemp_Y = preprocess.distinguishNaturalAttack(train_temp, train_noStringTemp_Y, int(outputLayer))
+test_noStringTemp_Y = []
+test_noStringTemp_Y = preprocess.distinguishNaturalAttack(test_temp, test_noStringTemp_Y, int(outputLayer))
+
+# list->np
+train_noStringTemp_Y = np.array(train_noStringTemp_Y)
+test_noStringTemp_Y = np.array(test_noStringTemp_Y)
 
 # duration src_bytes
 for i in range(len(train_noStringTemp_X)):
@@ -67,11 +79,12 @@ for eachepoch in range(int(epoch)):
         y_prediction = autdoencoder(batch_x)
 
     y_prediction = y_prediction.view(np.size(batch_x.numpy(), 1), -1) # reshape from 3 dimention to 2 dimention
-    loss = lossFunction(y_prediction, y_train_tensor.cuda())
+
     if cuda == True:
         loss = lossFunction(y_prediction, y_train_tensor.cuda())
     else:
         loss = lossFunction(y_prediction, y_train_tensor)
+    print(loss.item())
     optimizer.zero_grad()# clean optimizer
     loss.backward(retain_graph=True)# calculate new parameters
     optimizer.step()# update parameters

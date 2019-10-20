@@ -37,8 +37,16 @@ CR = 0.3
 cuda = torch.cuda.is_available()
 
 # load dataset
-train_noStringTemp_X, train_noStringTemp_Y = preprocess.loadDataset(trainData)
-test_noStringTemp_X, test_noStringTemp_Y = preprocess.loadDataset(testData)
+train_noStringTemp_X = preprocess.loadDataset(trainData)
+test_noStringTemp_X = preprocess.loadDataset(testData)
+
+train_temp = preprocess.originalDataset(trainData)
+test_temp = preprocess.originalDataset(testData)
+
+train_noStringTemp_Y = []
+train_noStringTemp_Y = preprocess.distinguishNaturalAttack(train_temp, train_noStringTemp_Y, int(outputLayer))
+test_noStringTemp_Y = []
+test_noStringTemp_Y = preprocess.distinguishNaturalAttack(test_temp, test_noStringTemp_Y, int(outputLayer))
 
 # start preprocess----------------------------------------------------------------------------------------------------------
 

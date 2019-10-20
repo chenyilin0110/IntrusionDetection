@@ -5,10 +5,12 @@ import numpy as np
 import math
 
 def loadDataset(name):
-    temp_x = np.loadtxt('dataSet/KDD99/' + name + '_x.txt', dtype=np.str, delimiter=',')
-    temp_y = np.loadtxt('dataSet/KDD99/' + name + '_y.txt', dtype=np.int, delimiter='\n')
-    
-    return temp_x, temp_y
+    temp = np.loadtxt('dataSet/KDD99/' + name + '_x.txt', dtype=np.str, delimiter=',')
+    return temp
+
+def originalDataset(name):
+    temp = np.loadtxt('dataSet/KDD99/' + name + '_10.txt', dtype=np.str, delimiter=',')
+    return temp
 
 def saveProtocal_typeOrder(noStringTemp_X):
     protocal_type_list = []

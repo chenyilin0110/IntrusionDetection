@@ -103,4 +103,4 @@ pred = pred.reshape(-1, int(outputlayer))
 y_test_list_predic = np.argmax(pred, axis=1)
 
 accuracyfunction.accuracy(y_test_tensor, y_test_list_predic)
-torch.save(lstm, 'lstm.pkl')
+torch.save(lstm, 'src/LSTM_ICS/result/lstm.pkl')

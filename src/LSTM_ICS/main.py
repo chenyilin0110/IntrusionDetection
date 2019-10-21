@@ -11,6 +11,10 @@ import preprocess
 import accuracyfunction
 import time
 
+# don't show warnings message
+import warnings
+warnings.filterwarnings("ignore")
+
 finder = sys.argv[1]
 filename = sys.argv[2]
 outputlayer = sys.argv[3]

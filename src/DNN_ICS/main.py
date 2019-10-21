@@ -11,6 +11,10 @@ import accuracyfunction
 #import matplotlib.pyplot as plt
 #import seaborn as sns
 
+# don't show warnings message
+import warnings
+warnings.filterwarnings("ignore")
+
 # set filename outputLayer testing epoch
 finder = sys.argv[1]
 filename = sys.argv[2]

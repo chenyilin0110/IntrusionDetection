@@ -13,6 +13,10 @@ import time
 #import matplotlib.pyplot as plt
 #import seaborn as sns
 
+# don't show warnings message
+import warnings
+warnings.filterwarnings("ignore")
+
 # set filename outputLayer testing iteration
 finder = sys.argv[1]
 filename = sys.argv[2]

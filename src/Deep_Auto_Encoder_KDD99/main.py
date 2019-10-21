@@ -1,6 +1,4 @@
-from sklearn.model_selection import train_test_split
 from torch.autograd import Variable
-from torch.utils.data import DataLoader
 import torch.optim as optim
 import torch.nn as nn
 import torch
@@ -10,6 +8,10 @@ from neuralnetwork import AutoEncoder
 import preprocess
 from accuracyfunction import accuracy
 import time
+
+# don't show warnings message
+import warnings
+warnings.filterwarnings("ignore")
 
 # set filename outputLayer testing iteration
 trainData = sys.argv[1]
@@ -84,7 +86,7 @@ for eachepoch in range(int(epoch)):
         loss = lossFunction(y_prediction, y_train_tensor.cuda())
     else:
         loss = lossFunction(y_prediction, y_train_tensor)
-    print(loss.item())
+    # print(loss.item())
     optimizer.zero_grad()# clean optimizer
     loss.backward(retain_graph=True)# calculate new parameters
     optimizer.step()# update parameters

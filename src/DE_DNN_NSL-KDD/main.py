@@ -10,6 +10,10 @@ from Selection import selection
 from Fitness import fitness
 import time
 
+# don't show warnings message
+import warnings
+warnings.filterwarnings("ignore")
+
 # set filename outputLayer testing iteration
 trainData = sys.argv[1]
 testData = sys.argv[2]

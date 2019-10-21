@@ -1,4 +1,3 @@
-from sklearn.model_selection import train_test_split
 from torch.autograd import Variable
 import torch.optim as optim
 import torch.nn as nn
@@ -13,6 +12,11 @@ from transactionFunction import transaction
 #import matplotlib.pyplot as plt
 #import seaborn as sns
 import time
+
+# don't show warnings message
+import warnings
+warnings.filterwarnings("ignore")
+
 # set filename outputLayer testing iteration
 trainData = sys.argv[1]
 testData = sys.argv[2]

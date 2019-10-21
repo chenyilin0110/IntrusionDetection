@@ -1,4 +1,3 @@
-from sklearn.model_selection import train_test_split
 from torch.autograd import Variable
 import torch.optim as optim
 import torch.nn as nn
@@ -10,6 +9,10 @@ import preprocess
 import accuracyfunction
 #import matplotlib.pyplot as plt
 #import seaborn as sns
+
+# don't show warnings message
+import warnings
+warnings.filterwarnings("ignore")
 
 # set filename outputLayer testing epoch
 trainData = sys.argv[1]

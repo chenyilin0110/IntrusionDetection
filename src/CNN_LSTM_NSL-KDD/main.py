@@ -1,4 +1,3 @@
-from sklearn.model_selection import train_test_split
 from torch.autograd import Variable
 from torch.utils.data import DataLoader
 import torch.optim as optim
@@ -10,6 +9,10 @@ from Neuralnetwork import CNN
 import preprocess
 from accuracyfunction import accuracy
 import time
+
+# don't show warnings message
+import warnings
+warnings.filterwarnings("ignore")
 
 # set filename outputLayer testing iteration
 trainData = sys.argv[1]

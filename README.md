@@ -39,7 +39,7 @@
 
 ## Name：
 * DNN -> Deep Neural Network
-* LSTM -> Long-Short_Term Memory
+* LSTM -> Long-Short-Term Memory
 * CNN -> Convolution Neural Network
 * HC -> Hill Climbing
 * DE -> Differential Evolution

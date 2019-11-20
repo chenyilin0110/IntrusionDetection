@@ -26,8 +26,7 @@ epoch = sys.argv[5]
 
 # load dataset
 data = preprocess.load(week)
-print("總筆數：", len(data))
-print(data)
+
 # duration_list = []
 protocal_list = []
 source_ip_list = []
@@ -38,11 +37,10 @@ distination_ip_list = []
 # byte_list = []
 flag_list = []
 
-protocal, source_ip, distination_ip, flag = preprocess.onehotencoding(data, \
-            protocal_list, source_ip_list, distination_ip_list, flag_list)
+protocal, source_ip, distination_ip, flag = preprocess.onehotencoding(data, protocal_list, source_ip_list, distination_ip_list, flag_list)
 data = data.values
-preprocess.replace(data, protocal_list, protocal, source_ip_list, source_ip, \
-distination_ip_list, distination_ip, flag_list, flag)
+preprocess.replace(data, protocal_list, protocal, source_ip_list, source_ip, distination_ip_list, distination_ip, flag_list, flag)
+
 # # preprocess
 # train_x = train_data[:,0:-1]
 # test_x = test_data[:,0:-1]

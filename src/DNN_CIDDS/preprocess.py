@@ -88,8 +88,7 @@ def onehotencoding(data, protocal_list, source_ip_list, \
 
     return protocal_onehotencoded, srcip_onehotencoded, dstip_onehotencoded, flag_onehotencoded
 
-def replace(data, protocal_list, protocal, source_ip_list, source_ip, \
-distination_ip_list, distination_ip, flag_list, flag):
+def replace(data, protocal_list, protocal, source_ip_list, source_ip, distination_ip_list, distination_ip, flag_list, flag):
     # numpy cannot delete element, so numpy to list
     data = data.tolist()
     
@@ -140,6 +139,12 @@ distination_ip_list, distination_ip, flag_list, flag):
                     data[i].insert(next_index, flag[each_flag][add])
                     next_index += 1
                 break
+
+        for each_dim in range(len(data[i])):
+            if each_dim == len(data)-1:
+                print(data[i][each_dim])
+            else:
+                print(data[i][each_dim], ",", end="")
 
 def missingValue(x):
     for i in range(np.size(x,0)):

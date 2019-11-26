@@ -1,4 +1,5 @@
 reset
+set title "Deep Neural Network"
 set style data histogram
 #histogram 寬度
 set boxwidth 0.8 relative

@@ -104,4 +104,4 @@ y_test_list_predic = np.argmax(pred, axis=1)
 
 accuracyvalue = accuracy(y_test_tensor, y_test_list_predic)
 print(accuracyvalue)
-torch.save(autdoencoder, 'src/Deep_Auto_Encoder_KDD99/result/autoencoder' + outputLayer + '.pkl')
+torch.save(autdoencoder, 'src/DAE_KDD99/result/autoencoder' + outputLayer + '.pkl')

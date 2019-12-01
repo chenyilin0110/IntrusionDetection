@@ -6,7 +6,7 @@ import torch.nn as nn
 import torch
 import numpy as np
 import sys
-from Neuralnetwork import LSTM
+from neuralnetwork import LSTM
 import preprocess
 import accuracyfunction
 import time

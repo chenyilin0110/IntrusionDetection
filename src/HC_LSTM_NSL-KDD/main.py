@@ -9,7 +9,7 @@ import random as rand
 from neuralnetwork import LSTM
 import preprocess
 import accuracyfunction
-from transactionFunction import transaction
+from transaction import transaction
 #import matplotlib.pyplot as plt
 #import seaborn as sns
 import time

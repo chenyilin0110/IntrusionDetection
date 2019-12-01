@@ -4,9 +4,9 @@ import torch
 import numpy as np
 import sys
 import preprocess
-from Mutation import mutation
-from Crossover import crossover
-from Selection import selection
+from mutation import mutation
+from crossover import crossover
+from selection import selection
 import random as rand
 import time
 

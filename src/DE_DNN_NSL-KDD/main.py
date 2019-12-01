@@ -4,10 +4,9 @@ import numpy as np
 import sys
 import random as rand
 import preprocess
-from Mutation import mutation
-from Crossover import crossover
-from Selection import selection
-from Fitness import fitness
+from mutation import mutation
+from crossover import crossover
+from selection import selection
 import time
 
 # don't show warnings message

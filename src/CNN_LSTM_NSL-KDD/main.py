@@ -5,7 +5,7 @@ import torch.nn as nn
 import torch
 import numpy as np
 import sys
-from Neuralnetwork import CNN
+from neuralnetwork import CNN
 import preprocess
 from accuracyfunction import accuracy
 import time

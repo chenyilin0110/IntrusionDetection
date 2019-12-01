@@ -25,9 +25,14 @@
 >>> * trainData：訓練資料 ex:train
 >>> * testData：測試資料 ex:test
 >>> * testData_21：測試資料 ex:test-21
-	
+
+>> #### CIDDS-001：
+>> CIDDS-001 已經將資料分割成 **三** 個檔案，分別為一個訓練資料和兩個測試資料。
+>>> * trainData：訓練資料 ex:train
+>>> * testData：測試資料 ex:test
+
 > ### Deep Learning Model：
->* outputLayer(== finder)：將資料分為幾類 ex:2class->2, multiclass->41
+>* outputLayer(== finder)：將資料分為幾類 ex:2class->2, 5class-> 5, multiclass->41
 >* hiddenLayer：幾層隱藏層 ex:3->3個隱藏層
 >* hiddenNeural：隱藏層中幾個神經元 ex:64->在隱藏層中有64個神經元
 >* epoch：深度學習模型學習次數 ex:100->100次，越多執行速度越慢且易overfitting，越少則無法完整學習資料間的關聯
@@ -39,10 +44,11 @@
 >* F：縮放因子，通常是介於0-1中間的浮點數 ex:0.5
 >* CR： 交叉機率，通常是介於0-1中間的浮點數 ex:0.8
 
-## Name：
+## Abbreviation Name：
 * DNN -> Deep Neural Network
 * LSTM -> Long-Short-Term Memory
 * CNN -> Convolution Neural Network
 * HC -> Hill Climbing
 * DE -> Differential Evolution
 * DAE -> Deep Auto Encoder
+* SNDAE -> Stacked Non-symmetric Deep Auto Encoder

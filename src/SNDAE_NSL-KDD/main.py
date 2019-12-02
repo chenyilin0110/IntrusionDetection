@@ -19,9 +19,8 @@ warnings.filterwarnings("ignore")
 trainData = sys.argv[1]
 testData = sys.argv[2]
 testData_21 = sys.argv[3]
-hiddenLayer = sys.argv[4]
-outputLayer = sys.argv[5]
-epoch = sys.argv[6]
+outputLayer = sys.argv[4]
+tree_number = sys.argv[5]
 
 # load trainData
 train_temp = preprocess.loadDataset(trainData)
@@ -85,7 +84,7 @@ y_test_tensor = Variable(torch.from_numpy(test_noStringTemp_Y)).long()
 
 # bulid stacked non-symmetric deep auto encoder model & random forest
 sndae = SNDAE(np.size(train_resultNormalize,1))
-random_forest = RandomForestClassifier(n_estimators=100)
+random_forest = RandomForestClassifier(n_estimators=int(tree_number))
 
 # set optimizer and lossFunction
 optimizer = optim.RMSprop(sndae.parameters(), lr=0.05)

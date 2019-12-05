@@ -21,6 +21,7 @@ testData = sys.argv[2]
 testData_21 = sys.argv[3]
 outputLayer = sys.argv[4]
 tree_number = sys.argv[5]
+learning_rate = sys.argv[6]
 
 # load trainData
 train_temp = preprocess.loadDataset(trainData)
@@ -84,10 +85,10 @@ y_test_tensor = Variable(torch.from_numpy(test_noStringTemp_Y)).long()
 
 # bulid stacked non-symmetric deep auto encoder model & random forest
 sndae = SNDAE(np.size(train_resultNormalize,1))
-random_forest = RandomForestClassifier(n_estimators=int(tree_number))
+random_forest = RandomForestClassifier(n_estimators=int(tree_number),n_jobs=-1)
 
 # set optimizer and lossFunction
-optimizer = optim.RMSprop(sndae.parameters(), lr=0.05)
+optimizer = optim.RMSprop(sndae.parameters(), lr=float(learning_rate))
 lossFunction = nn.CrossEntropyLoss()
 
 # traning
@@ -102,4 +103,4 @@ y_test_predic = random_forest.predict(sndae_test)
 
 accuracy = accuracy(test_noStringTemp_Y, y_test_predic)
 print(accuracy)
-torch.save(sndae, 'src/SNDAE_NSL-KDD/result/sndae' + outputLayer + '.pkl')
+# torch.save(sndae, 'src/SNDAE_NSL-KDD/result/sndae' + outputLayer + '.pkl')

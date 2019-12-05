@@ -9,6 +9,7 @@ set style histogram clustered gap 0.5 title offset 0, 1 font "Times New Roman,16
 set grid
 set key off
 set tics font "Times New Roman,12"
+set xtics rotate by 45 right
 #填滿類型
 set style fill solid
 #邊線類型

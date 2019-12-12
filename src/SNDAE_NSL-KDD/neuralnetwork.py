@@ -7,20 +7,16 @@ class SNDAE(nn.Module):
         super(SNDAE, self).__init__()
         self.network1 = nn.Sequential(
             nn.Linear(inputDim, 14),
-            # nn.Tanh(),
             nn.Linear(14, 28),
-            # nn.Tanh(),
             nn.Linear(28, 28),
-            # nn.Tanh(),
+            nn.Sigmoid(),
         )
 
         self.network2 = nn.Sequential(
             nn.Linear(28, 14),
-            # nn.Tanh(),
             nn.Linear(14, 28),
-            # nn.Tanh(),
             nn.Linear(28, 28),
-            # nn.Sigmoid(),
+            nn.Sigmoid(),
         )
 
     

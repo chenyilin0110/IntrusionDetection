@@ -80,4 +80,4 @@ y_test_predic = random_forest.predict(sndae_test)
 
 accuracy = accuracy(test_noStringTemp_Y, y_test_predic)
 print(accuracy)
-# torch.save(autdoencoder, 'src/DAE_KDD99/result/autoencoder' + outputLayer + '.pkl')
+torch.save(random_forest, 'src/SNDAE_KDD99/result/sndae' + outputLayer + '.pkl')

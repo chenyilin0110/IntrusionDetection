@@ -18,10 +18,10 @@ warnings.filterwarnings("ignore")
 trainData = sys.argv[1]
 testData = sys.argv[2]
 testData_21 = sys.argv[3]
-hiddenLayer = sys.argv[4]
-outputLayer = sys.argv[5]
-batchSize = sys.argv[6]
-epoch = sys.argv[7]
+outputLayer = sys.argv[4]
+batchSize = sys.argv[5]
+epoch = sys.argv[6]
+learning_rate = sys.argv[7]
 
 # can use cuda or not
 cuda = torch.cuda.is_available()
@@ -92,7 +92,7 @@ if cuda == True:
 	lstm.cuda()
 
 # set optimizer and lossFunction
-optimizer = optim.RMSprop(lstm.parameters(), lr=0.05)
+optimizer = optim.Adam(lstm.parameters(), lr=float(learning_rate))
 lossFunction = nn.CrossEntropyLoss()
 
 # split batch
@@ -135,4 +135,4 @@ y_test_list_predic = np.argmax(pred, axis=1)
 
 accuracy = accuracy(y_test_tensor, y_test_list_predic)
 print(accuracy)
-torch.save(lstm, 'src/CNN_LSTM_NSL-KDD/result/lstm.pkl')
+# torch.save(lstm, 'src/CNN_LSTM_NSL-KDD/result/lstm.pkl')

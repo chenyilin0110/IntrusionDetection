@@ -3,7 +3,7 @@ import sys
 
 run = sys.argv[1]
 name = sys.argv[2]
-data = np.loadtxt('src/SNDAE_NSL-KDD/result/' + name + '.txt', delimiter='\n')
+data = np.loadtxt('src/DAE_NSL-KDD/result/' + name + '.txt', delimiter='\n')
 avg_list = []
 
 count = 0

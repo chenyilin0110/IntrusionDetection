@@ -9,7 +9,7 @@ def loadDataset(name):
     return temp
 
 def originalDataset(name):
-    temp = np.loadtxt('dataSet/KDD99/' + name + '_10.txt', dtype=np.str, delimiter=',')
+    temp = np.loadtxt('dataSet/KDD99/' + name + '_original.txt', dtype=np.str, delimiter=',')
     return temp
 
 def saveProtocal_typeOrder(noStringTemp_X):
@@ -69,29 +69,29 @@ def distinguishNaturalAttack(original, y, outputLayer):
     # label name transform number
     if outputLayer == 2: # 2 classification
         for i in range(np.size(original,0)):
-            if original[i,-1] == 'normal':
+            if original[i,-1] == 'normal.':
                 y.append(0)
             else:
                 y.append(1)
     else: # 5 classification
         for i in range(np.size(original,0)):
-            if original[i,-1] == 'normal':
+            if original[i,-1] == 'normal.':
                 y.append(0)
-            elif original[i,-1] == 'PROBE' or original[i,-1] == 'ipsweep' or original[i,-1] == 'mscan' or original[i,-1] == 'nmap' \
-                or original[i,-1] == 'portsweep' or original[i,-1] == 'saint' or original[i,-1] == 'satan':
+            elif original[i,-1] == 'PROBE.' or original[i,-1] == 'ipsweep.' or original[i,-1] == 'mscan.' or original[i,-1] == 'nmap.' \
+                or original[i,-1] == 'portsweep.' or original[i,-1] == 'saint.' or original[i,-1] == 'satan.':
                 y.append(1)
-            elif original[i,-1] == 'DOS' or original[i,-1] == 'apache2' or original[i,-1] == 'back' or original[i,-1] == 'land'\
-                or original[i,-1] == 'mailbomb' or original[i,-1] == 'neptune' or original[i,-1] == 'pod' or original[i,-1] == 'processtable'\
-                    or original[i,-1] == 'smurf' or original[i,-1] == 'teardrop' or original[i,-1] == 'udpstorm':
+            elif original[i,-1] == 'DOS.' or original[i,-1] == 'apache2.' or original[i,-1] == 'back.' or original[i,-1] == 'land.'\
+                or original[i,-1] == 'mailbomb.' or original[i,-1] == 'neptune.' or original[i,-1] == 'pod.' or original[i,-1] == 'processtable.'\
+                    or original[i,-1] == 'smurf.' or original[i,-1] == 'teardrop.' or original[i,-1] == 'udpstorm.':
                 y.append(2)
-            elif original[i,-1] == 'U2R' or original[i,-1] == 'buffer_overflow' or original[i,-1] == 'httptunnel' or original[i,-1] == 'loadmodule'\
-                or original[i,-1] == 'perl' or original[i,-1] == 'ps' or original[i,-1] == 'rootkit' or original[i,-1] == 'sqlattack'\
-                    or original[i,-1] == 'xterm':
+            elif original[i,-1] == 'U2R.' or original[i,-1] == 'buffer_overflow.' or original[i,-1] == 'httptunnel.' or original[i,-1] == 'loadmodule.'\
+                or original[i,-1] == 'perl.' or original[i,-1] == 'ps.' or original[i,-1] == 'rootkit.' or original[i,-1] == 'sqlattack.'\
+                    or original[i,-1] == 'xterm.':
                 y.append(3)
-            elif original[i,-1] == 'R2L' or original[i,-1] == 'ftp_write' or original[i,-1] == 'guess_passwd' or original[i,-1] == 'imap'\
-                or original[i,-1] == 'multihop' or original[i,-1] == 'named' or original[i,-1] == 'phf' or original[i,-1] == 'sendmail'\
-                    or original[i,-1] == 'snmpgetattack' or original[i,-1] == 'snmpguess' or original[i,-1] == 'spy' or original[i,-1] == 'warezclient'\
-                        or original[i,-1] == 'warezmaster' or original[i,-1] == 'worm' or original[i,-1] == 'xlock' or original[i,-1] == 'xsnoop':
+            elif original[i,-1] == 'R2L.' or original[i,-1] == 'ftp_write.' or original[i,-1] == 'guess_passwd.' or original[i,-1] == 'imap.'\
+                or original[i,-1] == 'multihop.' or original[i,-1] == 'named.' or original[i,-1] == 'phf.' or original[i,-1] == 'sendmail.'\
+                    or original[i,-1] == 'snmpgetattack.' or original[i,-1] == 'snmpguess.' or original[i,-1] == 'spy.' or original[i,-1] == 'warezclient.'\
+                        or original[i,-1] == 'warezmaster.' or original[i,-1] == 'worm.' or original[i,-1] == 'xlock.' or original[i,-1] == 'xsnoop.':
                 y.append(4)
     return y
 
@@ -119,7 +119,7 @@ def replace(x, protocal_type_list, service_list, flag_list, protocal_type_onehot
 
     # replace flag
     flag = service + len(service_list)
-    for i in range(len(x)):    
+    for i in range(len(x)):
         for eachflag in range(len(flag_list)):
             if x[i][flag] == flag_list[eachflag]:
                 del x[i][flag]
@@ -127,7 +127,7 @@ def replace(x, protocal_type_list, service_list, flag_list, protocal_type_onehot
                 for q in range(len(flag_list)):
                     x[i].insert(nextIndex, flag_list_onehotencoded[eachflag][q])
                     nextIndex += 1
-
+    
 def log(x):
     x = x.astype(float)
     if x != 0:

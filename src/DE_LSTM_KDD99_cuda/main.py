@@ -15,27 +15,16 @@ import warnings
 warnings.filterwarnings("ignore")
 
 # set filename outputLayer testing iteration
-# trainData = sys.argv[1]
-# testData = sys.argv[2]
-# testData_21 = sys.argv[3]
-# hiddenLayer = sys.argv[4]
-# outputLayer = sys.argv[5]
-# batchSize = sys.argv[6]
-# iteration = sys.argv[7]
-# epoch = sys.argv[8]
-# population = sys.argv[9]
-# F = sys.argv[10]
-# CR = sys.argv[11]
-trainData = "train"
-testData = "test"
-hiddenLayer = 1
-outputLayer = 5
-batchSize = 100
-iteration = 1
-epoch = 80
-population = 3
-F = 0.5
-CR = 0.3
+trainData = sys.argv[1]
+testData = sys.argv[2]
+hiddenLayer = sys.argv[3]
+outputLayer = sys.argv[4]
+batchSize = sys.argv[5]
+iteration = sys.argv[6]
+epoch = sys.argv[7]
+population = sys.argv[8]
+F = sys.argv[9]
+CR = sys.argv[10]
 
 # can use cuda or not
 cuda = torch.cuda.is_available()
@@ -52,7 +41,9 @@ train_noStringTemp_Y = preprocess.distinguishNaturalAttack(train_temp, train_noS
 test_noStringTemp_Y = []
 test_noStringTemp_Y = preprocess.distinguishNaturalAttack(test_temp, test_noStringTemp_Y, int(outputLayer))
 
-# start preprocess----------------------------------------------------------------------------------------------------------
+# list->np
+train_noStringTemp_Y = np.array(train_noStringTemp_Y)
+test_noStringTemp_Y = np.array(test_noStringTemp_Y)
 
 # duration src_bytes
 for i in range(len(train_noStringTemp_X)):

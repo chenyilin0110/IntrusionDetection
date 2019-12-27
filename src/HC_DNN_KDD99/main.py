@@ -100,6 +100,7 @@ for eachiteration in range(int(iteration)):
     # compare f1score
     if best <= accuracy:        
         best = accuracy
+        global_best_value = best
         bestSolution = solution.copy()
     else:
         for i in range(np.size(bestSolution)):
@@ -108,4 +109,4 @@ for eachiteration in range(int(iteration)):
     if eachiteration != int(iteration)-1:
         # transaction
         solution = transaction(solution, np.size(train_resultNormalize, 1), int(hiddenLayer), int(outputLayer))
-    print(best)
+print(global_best_value)

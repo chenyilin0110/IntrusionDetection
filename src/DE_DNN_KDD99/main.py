@@ -83,9 +83,9 @@ for eachpopulationData_colum in range(int(population)):
 populationData = populationDataOriginal.copy() # copy populationDataOriginal to populationData
 
 for eachiteration in range(int(iteration)):
-    if eachiteration != 0:
-        print(best)
-        print(bestSolution)
+    # if eachiteration != 0:
+    #     print(best)
+    #     print(bestSolution)
     # Mutation
     mutationData = mutation(populationData, float(F), Ud, Ld)
     

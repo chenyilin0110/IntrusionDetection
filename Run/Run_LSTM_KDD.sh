@@ -1,7 +1,7 @@
 #!/bin/bash
 train="train"
 test="test"
-outputLayer="5"
+outputLayer="2"
 batchSize="10000"
 epoch="100"
 

@@ -3,7 +3,7 @@ train="train"
 test="test"
 hiddenLayer="1"
 hiddenNeural="80"
-outputLayer="5"
+outputLayer="2"
 epoch="100"
 
 END=10

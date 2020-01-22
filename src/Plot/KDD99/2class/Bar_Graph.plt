@@ -4,7 +4,7 @@ set encoding utf8
 set style fill solid
 set key outside bottom center horizontal font ",17"
 set yrange [0.69 : 0.93]
-set ytics 0,0.03 font ",15"
+set ytics 0,0.02 font ",15"
 
 set style line 1\
 	linecolor rgb "#49434a"

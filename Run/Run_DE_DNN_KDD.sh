@@ -2,7 +2,7 @@
 train="train"
 test="test"
 hiddenLayer="1"
-outputLayer="5"
+outputLayer="2"
 iteration="40"
 epoch="100"
 population="20"

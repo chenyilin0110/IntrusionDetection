@@ -9,7 +9,7 @@ def loadDataset(name):
     return temp
 
 def originalDataset(name):
-    temp = np.loadtxt('dataSet/KDD99/' + name + '_10.txt', dtype=np.str, delimiter=',')
+    temp = np.loadtxt('dataSet/KDD99/' + name + '_original.txt', dtype=np.str, delimiter=',')
     return temp
 
 def saveProtocal_typeOrder(noStringTemp_X):

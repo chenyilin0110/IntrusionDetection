@@ -9,8 +9,7 @@ from neuralnetwork import Net
 import preprocess
 import accuracyfunction
 from transaction import transaction
-#import matplotlib.pyplot as plt
-#import seaborn as sns
+from testingfunction import testing
 import time
 
 # don't show warnings message
@@ -20,11 +19,10 @@ warnings.filterwarnings("ignore")
 # set filename outputLayer testing iteration
 trainData = sys.argv[1]
 testData = sys.argv[2]
-testData_21 = sys.argv[3]
-hiddenLayer = sys.argv[4]
-outputLayer = sys.argv[5]
-iteration = sys.argv[6]
-epoch = sys.argv[7]
+hiddenLayer = sys.argv[3]
+outputLayer = sys.argv[4]
+iteration = sys.argv[5]
+epoch = sys.argv[6]
 
 # load trainData
 train_temp = preprocess.loadDataset(trainData)
@@ -91,7 +89,7 @@ solution = solution.astype(int)
 for i in range(len(solution)):
     solution[i] = rand.randint(int(outputLayer), int(np.size(train_resultNormalize, 1)))
 # best = np.zeros(4, dtype=float)
-best = 0
+best = 999999999
 
 for eachiteration in range(int(iteration)):
     # build network
@@ -110,19 +108,14 @@ for eachiteration in range(int(iteration)):
         optimizer.zero_grad()# clean optimizer
         loss_train.backward()# calculate new parameters
         optimizer.step()# update parameters
+    loss_value = float(loss_train.item())
+    # print('loss value', loss_value)
 
-    # testing 
-    y_test_predic = net(x_test_tensor, int(hiddenLayer))
-    pred = y_test_predic.detach().numpy()
-    y_test_list_predic = np.argmax(pred, axis=1)
-
-    # print(filename, " ", end='')
-    accuracy = accuracyfunction.accuracy(y_test_tensor, y_test_list_predic)    
-
-    # compare f1score
-    if best <= accuracy:        
-        best = accuracy
+    # compare loss value
+    if best >= loss_value:        
+        best = loss_value
         bestSolution = solution.copy()
+        torch.save(net, 'src/HC_DNN_NSL-KDD/result/HC_DNN_' + outputLayer + '.pkl')
     else:
         for i in range(np.size(bestSolution)):
             solution[i] = bestSolution[i]
@@ -130,4 +123,5 @@ for eachiteration in range(int(iteration)):
     if eachiteration != int(iteration)-1:
         # transaction
         solution = transaction(solution, np.size(train_resultNormalize, 1), int(hiddenLayer), int(outputLayer))
-    print(best)
+    # print(best)
+testing(outputLayer, x_test_tensor, y_test_tensor, int(hiddenLayer))

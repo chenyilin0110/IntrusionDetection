@@ -24,6 +24,7 @@ epoch = sys.argv[6]
 population = sys.argv[7]
 F = sys.argv[8]
 CR = sys.argv[9]
+name = sys.argv[10]
 
 # load trainData
 train_temp = preprocess.loadDataset(trainData)
@@ -174,5 +175,8 @@ for eachiteration in range(int(iteration)):
         populationData = selectionData.copy()
 
 # print(best)
-torch.save(bestModel, 'src/DE_DNN_NSL-KDD/result/DE_DNN_'+ outputLayer + '.pkl')
-testing(hiddenLayer, outputLayer, x_test_tensor, y_test_tensor)
+if name == '0':
+    torch.save(bestModel, 'src/DE_DNN_NSL-KDD/result/DE_DNN_'+ outputLayer + '.pkl')
+else:
+    torch.save(bestModel, 'src/DE_DNN_NSL-KDD/result/DE_DNN_'+ outputLayer + name +'.pkl')
+testing(hiddenLayer, outputLayer, x_test_tensor, y_test_tensor, name)

@@ -21,13 +21,13 @@ def fitness(data, hiddenLayer, outputLayer, epoch, train_noStringTemp_X, x_train
         optimizer.zero_grad()# clean optimizer
         loss_train.backward()# calculate new parameters
         optimizer.step()# update parameters
+    
+    loss_value = float(loss_train.item())
 
-    # testing 
-    y_test_predic = net(x_test_tensor, int(hiddenLayer))
-    pred = y_test_predic.detach().numpy()
-    y_test_list_predic = np.argmax(pred, axis=1)
+    # # testing 
+    # y_test_predic = net(x_test_tensor, int(hiddenLayer))
+    # pred = y_test_predic.detach().numpy()
+    # y_test_list_predic = np.argmax(pred, axis=1)
 
-    # print(filename, " ", end='')
-    # accuracyvalue, local, precision, recall = accuracy(y_test_tensor, y_test_list_predic)
-    accuracyvalue = accuracy(y_test_tensor, y_test_list_predic)
-    return accuracyvalue
+    # accuracyvalue = accuracy(y_test_tensor, y_test_list_predic)
+    return loss_value, net

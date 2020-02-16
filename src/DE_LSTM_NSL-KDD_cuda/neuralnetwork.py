@@ -12,7 +12,7 @@ class LSTM(nn.Module):
         )        
         self.out = nn.Linear(neuron, outputDim)
 
-    def forward(self, x, h, c):
-        r_out, (h, c) = self.lstm(x, (h, c))
+    def forward(self, x):
+        r_out, _ = self.lstm(x)
         out = self.out(r_out)
-        return out, (h, c)
+        return out

@@ -9,7 +9,9 @@ import random as rand
 from neuralnetwork import LSTM
 import preprocess
 import accuracyfunction
+from fitness import fitness
 from transaction import transaction
+from testingfunction import testing
 #import matplotlib.pyplot as plt
 #import seaborn as sns
 import time
@@ -21,12 +23,15 @@ warnings.filterwarnings("ignore")
 # set filename outputLayer testing iteration
 trainData = sys.argv[1]
 testData = sys.argv[2]
-testData_21 = sys.argv[3]
-hiddenLayer = sys.argv[4]
-outputLayer = sys.argv[5]
-iteration = sys.argv[6]
-batchSize = sys.argv[7]
-epoch = sys.argv[8]
+hiddenLayer = sys.argv[3]
+outputLayer = sys.argv[4]
+iteration = sys.argv[5]
+batchSize = sys.argv[6]
+epoch = sys.argv[7]
+name = sys.argv[8]
+
+# can use cuda or not
+cuda = torch.cuda.is_available()
 
 # load trainData
 train_temp = preprocess.loadDataset(trainData)
@@ -88,58 +93,20 @@ y_test_tensor = Variable(torch.from_numpy(test_noStringTemp_Y)).long()
 
 # end preprocess----------------------------------------------------------------------------------------------------------
 
-# split batch
-batch_train_dataset = torch.utils.data.TensorDataset(x_train_tensor, y_train_tensor)
-train_loader = torch.utils.data.DataLoader(batch_train_dataset, batch_size=int(batchSize), shuffle=False)
-
 solution = np.zeros(int(hiddenLayer))
 solution = solution.astype(int)
 for i in range(len(solution)):
     solution[i] = rand.randint(int(outputLayer), int(np.size(train_resultNormalize, 1)))
 # best = np.zeros(4, dtype=float)
-best = 0
+best = 999999999
 
 for eachiteration in range(int(iteration)):
-    # build network
-    lstm = LSTM(np.size(train_resultNormalize, 1), int(outputLayer), solution[0])
-    
-    # set optimizer and loss_function
-    optimizer = optim.RMSprop(lstm.parameters(), lr = 0.05)
-    lossFunction = nn.CrossEntropyLoss()
-
-    # traning
-    for eachepoch in range(int(epoch)):
-        h = torch.Tensor(1, int(batchSize), solution[0]).zero_() # hiddenLayerNumber, batchSize, hiddenSize
-        c = torch.Tensor(1, int(batchSize), solution[0]).zero_()
-        for step, (batch_x, batch_y) in enumerate (train_loader):
-            batch_x = batch_x.view(1, -1, np.size(train_resultNormalize, 1)) # seq_len batch_size input_dim
-            if len(batch_x[0]) != int(batchSize):
-                h = h.detach().numpy()
-                c = c.detach().numpy()
-                h = h[:,:len(batch_x[0]),:]
-                c = c[:,:len(batch_x[0]),:]
-                h = torch.from_numpy(h)
-                c = torch.from_numpy(c)
-            y_prediction, (h,c) = lstm(batch_x, h, c)
-            y_prediction = y_prediction.view(np.size(batch_x.numpy(), 1), -1) # reshape from 3 dimention to 2 dimention
-            loss = lossFunction(y_prediction, batch_y)
-            optimizer.zero_grad()# clean optimizer
-            loss.backward(retain_graph=True)# calculate new parameters
-            optimizer.step()# update parameters
-    h = torch.Tensor(1, len(x_test_tensor), solution[0]).zero_()
-    c = torch.Tensor(1, len(x_test_tensor), solution[0]).zero_()
-    
-    # testing
-    x_test = x_test_tensor.view(1, -1, np.size(train_resultNormalize, 1))
-    y_test_predic, _ = lstm(x_test, h, c)
-    pred = y_test_predic.detach().numpy()
-    pred = pred.reshape(-1, int(outputLayer))
-    y_test_list_predic = np.argmax(pred, axis=1)
-    accuracy = accuracyfunction.accuracy(y_test_tensor, y_test_list_predic)    
+    loss_value, model = fitness(solution, hiddenLayer, outputLayer, epoch, int(batchSize), train_noStringTemp_X, x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor, cuda)
 
     # compare f1score
-    if best <= accuracy:        
-        best = accuracy
+    if best >= loss_value:        
+        best = loss_value
+        bestModel = model
         bestSolution = solution.copy()
     else:
         for i in range(np.size(bestSolution)):
@@ -148,4 +115,9 @@ for eachiteration in range(int(iteration)):
     if eachiteration != int(iteration)-1:
         # transaction
         solution = transaction(solution, np.size(train_resultNormalize, 1), int(hiddenLayer), int(outputLayer))
-    print(best)
+    # print(best)
+if name == '0':
+    torch.save(bestModel, 'src/HC_LSTM_NSL-KDD/result/HC_LSTM_' + outputLayer + '.pkl')
+else:
+    torch.save(bestModel, 'src/HC_LSTM_NSL-KDD/result/HC_LSTM_' + outputLayer + name +'.pkl')
+testing(outputLayer, train_resultNormalize, x_test_tensor, y_test_tensor,cuda, name)

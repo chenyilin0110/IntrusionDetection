@@ -12,15 +12,16 @@ def fitness(data, hiddenLayer, outputLayer, epoch, batchSize, train_noStringTemp
         lstm.cuda()
     
     # set optimizer and lossFunction
-    optimizer = optim.Adam(lstm.parameters(), lr=0.05)
+    optimizer = optim.RMSprop(lstm.parameters(), lr=0.05)
     lossFunction = nn.CrossEntropyLoss()
 
     # split batch
     batch_train_dataset = torch.utils.data.TensorDataset(x_train_tensor, y_train_tensor)
-    train_loader = torch.utils.data.DataLoader(batch_train_dataset, batch_size=batchSize, shuffle=True)
+    train_loader = torch.utils.data.DataLoader(batch_train_dataset, batch_size=batchSize, shuffle=True, num_workers=8)
 
     # traning
     for eachepoch in range(int(epoch)):
+        batch_loss_value = 0.0
         for step, (batch_x, batch_y) in enumerate (train_loader):
             batch_x = batch_x.view(1, -1, np.size(train_noStringTemp_X, 1)) # seq_len batch_size input_dim
         
@@ -39,21 +40,9 @@ def fitness(data, hiddenLayer, outputLayer, epoch, batchSize, train_noStringTemp
             optimizer.zero_grad()# clean optimizer
             loss.backward(retain_graph=True)# calculate new parameters
             optimizer.step()# update parameters
-    loss_value = float(loss.item())
+            
+            if eachepoch == epoch-1:
+                batch_loss_value += float(loss.item())
 
-    # h = torch.Tensor(1, len(x_test_tensor), data[0].tolist()).zero_()
-    # c = torch.Tensor(1, len(x_test_tensor), data[0].tolist()).zero_()
-
-    # x_test = x_test_tensor.view(1, -1, np.size(train_noStringTemp_X, 1))
-
-    # if cuda == True:
-    #     y_test_predic, _ = lstm(x_test.cuda(), h.cuda(), c.cuda())
-    # else:
-    #         y_test_predic, _ = lstm(x_test, h, c)
-
-    # pred = y_test_predic.detach().cpu().numpy()
-    # pred = pred.reshape(-1, int(outputLayer))
-    # y_test_list_predic = np.argmax(pred, axis=1)
-    
-    # accuracyvalue = accuracy(y_test_tensor, y_test_list_predic)
+    loss_value = batch_loss_value / (step + 1)
     return loss_value, lstm

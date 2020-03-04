@@ -6,7 +6,7 @@ import math
 
 def loadDataset(x):
     temp = np.loadtxt('dataSet/NSL-KDD/' + x +'.txt', dtype=np.str, delimiter=',')
-    temp = temp[0:,:-1] # rempve final column
+    temp = temp[0:,:-1] # remove final column
     return temp
 
 def saveProtocal_typeOrder(noStringTemp_X):

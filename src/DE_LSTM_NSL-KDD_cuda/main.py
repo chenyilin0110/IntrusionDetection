@@ -179,7 +179,7 @@ for eachiteration in range(int(iteration)):
         # reset
         populationDataOriginal = selectionData.copy()
         populationData = selectionData.copy()
-    print(best)
+    print(best, bestSolution)
 
 if name == '0':
     torch.save(bestModel, 'src/DE_LSTM_NSL-KDD_cuda/result/DE_LSTM_' + outputLayer + '.pkl')

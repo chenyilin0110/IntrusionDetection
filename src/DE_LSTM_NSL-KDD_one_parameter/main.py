@@ -27,6 +27,7 @@ population = sys.argv[8]
 F = sys.argv[9]
 CR = sys.argv[10]
 name = sys.argv[11]
+number = sys.argv[12]
 
 # can use cuda or not
 cuda = torch.cuda.is_available()
@@ -182,7 +183,8 @@ for eachiteration in range(int(iteration)):
     print(best, bestSolution)
 
 if name == '0':
-    torch.save(bestModel, 'src/DE_LSTM_NSL-KDD_one_parameter/result/DE_LSTM_' + outputLayer + '.pkl')
+    torch.save(bestModel, 'src/DE_LSTM_NSL-KDD_one_parameter/result/DE_LSTM_' + outputLayer + '_bs' + batchSize + '-' + number + '.pkl')
 else:
-    torch.save(bestModel, 'src/DE_LSTM_NSL-KDD_one_parameter/result/DE_LSTM_' + outputLayer + name + '.pkl')
-testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, name)
+    torch.save(bestModel, 'src/DE_LSTM_NSL-KDD_one_parameter/result/DE_LSTM_' + outputLayer + name + '_bs' + batchSize + '-' + number + '.pkl')
+
+testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, name, batchSize, number)

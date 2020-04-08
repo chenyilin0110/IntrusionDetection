@@ -31,6 +31,7 @@ CR1 = sys.argv[10]
 CR2 = sys.argv[11]
 CR3 = sys.argv[12]
 name = sys.argv[13]
+number = sys.argv[14]
 
 # can use cuda or not
 cuda = torch.cuda.is_available()
@@ -139,12 +140,12 @@ for eachiteration in range(int(iteration)):
 
     # Save Model
     if name == '0':
-        if os.path.exists('src/EDE_LSTM_NSL-KDD/result/EDE_LSTM_' + outputLayer + '_bs' + batchSize + '.pkl'):
-            os.remove('src/EDE_LSTM_NSL-KDD/result/EDE_LSTM_' + outputLayer + '_bs' + batchSize + '.pkl')
-        torch.save(bestModel, 'src/EDE_LSTM_NSL-KDD/result/EDE_LSTM_' + outputLayer + '_bs' + batchSize + '.pkl')
+        if os.path.exists('src/EDE_LSTM_NSL-KDD/result/EDE_LSTM_' + outputLayer + '_bs' + batchSize + '-' + number +'.pkl'):
+            os.remove('src/EDE_LSTM_NSL-KDD/result/EDE_LSTM_' + outputLayer + '_bs' + batchSize + '-' + number +'.pkl')
+        torch.save(bestModel, 'src/EDE_LSTM_NSL-KDD/result/EDE_LSTM_' + outputLayer + '_bs' + batchSize + '-' + number +'.pkl')
     else:
-        if os.path.exists('src/EDE_LSTM_NSL-KDD/result/EDE_LSTM_' + outputLayer + name + '_bs' + batchSize + '.pkl'):
-            os.remove('src/EDE_LSTM_NSL-KDD/result/EDE_LSTM_' + outputLayer + name + '_bs' + batchSize + '.pkl')
-        torch.save(bestModel, 'src/EDE_LSTM_NSL-KDD/result/EDE_LSTM_' + outputLayer + name + '_bs' + batchSize + '.pkl')
+        if os.path.exists('src/EDE_LSTM_NSL-KDD/result/EDE_LSTM_' + outputLayer + name + '_bs' + batchSize + '-' + number +'.pkl'):
+            os.remove('src/EDE_LSTM_NSL-KDD/result/EDE_LSTM_' + outputLayer + name + '_bs' + batchSize + '-' + number +'.pkl')
+        torch.save(bestModel, 'src/EDE_LSTM_NSL-KDD/result/EDE_LSTM_' + outputLayer + name + '_bs' + batchSize + '-' + number +'.pkl')
 
-testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, name, batchSize)
+testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, name, batchSize, number)

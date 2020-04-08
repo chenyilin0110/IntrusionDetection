@@ -12,9 +12,9 @@ for i in $(seq 1 $END);
 do
     if [ "$i" = "$END" ]
     then
-        python3 src/RandomForest/main.py $train $test $outputLayer $estimators >> src/RandomForest/result/experimental_result_2.txt
+        python3 src/RandomForest_NSL-KDD/main.py $train $test $outputLayer $estimators >> src/RandomForest_NSL-KDD/result/experimental_result_2.txt
     else
-        python3 src/RandomForest/main.py $train $test $outputLayer $estimators >> src/RandomForest/result/experimental_result_2.txt &
+        python3 src/RandomForest_NSL-KDD/main.py $train $test $outputLayer $estimators >> src/RandomForest_NSL-KDD/result/experimental_result_2.txt &
     fi
 done
 
@@ -24,8 +24,8 @@ for i in $(seq 1 $END);
 do
     if [ "$i" = "$END" ]
     then
-        python3 src/RandomForest/main.py $train $test $outputLayer $estimators >> src/RandomForest/result/experimental_result_5.txt
+        python3 src/RandomForest_NSL-KDD/main.py $train $test $outputLayer $estimators >> src/RandomForest_NSL-KDD/result/experimental_result_5.txt
     else
-        python3 src/RandomForest/main.py $train $test $outputLayer $estimators >> src/RandomForest/result/experimental_result_5.txt &
+        python3 src/RandomForest_NSL-KDD/main.py $train $test $outputLayer $estimators >> src/RandomForest_NSL-KDD/result/experimental_result_5.txt &
     fi
 done

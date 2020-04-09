@@ -94,59 +94,51 @@ y_test_tensor = Variable(torch.from_numpy(test_noStringTemp_Y)).long()
 
 # end preprocess----------------------------------------------------------------------------------------------------------
 
-# best = 0
-# bestModel = 0
-# bestSolution = np.zeros(2).astype(float)
-# eachIterationLocalBest = np.zeros((int(iteration), len(bestSolution)+1), dtype=float)
-# Ud = np.size(train_noStringTemp_X, 1)
-# Ld = int(outputLayer)
-# lrUd = 0.01
-# lrLd = 0.001
+best = 0
+bestModel = 0
+bestSolution = np.zeros(2).astype(float)
+eachIterationLocalBest = np.zeros((int(iteration), len(bestSolution)+1), dtype=float)
+Ud = np.size(train_noStringTemp_X, 1)
+Ld = int(outputLayer)
+lrUd = 0.01
+lrLd = 0.001
 
-# # Initial
-# populationDataOriginal = np.zeros((int(population), len(bestSolution)), dtype=np.float)
-# for eachpopulationData_colum in range(int(population)):
-#     for eachpopulationData_row in range(np.size(populationDataOriginal, 1)):
-#         if eachpopulationData_row == 0: # initial first bit(neurons)
-#             r = rand.random()
-#             populationDataOriginal[eachpopulationData_colum][eachpopulationData_row] = int(((Ud - Ld) * r) + Ld)
-#         else:
-#             r = rand.random()
-#             populationDataOriginal[eachpopulationData_colum][eachpopulationData_row] = ((lrUd - lrLd) * r) + lrLd
-# populationData = populationDataOriginal.copy() # copy populationDataOriginal to populationData
+# Initial
+populationDataOriginal = np.zeros((int(population), len(bestSolution)), dtype=np.float)
+for eachpopulationData_colum in range(int(population)):
+    for eachpopulationData_row in range(np.size(populationDataOriginal, 1)):
+        if eachpopulationData_row == 0: # initial first bit(neurons)
+            r = rand.random()
+            populationDataOriginal[eachpopulationData_colum][eachpopulationData_row] = int(((Ud - Ld) * r) + Ld)
+        else:
+            r = rand.random()
+            populationDataOriginal[eachpopulationData_colum][eachpopulationData_row] = ((lrUd - lrLd) * r) + lrLd
+populationData = populationDataOriginal.copy() # copy populationDataOriginal to populationData
 
-# for eachiteration in range(int(iteration)):
-#     # split batch
-#     batch_train_dataset = torch.utils.data.TensorDataset(x_train_tensor, y_train_tensor)
-#     train_loader = torch.utils.data.DataLoader(batch_train_dataset, batch_size=int(batchSize), shuffle=True, num_workers=8)
+for eachiteration in range(int(iteration)):
+    # split batch
+    batch_train_dataset = torch.utils.data.TensorDataset(x_train_tensor, y_train_tensor)
+    train_loader = torch.utils.data.DataLoader(batch_train_dataset, batch_size=int(batchSize), shuffle=True, num_workers=8)
 
-#     # Mutation
-#     mutationData = mutation(populationData, float(F), Ud, Ld, lrUd, lrLd)
+    # Mutation
+    mutationData = mutation(populationData, float(F), Ud, Ld, lrUd, lrLd)
     
-#     # Crossover
-#     crossoverData = crossover(populationDataOriginal, mutationData, float(CR), Ud, Ld, lrUd, lrLd)
+    # Crossover
+    crossoverData = crossover(populationDataOriginal, mutationData, float(CR), Ud, Ld, lrUd, lrLd)
     
-#     # Selection
-#     countOriginalLossValue = np.zeros((4, int(population)))
-#     countCrossoverLossValue = np.zeros((4, int(population)))
-#     crossoverModel = []
-#     originalModel = []
-#     selectionData = selection(crossoverModel, originalModel, populationDataOriginal, crossoverData, countOriginalLossValue, countCrossoverLossValue, int(hiddenLayer), int(outputLayer), int(epoch), int(batchSize), train_noStringTemp_X, x_train_tensor, y_train_tensor, train_loader, cuda)
+    # Selection
+    countOriginalLossValue = np.zeros((4, int(population)))
+    countCrossoverLossValue = np.zeros((4, int(population)))
+    crossoverModel = []
+    originalModel = []
+    selectionData = selection(crossoverModel, originalModel, populationDataOriginal, crossoverData, countOriginalLossValue, countCrossoverLossValue, int(hiddenLayer), int(outputLayer), int(epoch), int(batchSize), train_noStringTemp_X, x_train_tensor, y_train_tensor, train_loader, cuda)
     
-#     # Update
-#     best, bestModel = update(best, bestModel, eachiteration, bestSolution, eachIterationLocalBest, int(population), countCrossoverLossValue, countOriginalLossValue, crossoverModel, originalModel, selectionData, name)
+    # Update
+    best, bestModel = update(best, bestModel, eachiteration, bestSolution, eachIterationLocalBest, int(population), countCrossoverLossValue, countOriginalLossValue, crossoverModel, originalModel, selectionData, name)
 
-#     # if name == '0':
-#     #     if os.path.exists('src/DE_LSTM_NSL-KDD_two_parameters/result/DE_LSTM_' + outputLayer + '_bs' + batchSize + '.pkl'):
-#     #         os.remove('src/DE_LSTM_NSL-KDD_two_parameters/result/DE_LSTM_' + outputLayer + '_bs' + batchSize + '.pkl')
-#     #     torch.save(bestModel, 'src/DE_LSTM_NSL-KDD_two_parameters/result/DE_LSTM_' + outputLayer + '_bs' + batchSize + '.pkl')
-#     # else:
-#     #     if os.path.exists('src/DE_LSTM_NSL-KDD_two_parameters/result/DE_LSTM_' + outputLayer + name + '_bs' + batchSize + '.pkl'):
-#     #         os.remove('src/DE_LSTM_NSL-KDD_two_parameters/result/DE_LSTM_' + outputLayer + name + '_bs' + batchSize + '.pkl')
-#     #     torch.save(bestModel, 'src/DE_LSTM_NSL-KDD_two_parameters/result/DE_LSTM_' + outputLayer + name + '_bs' + batchSize + '.pkl')
-#     if name == '0':
-#         torch.save(bestModel, 'src/DE_LSTM_NSL-KDD_two_parameters/result/DE_LSTM_' + outputLayer + '_bs' + batchSize + '-' + number + '.pkl')
-#     else:
-#         torch.save(bestModel, 'src/DE_LSTM_NSL-KDD_two_parameters/result/DE_LSTM_' + outputLayer + name + '_bs' + batchSize + '-' + number + '.pkl')
+    if name == '0':
+        torch.save(bestModel, 'src/DE_LSTM_two_parameters_NSL-KDD/result/DE_LSTM_' + outputLayer + '_bs' + batchSize + '-' + number + '.pkl')
+    else:
+        torch.save(bestModel, 'src/DE_LSTM_two_parameters_NSL-KDD/result/DE_LSTM_' + outputLayer + name + '_bs' + batchSize + '-' + number + '.pkl')
 
 testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, name, batchSize, number)

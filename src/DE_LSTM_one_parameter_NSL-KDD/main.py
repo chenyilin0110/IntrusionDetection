@@ -7,6 +7,7 @@ import preprocess
 from mutation import mutation
 from crossover import crossover
 from selection import selection
+from update import update
 from testingfunction import testing
 import random as rand
 import time
@@ -94,9 +95,6 @@ y_test_tensor = Variable(torch.from_numpy(test_noStringTemp_Y)).long()
 
 best = 0
 bestModel = 0
-bestAccuracy = 0
-bestPrecision = 0
-bestRecall = 0
 bestSolution = np.zeros(int(hiddenLayer)).astype(int)
 eachIterationLocalBest = []
 Ud = np.size(train_noStringTemp_X, 1)
@@ -123,68 +121,13 @@ for eachiteration in range(int(iteration)):
     crossoverModel = []
     originalModel = []
     selectionData = selection(crossoverModel, originalModel, populationDataOriginal, crossoverData, countOriginalLossValue, countCrossoverLossValue, int(hiddenLayer), int(outputLayer), int(epoch), int(batchSize), train_noStringTemp_X, x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor, cuda)
-    
-    if eachiteration == 0:
-        best = countCrossoverLossValue[0][0]
-        bestModel = crossoverModel[0]
 
-    for i in range(np.size(countCrossoverLossValue, 1)):
-        # if best <= countCrossoverLossValue[1][i]:
-            # best = countCrossoverLossValue[1][i]
-        if best >= countCrossoverLossValue[0][i]:
-            best = countCrossoverLossValue[0][i]
-            bestModel = crossoverModel[i]
-            # bestAccuracy = countCrossoverLossValue[0][i]
-            # bestPrecision = countCrossoverLossValue[2][i]
-            # bestRecall = countCrossoverLossValue[3][i]
-            for j in range(int(hiddenLayer)):
-                bestSolution[j] = selectionData[i][j]
+    # Update
+    best, bestModel = update(best, bestModel, eachiteration, bestSolution, eachIterationLocalBest, int(population), countCrossoverLossValue, countOriginalLossValue, crossoverModel, originalModel, selectionData, name)
 
-    for i in range(np.size(countCrossoverLossValue, 1)):
-        # if best <= countOriginalLossValue[1][i]:
-        #     best = countOriginalLossValue[1][i]
-        if best >= countOriginalLossValue[0][i]:
-            best = countOriginalLossValue[0][i]
-            bestModel = originalModel[i]
-            # bestAccuracy = countOriginalLossValue[0][i]
-            # bestPrecision = countOriginalLossValue[2][i]
-            # bestRecall = countOriginalLossValue[3][i]
-            for j in range(int(hiddenLayer)):
-                bestSolution[j] = selectionData[i][j]
-    
-    eachIterationLocalBest.append(bestSolution[0]) # save each iteration best local
-    index = 0
-    count = 0
-    total = 0
-    if eachiteration >= 4:
-        for j in range(len(eachIterationLocalBest)):
-            if eachIterationLocalBest[index] != eachIterationLocalBest[j]:
-                count = 0
-                index = j
-                count += 1
-            else:
-                count +=1
-        
-        if count >= 5: # five iteration same
-            for i in range(len(eachIterationLocalBest)):
-                total += eachIterationLocalBest[i]
-            total /= (eachiteration + 1)
-
-            # reset
-            ran = rand.randint(0, int(population)-1)
-            populationDataOriginal = selectionData.copy()
-            populationData = selectionData.copy()
-            populationDataOriginal[ran] = int(total)
-            populationData[ran] = int(total)
-    else:    
-        # reset
-        populationDataOriginal = selectionData.copy()
-        populationData = selectionData.copy()
-    print(best, bestSolution)
-
-if name == '0':
-    torch.save(bestModel, 'src/DE_LSTM_NSL-KDD_one_parameter/result/DE_LSTM_' + outputLayer + '_bs' + batchSize + '-' + number + '.pkl')
-else:
-    torch.save(bestModel, 'src/DE_LSTM_NSL-KDD_one_parameter/result/DE_LSTM_' + outputLayer + name + '_bs' + batchSize + '-' + number + '.pkl')
+    if name == '0':
+        torch.save(bestModel, 'src/DE_LSTM_one_parameter_NSL-KDD/result/DE_LSTM_' + outputLayer + '_bs' + batchSize + '-' + number + '.pkl')
+    else:
+        torch.save(bestModel, 'src/DE_LSTM_one_parameter_NSL-KDD/result/DE_LSTM_' + outputLayer + name + '_bs' + batchSize + '-' + number + '.pkl')
 
 testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, name, batchSize, number)

@@ -3,7 +3,7 @@ set terminal wxt size 400,400
 set encoding utf8
 set style fill solid
 set key outside bottom center horizontal font ",17"
-set yrange [0.64 : 0.78]
+set yrange [0.36 : 0.78]
 set ytics 0,0.03 font ",15"
 
 set style line 1\

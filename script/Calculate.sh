@@ -35,7 +35,7 @@ python3 src/Calculate/calavg.py 15 DNN $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 5 DE_DNN $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 15 LSTM $dataset $file_name >> $path
 # python3 src/Calculate/calavg.py 3 HC_LSTM $dataset $file_name >> $path
-python3 src/Calculate/calavg.py 3 DE_LSTM_one_parameter $dataset $file_name >> $path
+python3 src/Calculate/calavg.py 4 DE_LSTM_one_parameter $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 4 DE_LSTM_two_parameters $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 5 Naive_Bayes $dataset $file_name >> $path
@@ -54,9 +54,8 @@ python3 src/Calculate/calavg.py 15 DNN $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 5 DE_DNN $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 15 LSTM $dataset $file_name >> $path
 # python3 src/Calculate/calavg.py 3 HC_LSTM $dataset $file_name >> $path
-echo -n "0 " >> $path
-# python3 src/Calculate/calavg.py 3 DE_LSTM_one_parameter $dataset $file_name >> $path
-python3 src/Calculate/calavg.py 3 DE_LSTM_two_parameters $dataset $file_name >> $path
+python3 src/Calculate/calavg.py 4 DE_LSTM_one_parameter $dataset $file_name >> $path
+python3 src/Calculate/calavg.py 4 DE_LSTM_two_parameters $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 5 Naive_Bayes $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 5 RandomForest $dataset $file_name >> $path
@@ -74,8 +73,7 @@ python3 src/Calculate/calavg.py 15 DNN $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 3 DE_DNN $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 15 LSTM $dataset $file_name >> $path
 # python3 src/Calculate/calavg.py 3 HC_LSTM $dataset $file_name >> $path
-echo -n "0 " >> $path
-# python3 src/Calculate/calavg.py 3 DE_LSTM_one_parameter $dataset $file_name >> $path
+python3 src/Calculate/calavg.py 4 DE_LSTM_one_parameter $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 4 DE_LSTM_two_parameters $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 5 Naive_Bayes $dataset $file_name >> $path

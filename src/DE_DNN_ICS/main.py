@@ -8,6 +8,8 @@ import preprocess
 from mutation import mutation
 from crossover import crossover
 from selection import selection
+from update import update
+from testingfunction import testing
 import time
 #import matplotlib.pyplot as plt
 #import seaborn as sns
@@ -22,26 +24,16 @@ filename = sys.argv[2]
 outputLayer = sys.argv[3]
 hiddenLayer = sys.argv[4]
 hiddenNeural = sys.argv[5]
-testing = sys.argv[6]
+test = sys.argv[6]
 iteration = sys.argv[7]
 epoch = sys.argv[8]
 population = sys.argv[9]
 F = sys.argv[10]
 CR = sys.argv[11]
+number = sys.argv[12]
 
 # load dataset
-if finder == "multi":
-    temp = np.loadtxt('dataSet/IndustrialControlSystem/multiclass/'+filename, dtype=np.str, delimiter=',')
-elif int(finder) == 2:
-    temp = np.loadtxt('dataSet/IndustrialControlSystem/2class/'+filename, dtype=np.str, delimiter=',')
-elif int(finder) == 3:
-    temp = np.loadtxt('dataSet/IndustrialControlSystem/3class/'+filename, dtype=np.str, delimiter=',')
-
-if finder =="multi":
-    noStringTemp = temp[0:,0:] 
-else:
-    noStringTemp = temp[1:,0:] #[欄,列] and clean top string
-
+noStringTemp = preprocess.load(finder, filename)
 noStringTemp_X = noStringTemp[0:,0:-1]
 
 # preprocess
@@ -64,7 +56,7 @@ resultNormalize = preprocess.normalize(noStringTemp_X)
 noStringTemp_X = noStringTemp_X.astype(float)
 
 # split data
-x_train, x_test, y_train, y_test = train_test_split(resultNormalize, noStringTemp_Y, test_size = float(testing)/100)
+x_train, x_test, y_train, y_test = train_test_split(resultNormalize, noStringTemp_Y, test_size = float(test)/100)
 
 # np->tensor
 x_train_tensor = Variable(torch.from_numpy(x_train)).float()
@@ -72,11 +64,10 @@ y_train_tensor = Variable(torch.from_numpy(y_train)).long()
 x_test_tensor = Variable(torch.from_numpy(x_test)).float()
 y_test_tensor = Variable(torch.from_numpy(y_test)).long()
 
-best = 0
-bestAccuracy = 0
-bestPrecision = 0
-bestRecall = 0
+best = 9999
+bestModel = 0
 bestSolution = np.zeros(int(hiddenLayer)).astype(int)
+eachIterationLocalBest = []
 Ud = np.size(noStringTemp_X, 1)
 Ld = int(outputLayer)
 
@@ -96,47 +87,16 @@ for eachiteration in range(int(iteration)):
     crossoverData = crossover(populationDataOriginal, mutationData, float(CR), Ud, Ld)
     
     # Selection
-    # countOriginalFitness = []
-    # countCrossoverFitness = []
-    countOriginalOtherAccuracy = np.zeros((4, int(population)))
-    countCrossoverOtherAccuracy = np.zeros((4, int(population)))
-    selectionData = selection(populationDataOriginal, crossoverData, countOriginalOtherAccuracy, countCrossoverOtherAccuracy, int(hiddenLayer), int(outputLayer), int(epoch), noStringTemp_X, x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor)
+    countOriginalLossValue = np.zeros((4, int(population)))
+    countCrossoverLossValue = np.zeros((4, int(population)))
+    crossoverModel = []
+    originalModel = []
+    selectionData = selection(populationDataOriginal, crossoverData, countOriginalLossValue, countCrossoverLossValue, crossoverModel, originalModel, int(hiddenLayer), int(outputLayer), int(epoch), noStringTemp_X, x_train_tensor, y_train_tensor)
     
-    if eachiteration == 0:
-        best = countCrossoverOtherAccuracy[1][0]
+    # Update
+    best, bestModel = update(best, bestModel, eachiteration, bestSolution, eachIterationLocalBest, int(population), countCrossoverLossValue, countOriginalLossValue, crossoverModel, originalModel, selectionData)
 
-    for i in range(np.size(countCrossoverOtherAccuracy, 1)):
-        if best <= countCrossoverOtherAccuracy[1][i]:
-            best = countCrossoverOtherAccuracy[1][i]
-            bestAccuracy = countCrossoverOtherAccuracy[0][i]
-            bestPrecision = countCrossoverOtherAccuracy[2][i]
-            bestRecall = countCrossoverOtherAccuracy[3][i]
-            for j in range(int(hiddenLayer)):
-                bestSolution[j] = selectionData[i][j]
-            
+    # Save model
+    torch.save(bestModel, 'src/DE_DNN_ICS/result/DE_DNN_' + outputLayer + '-' + number + '.pkl')
 
-    for i in range(np.size(countCrossoverOtherAccuracy, 1)):
-        if best <= countOriginalOtherAccuracy[1][i]:
-            best = countOriginalOtherAccuracy[1][i]
-            bestAccuracy = countOriginalOtherAccuracy[0][i]
-            bestPrecision = countOriginalOtherAccuracy[2][i]
-            bestRecall = countOriginalOtherAccuracy[3][i]
-            for j in range(int(hiddenLayer)):
-                bestSolution[j] = selectionData[i][j]
-
-    # reset
-    populationDataOriginal = selectionData.copy()
-    populationData = selectionData.copy()
-print(bestAccuracy)
-print(best)
-print(bestSolution)
-print(bestPrecision)
-print(bestRecall)
-# print(best,"",end='')
-# print(bestSolution)
-    # training 
-    # y_train_predict = net(x_train_tensor, int(hiddenLayer))
-    # pred = y_train_predict.detach().numpy()
-    # y_train_list_predic = np.argmax(pred, axis=1)
-    # print("The training accuracy is", accuracyfunction.accuracy(y_train_tensor, y_train_list_predic))
-    # print()
+testing(outputLayer, hiddenLayer, x_test_tensor, y_test_tensor, number)

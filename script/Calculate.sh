@@ -1,8 +1,7 @@
 #!/bin/bash
-rm src/Plot/NSL-KDD/2class/NSL-*
-rm src/Plot/NSL-KDD/5class/NSL-*
-# rm src/Plot/KDD99/2class/KDD*
-# rm src/Plot/KDD99/5class/KDD*
+rm src/Plot/*/*/NSL-*
+rm src/Plot/*/*/ICS_*
+rm src/Plot/*/*/KDD*
 
 dataset="NSL-KDD"
 # NSL-KDD 2 categories
@@ -76,6 +75,24 @@ python3 src/Calculate/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 5 Naive_Bayes $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 5 RandomForest $dataset $file_name >> $path
 python3 src/Calculate/calavg.py 5 SVM $dataset $file_name >> $path
+
+dataset="ICS"
+data=15
+# ICS 2 categories
+for i in $(seq 1 $data)
+do
+    file_name="experimental_result_2-"$i
+    path="src/Plot/ICS/2class/ICS_2class_Avg-"$i".txt"
+    echo -n '"'"ICS 2 categories data "$i'" ' >> $path
+    python3 src/Calculate/calavg.py 10 DAE $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 10 SNDAE $dataset $file_name >> $path
+    # python3 src/Calculate/calavg.py 12 DNN $dataset $file_name >> $path
+    # python3 src/Calculate/calavg.py 10 HC_DNN $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 10 DE_DNN $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 5 Naive_Bayes $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 5 RandomForest $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 5 SVM $dataset $file_name >> $path
+done
 
 # dataset="KDD99"
 # # KDD99 2 categories

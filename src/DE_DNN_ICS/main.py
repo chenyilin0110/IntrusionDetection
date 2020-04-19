@@ -32,6 +32,9 @@ F = sys.argv[10]
 CR = sys.argv[11]
 number = sys.argv[12]
 
+# can use cuda or not
+cuda = torch.cuda.is_available()
+
 # load dataset
 noStringTemp = preprocess.load(finder, filename)
 noStringTemp_X = noStringTemp[0:,0:-1]
@@ -91,7 +94,7 @@ for eachiteration in range(int(iteration)):
     countCrossoverLossValue = np.zeros((4, int(population)))
     crossoverModel = []
     originalModel = []
-    selectionData = selection(populationDataOriginal, crossoverData, countOriginalLossValue, countCrossoverLossValue, crossoverModel, originalModel, int(hiddenLayer), int(outputLayer), int(epoch), noStringTemp_X, x_train_tensor, y_train_tensor)
+    selectionData = selection(populationDataOriginal, crossoverData, countOriginalLossValue, countCrossoverLossValue, crossoverModel, originalModel, int(hiddenLayer), int(outputLayer), int(epoch), noStringTemp_X, x_train_tensor, y_train_tensor, cuda)
     
     # Update
     best, bestModel = update(best, bestModel, eachiteration, bestSolution, eachIterationLocalBest, int(population), countCrossoverLossValue, countOriginalLossValue, crossoverModel, originalModel, selectionData)
@@ -99,4 +102,4 @@ for eachiteration in range(int(iteration)):
     # Save model
     torch.save(bestModel, 'src/DE_DNN_ICS/result/DE_DNN_' + outputLayer + '-' + number + '.pkl')
 
-testing(outputLayer, hiddenLayer, x_test_tensor, y_test_tensor, number)
+testing(outputLayer, hiddenLayer, x_test_tensor, y_test_tensor, number, cuda)

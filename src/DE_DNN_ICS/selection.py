@@ -1,13 +1,13 @@
 from fitness import fitness
 import numpy as np
 
-def selection(populationDataOriginal, crossoverData, countOriginalLossValue, countCrossoverLossValue, crossoverModel, originalModel, hiddenLayer, outputLayer, epoch, noStringTemp_X, x_train_tensor, y_train_tensor):
+def selection(populationDataOriginal, crossoverData, countOriginalLossValue, countCrossoverLossValue, crossoverModel, originalModel, hiddenLayer, outputLayer, epoch, noStringTemp_X, x_train_tensor, y_train_tensor, cuda):
     selectionPopulationData = populationDataOriginal
     
     for eachPopulation in range(np.size(populationDataOriginal,0)):
-        countOriginalLossValue[0][eachPopulation], model = fitness(populationDataOriginal[eachPopulation], hiddenLayer, outputLayer, epoch, noStringTemp_X, x_train_tensor, y_train_tensor)
+        countOriginalLossValue[0][eachPopulation], model = fitness(populationDataOriginal[eachPopulation], hiddenLayer, outputLayer, epoch, noStringTemp_X, x_train_tensor, y_train_tensor, cuda)
         originalModel.append(model)
-        countCrossoverLossValue[0][eachPopulation], model = fitness(crossoverData[eachPopulation], hiddenLayer, outputLayer, epoch,  noStringTemp_X, x_train_tensor, y_train_tensor)
+        countCrossoverLossValue[0][eachPopulation], model = fitness(crossoverData[eachPopulation], hiddenLayer, outputLayer, epoch,  noStringTemp_X, x_train_tensor, y_train_tensor, cuda)
         crossoverModel.append(model)
         
     for eachPopulation in range(np.size(countCrossoverLossValue, 1)):

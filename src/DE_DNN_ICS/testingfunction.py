@@ -16,4 +16,4 @@ def testing(outputLayer, hiddenLayer, x_test_tensor, y_test_tensor, number, cuda
     y_test_list_predic = np.argmax(pred, axis=1)
     
     accuracyValue = accuracy(y_test_tensor, y_test_list_predic)
-    print("ACC", accuracyValue)
+    print(accuracyValue)

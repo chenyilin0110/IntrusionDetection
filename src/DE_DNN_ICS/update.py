@@ -59,5 +59,5 @@ def update(best, bestModel, eachiteration, bestSolution, eachIterationLocalBest,
         # reset
         populationDataOriginal = selectionData.copy()
         populationData = selectionData.copy()
-    print(best, bestSolution)
+    print(best)
     return best, bestModel

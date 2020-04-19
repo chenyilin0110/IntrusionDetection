@@ -5,7 +5,7 @@ tree_number=100
 data=15
 END=10
 
-# DAE 2 categories
+# SNDAE 2 categories
 finder="2"
 outputLayer="2"
 for j in $(seq 1 $data);
@@ -23,9 +23,9 @@ do
     done
 done
 
-# DAE 5 categories
-finder="5"
-outputLayer="5"
+# SNDAE 3 categories
+finder="3"
+outputLayer="3"
 for j in $(seq 1 $data);
 do
     filename="data"$j".csv"
@@ -41,9 +41,9 @@ do
     done
 done
 
-# DAE multi categories
+# SNDAE multi categories
 finder="multi"
-outputLayer="multi"
+outputLayer="41"
 for j in $(seq 1 $data);
 do
     filename="data"$j".csv"

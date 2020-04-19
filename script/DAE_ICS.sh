@@ -3,7 +3,7 @@ test=20
 epoch=100
 
 data=15
-END=2
+END=10
 
 # DAE 2 categories
 finder="2"
@@ -23,9 +23,9 @@ do
     done
 done
 
-# DAE 5 categories
-finder="5"
-outputLayer="5"
+# DAE 3 categories
+finder="3"
+outputLayer="3"
 for j in $(seq 1 $data);
 do
     filename="data"$j".csv"
@@ -43,7 +43,7 @@ done
 
 # DAE multi categories
 finder="multi"
-outputLayer="multi"
+outputLayer="41"
 for j in $(seq 1 $data);
 do
     filename="data"$j".csv"

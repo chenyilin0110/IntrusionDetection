@@ -86,14 +86,45 @@ do
     echo -n '"'"ICS 2 categories data "$i'" ' >> $path
     python3 src/Calculate/calavg.py 10 DAE $dataset $file_name >> $path
     python3 src/Calculate/calavg.py 10 SNDAE $dataset $file_name >> $path
-    # python3 src/Calculate/calavg.py 12 DNN $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 12 DNN $dataset $file_name >> $path
     # python3 src/Calculate/calavg.py 10 HC_DNN $dataset $file_name >> $path
     python3 src/Calculate/calavg.py 10 DE_DNN $dataset $file_name >> $path
-    python3 src/Calculate/calavg.py 5 Naive_Bayes $dataset $file_name >> $path
-    python3 src/Calculate/calavg.py 5 RandomForest $dataset $file_name >> $path
-    python3 src/Calculate/calavg.py 5 SVM $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 10 Naive_Bayes $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 10 RandomForest $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 10 SVM $dataset $file_name >> $path
 done
 
+# ICS 3 categories
+for i in $(seq 1 $data)
+do
+    file_name="experimental_result_3-"$i
+    path="src/Plot/ICS/3class/ICS_3class_Avg-"$i".txt"
+    echo -n '"'"ICS 3 categories data "$i'" ' >> $path
+    python3 src/Calculate/calavg.py 10 DAE $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 10 SNDAE $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 12 DNN $dataset $file_name >> $path
+    # python3 src/Calculate/calavg.py 10 HC_DNN $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 10 DE_DNN $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 10 Naive_Bayes $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 10 RandomForest $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 10 SVM $dataset $file_name >> $path
+done
+
+# ICS multi categories
+for i in $(seq 1 $data)
+do
+    file_name="experimental_result_41-"$i
+    path="src/Plot/ICS/multi/ICS_multi_Avg-"$i".txt"
+    echo -n '"'"ICS multi categories data "$i'" ' >> $path
+    python3 src/Calculate/calavg.py 10 DAE $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 10 SNDAE $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 12 DNN $dataset $file_name >> $path
+    # python3 src/Calculate/calavg.py 10 HC_DNN $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 10 DE_DNN $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 10 Naive_Bayes $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 10 RandomForest $dataset $file_name >> $path
+    python3 src/Calculate/calavg.py 10 SVM $dataset $file_name >> $path
+done
 # dataset="KDD99"
 # # KDD99 2 categories
 # file_name="experimental_result_2"

@@ -14,10 +14,11 @@ gnuplot src/Plot/NSL-KDD/2class/Bar_Graph-21.plt
 gnuplot src/Plot/NSL-KDD/5class/Bar_Graph.plt
 gnuplot src/Plot/NSL-KDD/5class/Bar_Graph-21.plt
 
-# # NSL-KDD-2parameters 2 categories
-# gnuplot src/Plot/NSL-KDD-2parameters/2class/Bar_Graph.plt
-# gnuplot src/Plot/NSL-KDD-2parameters/2class/Bar_Graph-21.plt
+# ICS 2 categories
+gnuplot src/Plot/ICS/2class/Bar_Graph.plt
 
-# # NSL-KDD-2parameters 5 categories
-# gnuplot src/Plot/NSL-KDD-2parameters/5class/Bar_Graph.plt
-# gnuplot src/Plot/NSL-KDD-2parameters/5class/Bar_Graph-21.plt
+# ICS 3 categories
+gnuplot src/Plot/ICS/3class/Bar_Graph.plt
+
+# ICS multi categories
+gnuplot src/Plot/ICS/multi/Bar_Graph.plt

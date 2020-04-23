@@ -3,8 +3,8 @@ set terminal wxt size 400,400
 set encoding utf8
 set style fill solid
 set key outside bottom center horizontal font ",17"
-set yrange [0.44 : 0.80]
-set ytics 0,0.03 font ",15"
+set yrange [0.0 : 0.99]
+set ytics 0,0.1 font ",15"
 
 set style line 1\
 	linecolor rgb "#49434a"
@@ -93,7 +93,7 @@ plot \
 "src/Plot/ICS/multi/ICS_multi_Avg-4.txt" using 5:xtic(1) with histogram linestyle 4 title "DE-DNN",\
 "src/Plot/ICS/multi/ICS_multi_Avg-4.txt" using 6:xtic(1) with histogram linestyle 5 title "NaiveBayes",\
 "src/Plot/ICS/multi/ICS_multi_Avg-4.txt" using 7:xtic(1) with histogram linestyle 6 title "RandomForest",\
-"src/Plot/ICS/multi/ICS_multi_Avg-4.txt" using 8:xtic(1) with histogram linestyle 7 title "SVM"4
+"src/Plot/ICS/multi/ICS_multi_Avg-4.txt" using 8:xtic(1) with histogram linestyle 7 title "SVM"
 set terminal png
 set output "src/Plot/ICS/multi/multiAccuracy-4.png"
 replot

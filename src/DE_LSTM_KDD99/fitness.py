@@ -21,22 +21,13 @@ def fitness(data, hiddenLayer, outputLayer, epoch, batchSize, train_noStringTemp
 
     # traning
     for eachepoch in range(int(epoch)):
-        h = torch.Tensor(1, int(batchSize), data[0].tolist()).zero_() # hiddenLayerNumber, batchSize, hiddenSize
-        c = torch.Tensor(1, int(batchSize), data[0].tolist()).zero_()
         for step, (batch_x, batch_y) in enumerate (train_loader):
             batch_x = batch_x.view(1, -1, np.size(train_noStringTemp_X, 1)) # seq_len batch_size input_dim
-            if len(batch_x[0]) != int(batchSize):
-                h = h.detach().cpu().numpy()
-                c = c.detach().cpu().numpy()
-                h = h[:,:len(batch_x[0]),:]
-                c = c[:,:len(batch_x[0]),:]
-                h = torch.from_numpy(h)
-                c = torch.from_numpy(c)
-
+        
             if cuda == True:
-                y_prediction, (h,c) = lstm(batch_x.cuda(), h.cuda(), c.cuda())
+                y_prediction = lstm(batch_x.cuda())
             else:
-                y_prediction, (h,c) = lstm(batch_x, h, c)
+                y_prediction = lstm(batch_x)
 
             y_prediction = y_prediction.view(np.size(batch_x.numpy(), 1), -1) # reshape from 3 dimention to 2 dimention
             
@@ -48,17 +39,16 @@ def fitness(data, hiddenLayer, outputLayer, epoch, batchSize, train_noStringTemp
             optimizer.zero_grad()# clean optimizer
             loss.backward(retain_graph=True)# calculate new parameters
             optimizer.step()# update parameters
-    h = torch.Tensor(1, len(x_test_tensor), data[0].tolist()).zero_()
-    c = torch.Tensor(1, len(x_test_tensor), data[0].tolist()).zero_()
-
+    
     x_test = x_test_tensor.view(1, -1, np.size(train_noStringTemp_X, 1))
 
     if cuda == True:
-        y_test_predic, _ = lstm(x_test.cuda(), h.cuda(), c.cuda())
+        y_test_predic = lstm(x_test.cuda())
+        pred = y_test_predic.detach().cpu().numpy()
     else:
-            y_test_predic, _ = lstm(x_test, h, c)
+        y_test_predic = lstm(x_test)
+        pred = y_test_predic.detach().numpy()
 
-    pred = y_test_predic.detach().cpu().numpy()
     pred = pred.reshape(-1, int(outputLayer))
     y_test_list_predic = np.argmax(pred, axis=1)
     

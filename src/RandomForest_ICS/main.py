@@ -41,7 +41,7 @@ resultNormalize = preprocess.normalize(noStringTemp_X)
 forest = ensemble.RandomForestClassifier(n_estimators=100)
 
 # split data
-x_train, x_test, y_train, y_test = train_test_split(resultNormalize, noStringTemp_Y, test_size = float(testing)/100, random_state=42)
+x_train, x_test, y_train, y_test = train_test_split(resultNormalize, noStringTemp_Y, test_size = float(testing)/100)
 
 # training
 forestFit = forest.fit(x_train, y_train)

@@ -64,7 +64,7 @@ optimizer = optim.RMSprop(lstm.parameters(), lr=0.05)
 lossFunction = nn.CrossEntropyLoss()
 
 # split traning and testing
-x_train, x_test, y_train, y_test = train_test_split(resultNormalize, noStringTemp_Y, test_size = float(testing)/100, random_state=42)
+x_train, x_test, y_train, y_test = train_test_split(resultNormalize, noStringTemp_Y, test_size = float(testing)/100)
 
 # np->tensor
 x_train_tensor = Variable(torch.from_numpy(x_train)).float()

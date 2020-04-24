@@ -85,8 +85,8 @@ data=15
 for i in $(seq 1 $data)
 do
     file_name="experimental_result_2-"$i
-    path="src/Plot/ICS/2class/ICS_2class_Avg-"$i".txt"
-    echo -n '"'"ICS 2 categories data "$i'" ' >> $path
+    path="src/Plot/ICS/2class/ICS_2class_Avg.txt"
+    echo -n '"'$i'" ' >> $path
     python3 src/Calculate/calavg.py 10 DAE $dataset $file_name >> $path
     python3 src/Calculate/calavg.py 10 SNDAE $dataset $file_name >> $path
     python3 src/Calculate/calavg.py 12 DNN $dataset $file_name >> $path
@@ -95,14 +95,15 @@ do
     python3 src/Calculate/calavg.py 10 Naive_Bayes $dataset $file_name >> $path
     python3 src/Calculate/calavg.py 10 RandomForest $dataset $file_name >> $path
     python3 src/Calculate/calavg.py 10 SVM $dataset $file_name >> $path
+    echo >> $path
 done
 
 # 3 categories
 for i in $(seq 1 $data)
 do
     file_name="experimental_result_3-"$i
-    path="src/Plot/ICS/3class/ICS_3class_Avg-"$i".txt"
-    echo -n '"'"ICS 3 categories data "$i'" ' >> $path
+    path="src/Plot/ICS/3class/ICS_3class_Avg.txt"
+    echo -n '"'$i'" ' >> $path
     python3 src/Calculate/calavg.py 10 DAE $dataset $file_name >> $path
     python3 src/Calculate/calavg.py 10 SNDAE $dataset $file_name >> $path
     python3 src/Calculate/calavg.py 12 DNN $dataset $file_name >> $path
@@ -111,14 +112,15 @@ do
     python3 src/Calculate/calavg.py 10 Naive_Bayes $dataset $file_name >> $path
     python3 src/Calculate/calavg.py 10 RandomForest $dataset $file_name >> $path
     python3 src/Calculate/calavg.py 10 SVM $dataset $file_name >> $path
+    echo >> $path
 done
 
 # multi categories
 for i in $(seq 1 $data)
 do
     file_name="experimental_result_41-"$i
-    path="src/Plot/ICS/multi/ICS_multi_Avg-"$i".txt"
-    echo -n '"'"ICS multi categories data "$i'" ' >> $path
+    path="src/Plot/ICS/multi/ICS_multi_Avg.txt"
+    echo -n '"'$i'" ' >> $path
     python3 src/Calculate/calavg.py 10 DAE $dataset $file_name >> $path
     python3 src/Calculate/calavg.py 10 SNDAE $dataset $file_name >> $path
     python3 src/Calculate/calavg.py 12 DNN $dataset $file_name >> $path
@@ -127,6 +129,7 @@ do
     python3 src/Calculate/calavg.py 10 Naive_Bayes $dataset $file_name >> $path
     python3 src/Calculate/calavg.py 10 RandomForest $dataset $file_name >> $path
     python3 src/Calculate/calavg.py 10 SVM $dataset $file_name >> $path
+    echo >> $path
 done
 #-----------------------------ICS     dataset-----------------------------#
 

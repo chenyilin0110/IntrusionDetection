@@ -1,7 +1,7 @@
 import numpy as np
 import random as rand
 
-def update(best, bestModel, eachiteration, bestSolution, eachIterationLocalBest, population, countCrossoverLossValue, countOriginalLossValue, crossoverModel, originalModel, selectionData, name):
+def update(best, bestModel, eachiteration, bestSolution, eachIterationLocalBest, population, countCrossoverLossValue, countOriginalLossValue, crossoverModel, originalModel, selectionData):
     
     if eachiteration == 0:
         best = countCrossoverLossValue[0][0]

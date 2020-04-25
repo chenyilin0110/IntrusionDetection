@@ -6,7 +6,7 @@ from sklearn.metrics import classification_report
 
 def accuracy(y_test_ture, y_test_predic):
     # accuarcy
-    print(accuracy_score(y_test_ture, y_test_predic))
+    accuracyValue = accuracy_score(y_test_ture, y_test_predic)
 
     # f1_score
     # print("The testing f1_score is", f1_score(y_test_ture, y_test_predic, average='micro'))
@@ -20,3 +20,4 @@ def accuracy(y_test_ture, y_test_predic):
     # classification_report
     # print("The testing classification_report is")
     # print(classification_report(y_test_ture, y_test_predic))
+    return accuracyValue

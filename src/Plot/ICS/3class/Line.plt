@@ -58,9 +58,10 @@ plot \
 "src/Plot/ICS/3class/ICS_3class_Avg.txt" using 3:xtic(1) with linespoints linestyle 2 title "SNDAE",\
 "src/Plot/ICS/3class/ICS_3class_Avg.txt" using 4:xtic(1) with linespoints linestyle 3 title "DNN",\
 "src/Plot/ICS/3class/ICS_3class_Avg.txt" using 5:xtic(1) with linespoints linestyle 4 title "DE-DNN",\
-"src/Plot/ICS/3class/ICS_3class_Avg.txt" using 6:xtic(1) with linespoints linestyle 7 title "NaiveBayes",\
-"src/Plot/ICS/3class/ICS_3class_Avg.txt" using 7:xtic(1) with linespoints linestyle 8 title "RandomForest",\
-"src/Plot/ICS/3class/ICS_3class_Avg.txt" using 8:xtic(1) with linespoints linestyle 9 title "SVM"
+"src/Plot/ICS/3class/ICS_3class_Avg.txt" using 6:xtic(1) with linespoints linestyle 5 title "LSTM",\
+"src/Plot/ICS/3class/ICS_3class_Avg.txt" using 7:xtic(1) with linespoints linestyle 7 title "NaiveBayes",\
+"src/Plot/ICS/3class/ICS_3class_Avg.txt" using 8:xtic(1) with linespoints linestyle 8 title "RandomForest",\
+"src/Plot/ICS/3class/ICS_3class_Avg.txt" using 9:xtic(1) with linespoints linestyle 9 title "SVM"
 
 set terminal png
 set output "src/Plot/ICS/3class/3classAccuracy.png"

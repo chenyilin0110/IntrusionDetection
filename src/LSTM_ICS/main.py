@@ -43,9 +43,6 @@ else:
 
 resultNormalize = preprocess.normalize(noStringTemp_X)
 
-# np->tensor but noStringTemp_X is not float so astype(x)
-noStringTemp_X = noStringTemp_X.astype(float)
-
 # bulid lstm
 lstm = LSTM(np.size(resultNormalize,1), int(outputlayer))
 

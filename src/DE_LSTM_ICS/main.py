@@ -17,12 +17,12 @@ import time
 import warnings
 warnings.filterwarnings("ignore")
 
-# set filename outputLayer testing iteration
+# set filename outputLayer test iteration
 finder = sys.argv[1]
 filename = sys.argv[2]
 hiddenLayer = sys.argv[3]
 outputLayer = sys.argv[4]
-testing = sys.argv[5]
+test = sys.argv[5]
 batchSize = sys.argv[6]
 epoch = sys.argv[7]
 iteration = sys.argv[8]
@@ -55,8 +55,8 @@ else:
 
 train_noStringTemp_X = preprocess.normalize(noStringTemp_X)
 
-# split traning and testing
-x_train, x_test, y_train, y_test = train_test_split(train_noStringTemp_X, noStringTemp_Y, test_size = float(testing)/100)
+# split traning and test
+x_train, x_test, y_train, y_test = train_test_split(train_noStringTemp_X, noStringTemp_Y, test_size = float(test)/100)
 
 # np->tensor
 x_train_tensor = Variable(torch.from_numpy(x_train)).float()
@@ -101,4 +101,4 @@ for eachiteration in range(int(iteration)):
     # Save model
     torch.save(bestModel, 'src/DE_LSTM_ICS/result/DE_LSTM_' + outputLayer + '_bs' + batchSize + '-' + number + '.pkl')
 
-testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, name, batchSize, number)
+testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, batchSize, number)

@@ -29,7 +29,8 @@ iteration = sys.argv[8]
 population = sys.argv[9]
 F = sys.argv[10]
 CR = sys.argv[11]
-number = sys.argv[12]
+datasetNumber = sys.argv[12]
+number = sys.argv[13]
 
 # can use cuda or not
 cuda = torch.cuda.is_available()
@@ -99,6 +100,6 @@ for eachiteration in range(int(iteration)):
     best, bestModel = update(best, bestModel, eachiteration, bestSolution, eachIterationLocalBest, int(population), countCrossoverLossValue, countOriginalLossValue, crossoverModel, originalModel, selectionData)
 
     # Save model
-    torch.save(bestModel, 'src/DE_LSTM_ICS/result/DE_LSTM_' + outputLayer + '_bs' + batchSize + '-' + number + '.pkl')
+    torch.save(bestModel, 'src/DE_LSTM_ICS/result/DE_LSTM_' + outputLayer + '-' + datasetNumber + '_bs' + batchSize + '-' + number + '.pkl')
 
-testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, batchSize, number)
+testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, batchSize, datasetNumber, number)

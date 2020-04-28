@@ -3,8 +3,8 @@ import torch.nn as nn
 import torch
 from accuracyfunction import accuracy
 
-def testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, batchSize, number):
-    lstm = torch.load('src/DE_LSTM_ICS/result/DE_LSTM_' + outputLayer + '_bs' + batchSize + '-' + number + '.pkl')
+def testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, batchSize, datasetNumber, number):
+    lstm = torch.load('src/DE_LSTM_ICS/result/DE_LSTM_' + outputLayer + '-' + datasetNumber + '_bs' + batchSize + '-' + number + '.pkl')
 
     x_test = x_test_tensor.view(1, -1, np.size(train_noStringTemp_X, 1))
 

@@ -25,12 +25,12 @@ do
         then
             if [ "$i" = "$END" ]
             then
-                CUDA_VISIBLE_DEVICES=1 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $i >> $path
+                CUDA_VISIBLE_DEVICES=1 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $j $i >> $path
             else
-                CUDA_VISIBLE_DEVICES=1 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $i >> $path &
+                CUDA_VISIBLE_DEVICES=1 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $j $i >> $path &
             fi
         else
-            CUDA_VISIBLE_DEVICES=0 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $i >> $path &
+            CUDA_VISIBLE_DEVICES=0 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $j $i >> $path &
         fi
     done
 done
@@ -48,12 +48,12 @@ do
         then
             if [ "$i" = "$END" ]
             then
-                CUDA_VISIBLE_DEVICES=1 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $i >> $path
+                CUDA_VISIBLE_DEVICES=1 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $j $i >> $path
             else
-                CUDA_VISIBLE_DEVICES=1 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $i >> $path &
+                CUDA_VISIBLE_DEVICES=1 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $j $i >> $path &
             fi
         else
-            CUDA_VISIBLE_DEVICES=0 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $i >> $path &
+            CUDA_VISIBLE_DEVICES=0 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $j $i >> $path &
         fi
     done
 done
@@ -71,12 +71,12 @@ do
         then
             if [ "$i" = "$END" ]
             then
-                CUDA_VISIBLE_DEVICES=1 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $i >> $path
+                CUDA_VISIBLE_DEVICES=1 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $j $i >> $path
             else
-                CUDA_VISIBLE_DEVICES=1 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $i >> $path &
+                CUDA_VISIBLE_DEVICES=1 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $j $i >> $path &
             fi
         else
-            CUDA_VISIBLE_DEVICES=0 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $i >> $path &
+            CUDA_VISIBLE_DEVICES=0 python3 src/DE_LSTM_ICS/main.py $finder $filename $hiddenLayer $outputLayer $test $batchSize $epoch $iteration $population $F $CR $j $i >> $path &
         fi
     done
 done

@@ -59,9 +59,10 @@ plot \
 "src/Plot/ICS/multi/ICS_multi_Avg.txt" using 4:xtic(1) with linespoints linestyle 3 title "DNN",\
 "src/Plot/ICS/multi/ICS_multi_Avg.txt" using 5:xtic(1) with linespoints linestyle 4 title "DE-DNN",\
 "src/Plot/ICS/multi/ICS_multi_Avg.txt" using 6:xtic(1) with linespoints linestyle 5 title "LSTM",\
-"src/Plot/ICS/multi/ICS_multi_Avg.txt" using 7:xtic(1) with linespoints linestyle 7 title "NaiveBayes",\
-"src/Plot/ICS/multi/ICS_multi_Avg.txt" using 8:xtic(1) with linespoints linestyle 8 title "RandomForest",\
-"src/Plot/ICS/multi/ICS_multi_Avg.txt" using 9:xtic(1) with linespoints linestyle 9 title "SVM"
+"src/Plot/ICS/multi/ICS_multi_Avg.txt" using 7:xtic(1) with linespoints linestyle 6 title "DE-LSTM",\
+"src/Plot/ICS/multi/ICS_multi_Avg.txt" using 8:xtic(1) with linespoints linestyle 7 title "NaiveBayes",\
+"src/Plot/ICS/multi/ICS_multi_Avg.txt" using 9:xtic(1) with linespoints linestyle 8 title "RandomForest",\
+"src/Plot/ICS/multi/ICS_multi_Avg.txt" using 10:xtic(1) with linespoints linestyle 9 title "SVM"
 
 set terminal png
 set output "src/Plot/ICS/multi/multiAccuracy.png"

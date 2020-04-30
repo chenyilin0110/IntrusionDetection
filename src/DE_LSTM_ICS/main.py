@@ -57,7 +57,8 @@ else:
 train_noStringTemp_X = preprocess.normalize(noStringTemp_X)
 
 # split traning and test
-x_train, x_test, y_train, y_test = train_test_split(train_noStringTemp_X, noStringTemp_Y, test_size = float(test)/100)
+x_train, x_test, y_train, y_test = train_test_split(train_noStringTemp_X, noStringTemp_Y, random_state=0, test_size = float(test)/100)
+# order to I can get the same training data and testing data, so I need use random_state
 
 # np->tensor
 x_train_tensor = Variable(torch.from_numpy(x_train)).float()

@@ -8,30 +8,35 @@ population="20"
 F="0.5"
 CR="0.3"
 
-END=5
+END=9
+max=3
+CUDA_VISIBLE_DEVICES=0 
 
 # DE_DNN 2 categories
 outputLayer="2"
 for i in $(seq 1 $END);
 do
     path="src/DE_DNN_KDD99/result/experimental_result_"$outputLayer"-"$i".txt"
-    if [ "$i" = "$END" ]
+    temp=`expr $i % $max`
+    if [ "$temp" = "0" ]
     then
-        python3 src/DE_DNN_KDD99/main.py $train $test $hiddenLayer $outputLayer $iteration $epoch $population $F $CR >> $path
+        python3 src/DE_DNN_KDD99/main.py $train $test $hiddenLayer $outputLayer $iteration $epoch $population $F $CR $i >> $path
     else
-        python3 src/DE_DNN_KDD99/main.py $train $test $hiddenLayer $outputLayer $iteration $epoch $population $F $CR >> $path &
+        python3 src/DE_DNN_KDD99/main.py $train $test $hiddenLayer $outputLayer $iteration $epoch $population $F $CR $i >> $path &
     fi
 done
 
 # DE_DNN 5 categories
+temp=0
 outputLayer="5"
 for i in $(seq 1 $END);
 do
     path="src/DE_DNN_KDD99/result/experimental_result_"$outputLayer"-"$i".txt"
-    if [ "$i" = "$END" ]
+    temp=`expr $i % $max`
+    if [ "$temp" = "0" ]
     then
-        python3 src/DE_DNN_KDD99/main.py $train $test $hiddenLayer $outputLayer $iteration $epoch $population $F $CR >> $path
+        python3 src/DE_DNN_KDD99/main.py $train $test $hiddenLayer $outputLayer $iteration $epoch $population $F $CR $i >> $path
     else
-        python3 src/DE_DNN_KDD99/main.py $train $test $hiddenLayer $outputLayer $iteration $epoch $population $F $CR >> $path &
+        python3 src/DE_DNN_KDD99/main.py $train $test $hiddenLayer $outputLayer $iteration $epoch $population $F $CR $i >> $path &
     fi
 done

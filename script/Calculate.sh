@@ -1,5 +1,5 @@
 #!/bin/bash
-rm src/Plot/*/*/NSL-*
+rm src/Plot/NSL-KDD/*/NSL-*
 rm src/Plot/*/*/ICS_*
 rm src/Plot/*/*/KDD*
 
@@ -86,13 +86,13 @@ for i in $(seq 1 $data)
 do
     file_name="experimental_result_2-"$i
     path="src/Plot/ICS/2class/ICS_2class_Avg.txt"
-    echo -n '"'$i'" ' >> $path
+    echo -n '"'"DS"$i'" ' >> $path
     python3 src/Other/calavg.py 10 DAE $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 SNDAE $dataset $file_name >> $path
     python3 src/Other/calavg.py 12 DNN $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 DE_DNN $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 LSTM $dataset $file_name >> $path
-    # python3 src/Other/calavg.py 10 DE_LSTM $dataset $file_name >> $path
+    python3 src/Other/calavg.py 4 DE_LSTM $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 Naive_Bayes $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 RandomForest $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 SVM $dataset $file_name >> $path
@@ -104,13 +104,13 @@ for i in $(seq 1 $data)
 do
     file_name="experimental_result_3-"$i
     path="src/Plot/ICS/3class/ICS_3class_Avg.txt"
-    echo -n '"'$i'" ' >> $path
+    echo -n '"'"DS"$i'" ' >> $path
     python3 src/Other/calavg.py 10 DAE $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 SNDAE $dataset $file_name >> $path
     python3 src/Other/calavg.py 12 DNN $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 DE_DNN $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 LSTM $dataset $file_name >> $path
-    # python3 src/Other/calavg.py 10 DE_LSTM $dataset $file_name >> $path
+    python3 src/Other/calavg.py 4 DE_LSTM $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 Naive_Bayes $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 RandomForest $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 SVM $dataset $file_name >> $path
@@ -122,13 +122,13 @@ for i in $(seq 1 $data)
 do
     file_name="experimental_result_41-"$i
     path="src/Plot/ICS/multi/ICS_multi_Avg.txt"
-    echo -n '"'$i'" ' >> $path
+    echo -n '"'"DS"$i'" ' >> $path
     python3 src/Other/calavg.py 10 DAE $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 SNDAE $dataset $file_name >> $path
     python3 src/Other/calavg.py 12 DNN $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 DE_DNN $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 LSTM $dataset $file_name >> $path
-    # python3 src/Other/calavg.py 10 DE_LSTM $dataset $file_name >> $path
+    python3 src/Other/calavg.py 4 DE_LSTM $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 Naive_Bayes $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 RandomForest $dataset $file_name >> $path
     python3 src/Other/calavg.py 10 SVM $dataset $file_name >> $path

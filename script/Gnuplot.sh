@@ -15,13 +15,10 @@ gnuplot src/Plot/NSL-KDD/5class/Bar_Graph.plt
 gnuplot src/Plot/NSL-KDD/5class/Bar_Graph-21.plt
 
 # ICS 2 categories
-gnuplot src/Plot/ICS/2class/Line.plt
-# gnuplot src/Plot/ICS/2class/Bar_Graph.plt
+gnuplot src/Plot/ICS/2class/Bar_Graph.plt
 
 # ICS 3 categories
-# gnuplot src/Plot/ICS/3class/Bar_Graph.plt
-gnuplot src/Plot/ICS/3class/Line.plt
+gnuplot src/Plot/ICS/3class/Bar_Graph.plt
 
 # ICS multi categories
-# gnuplot src/Plot/ICS/multi/Bar_Graph.plt
-gnuplot src/Plot/ICS/multi/Line.plt
+gnuplot src/Plot/ICS/multi/Bar_Graph.plt

@@ -6,7 +6,7 @@ epoch=100
 data=15
 END=10
 
-# SVM 2 categories
+# LSTM 2 categories
 finder="2"
 outputLayer="2"
 for j in $(seq 1 $data);
@@ -24,7 +24,7 @@ do
     done
 done
 
-# SVM 3 categories
+# LSTM 3 categories
 finder="3"
 outputLayer="3"
 for j in $(seq 1 $data);
@@ -42,7 +42,7 @@ do
     done
 done
 
-# SVM multi categories
+# LSTM multi categories
 finder="multi"
 outputLayer="41"
 for j in $(seq 1 $data);

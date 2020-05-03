@@ -123,7 +123,7 @@ for eachiteration in range(int(iteration)):
     selectionData = selection(crossoverModel, originalModel, populationDataOriginal, crossoverData, countOriginalLossValue, countCrossoverLossValue, int(hiddenLayer), int(outputLayer), int(epoch), int(batchSize), train_noStringTemp_X, x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor, cuda)
 
     # Update
-    best, bestModel = update(best, bestModel, eachiteration, bestSolution, eachIterationLocalBest, int(population), countCrossoverLossValue, countOriginalLossValue, crossoverModel, originalModel, selectionData, name)
+    best, bestModel = update(best, bestModel, eachiteration, bestSolution, eachIterationLocalBest, int(population), countCrossoverLossValue, countOriginalLossValue, crossoverModel, originalModel, selectionData)
 
     if name == '0':
         torch.save(bestModel, 'src/DE_LSTM_one_parameter_NSL-KDD/result/DE_LSTM_' + outputLayer + '_bs' + batchSize + '-' + number + '.pkl')

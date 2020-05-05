@@ -8,9 +8,8 @@ population="20"
 F="0.5"
 CR="0.3"
 
-END=9
-max=3
-CUDA_VISIBLE_DEVICES=0 
+END=8
+max=4
 
 # DE_DNN 2 categories
 outputLayer="2"
@@ -20,9 +19,9 @@ do
     temp=`expr $i % $max`
     if [ "$temp" = "0" ]
     then
-        python3 src/DE_DNN_KDD99/main.py $train $test $hiddenLayer $outputLayer $iteration $epoch $population $F $CR $i >> $path
+        CUDA_VISIBLE_DEVICES=1 python3 src/DE_DNN_KDD99/main.py $train $test $hiddenLayer $outputLayer $iteration $epoch $population $F $CR $i >> $path
     else
-        python3 src/DE_DNN_KDD99/main.py $train $test $hiddenLayer $outputLayer $iteration $epoch $population $F $CR $i >> $path &
+        CUDA_VISIBLE_DEVICES=0 python3 src/DE_DNN_KDD99/main.py $train $test $hiddenLayer $outputLayer $iteration $epoch $population $F $CR $i >> $path &
     fi
 done
 
@@ -35,8 +34,8 @@ do
     temp=`expr $i % $max`
     if [ "$temp" = "0" ]
     then
-        python3 src/DE_DNN_KDD99/main.py $train $test $hiddenLayer $outputLayer $iteration $epoch $population $F $CR $i >> $path
+        CUDA_VISIBLE_DEVICES=1 python3 src/DE_DNN_KDD99/main.py $train $test $hiddenLayer $outputLayer $iteration $epoch $population $F $CR $i >> $path
     else
-        python3 src/DE_DNN_KDD99/main.py $train $test $hiddenLayer $outputLayer $iteration $epoch $population $F $CR $i >> $path &
+        CUDA_VISIBLE_DEVICES=0 python3 src/DE_DNN_KDD99/main.py $train $test $hiddenLayer $outputLayer $iteration $epoch $population $F $CR $i >> $path &
     fi
 done

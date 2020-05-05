@@ -9,7 +9,7 @@ END=5
 outputLayer="2"
 for i in $(seq 1 $END);
 do
-    path="src/DAE_KDD99/result/experimental_result_"$outputLayer"-"$i".txt"
+    path="src/DAE_KDD99/result/experimental_result_"$outputLayer".txt"
     if [ "$i" = "$END" ]
     then
         python3 src/DAE_KDD99/main.py $train $test $outputLayer $epoch >> $path
@@ -22,7 +22,7 @@ done
 outputLayer="5"
 for i in $(seq 1 $END);
 do
-    path="src/DAE_KDD99/result/experimental_result_"$outputLayer"-"$i".txt"
+    path="src/DAE_KDD99/result/experimental_result_"$outputLayer".txt"
     if [ "$i" = "$END" ]
     then
         python3 src/DAE_KDD99/main.py $train $test $outputLayer $epoch >> $path

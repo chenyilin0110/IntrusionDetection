@@ -140,9 +140,12 @@ python3 src/Other/calavg.py 10 DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 8 DE_DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 10 LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 3 DE_LSTM $dataset $file_name >> $path
+python3 src/Other/calavg.py 10 Naive_Bayes $dataset $file_name >> $path
+python3 src/Other/calavg.py 10 RandomForest $dataset $file_name >> $path
+python3 src/Other/calavg.py 10 SVM $dataset $file_name >> $path
 
 # 5 categories
-file_name="experimental_result_2"
+file_name="experimental_result_5"
 path="src/Plot/KDD99/5class/KDD99_5class_Avg.txt"
 echo -n '"'"KDD CUP 99 5 categories"'" ' >> $path
 python3 src/Other/calavg.py 10 DAE $dataset $file_name >> $path
@@ -151,4 +154,7 @@ python3 src/Other/calavg.py 10 DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 8 DE_DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 10 LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 3 DE_LSTM $dataset $file_name >> $path
+python3 src/Other/calavg.py 10 Naive_Bayes $dataset $file_name >> $path
+python3 src/Other/calavg.py 10 RandomForest $dataset $file_name >> $path
+python3 src/Other/calavg.py 10 SVM $dataset $file_name >> $path
 #-----------------------------KDD99   dataset-----------------------------#

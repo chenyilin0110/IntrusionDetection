@@ -12,10 +12,8 @@ echo -n '"'"NSL-KDD 2 categories"'" ' >> $path
 python3 src/Other/calavg.py 5 DAE $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 SNDAE $dataset $file_name >> $path
 python3 src/Other/calavg.py 15 DNN $dataset $file_name >> $path
-# python3 src/Other/calavg.py 10 HC_DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 DE_DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 8 LSTM $dataset $file_name >> $path
-# python3 src/Other/calavg.py 3 HC_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 DE_LSTM_one_parameter $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 DE_LSTM_two_parameters $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
@@ -30,10 +28,8 @@ echo -n '"'"NSL-KDD 5 categories"'" ' >> $path
 python3 src/Other/calavg.py 5 DAE $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 SNDAE $dataset $file_name >> $path
 python3 src/Other/calavg.py 15 DNN $dataset $file_name >> $path
-# python3 src/Other/calavg.py 10 HC_DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 DE_DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 8 LSTM $dataset $file_name >> $path
-# python3 src/Other/calavg.py 3 HC_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 DE_LSTM_one_parameter $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 DE_LSTM_two_parameters $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
@@ -48,10 +44,8 @@ echo -n '"'"NSL-KDD 2 categories-21"'" ' >> $path
 python3 src/Other/calavg.py 5 DAE $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 SNDAE $dataset $file_name >> $path
 python3 src/Other/calavg.py 15 DNN $dataset $file_name >> $path
-# python3 src/Other/calavg.py 10 HC_DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 DE_DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 8 LSTM $dataset $file_name >> $path
-# python3 src/Other/calavg.py 3 HC_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 DE_LSTM_one_parameter $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 DE_LSTM_two_parameters $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
@@ -66,10 +60,8 @@ echo -n '"'"NSL-KDD 5 categories-21"'" ' >> $path
 python3 src/Other/calavg.py 5 DAE $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 SNDAE $dataset $file_name >> $path
 python3 src/Other/calavg.py 15 DNN $dataset $file_name >> $path
-# python3 src/Other/calavg.py 10 HC_DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 3 DE_DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 8 LSTM $dataset $file_name >> $path
-# python3 src/Other/calavg.py 3 HC_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 DE_LSTM_one_parameter $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 DE_LSTM_two_parameters $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
@@ -137,32 +129,26 @@ done
 #-----------------------------ICS     dataset-----------------------------#
 
 #-----------------------------KDD99   dataset-----------------------------#
-# dataset="KDD99"
-# # 2 categories
-# file_name="experimental_result_2"
-# path="src/Plot/KDD99/2class/KDD99_2class_Avg.txt"
-# echo '"'"KDD CUP 99 2 categories"'"' >> $path
-# python3 src/Other/calavg.py 5 DAE $dataset $file_name >> $path
-# python3 src/Other/calavg.py 5 SNDAE $dataset $file_name >> $path
-# python3 src/Other/calavg.py 15 DNN $dataset $file_name >> $path
-# # python3 src/Other/calavg.py 10 HC_DNN $dataset $file_name >> $path
-# python3 src/Other/calavg.py 5 DE_DNN $dataset $file_name >> $path
-# python3 src/Other/calavg.py 8 LSTM $dataset $file_name >> $path
-# # python3 src/Other/calavg.py 3 HC_LSTM $dataset $file_name >> $path
-# python3 src/Other/calavg.py 3 DE_LSTM $dataset $file_name >> $path
-# # python3 src/Other/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
+dataset="KDD99"
+# 2 categories
+file_name="experimental_result_2"
+path="src/Plot/KDD99/2class/KDD99_2class_Avg.txt"
+echo -n '"'"KDD CUP 99 2 categories"'" ' >> $path
+python3 src/Other/calavg.py 15 DAE $dataset $file_name >> $path
+python3 src/Other/calavg.py 8 SNDAE $dataset $file_name >> $path
+python3 src/Other/calavg.py 10 DNN $dataset $file_name >> $path
+python3 src/Other/calavg.py 8 DE_DNN $dataset $file_name >> $path
+python3 src/Other/calavg.py 10 LSTM $dataset $file_name >> $path
+python3 src/Other/calavg.py 3 DE_LSTM $dataset $file_name >> $path
 
-# # 5 categories
-# file_name="experimental_result_2"
-# path="src/Plot/KDD99/5class/KDD99_5class_Avg.txt"
-# echo '"'"KDD CUP 99 5 categories"'"' >> $path
-# python3 src/Other/calavg.py 5 DAE $dataset $file_name >> $path
-# python3 src/Other/calavg.py 5 SNDAE $dataset $file_name >> $path
-# python3 src/Other/calavg.py 15 DNN $dataset $file_name >> $path
-# # python3 src/Other/calavg.py 10 HC_DNN $dataset $file_name >> $path
-# python3 src/Other/calavg.py 5 DE_DNN $dataset $file_name >> $path
-# python3 src/Other/calavg.py 8 LSTM $dataset $file_name >> $path
-# # python3 src/Other/calavg.py 3 HC_LSTM $dataset $file_name >> $path
-# python3 src/Other/calavg.py 3 DE_LSTM $dataset $file_name >> $path
-# # python3 src/Other/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
+# 5 categories
+file_name="experimental_result_2"
+path="src/Plot/KDD99/5class/KDD99_5class_Avg.txt"
+echo -n '"'"KDD CUP 99 5 categories"'" ' >> $path
+python3 src/Other/calavg.py 10 DAE $dataset $file_name >> $path
+python3 src/Other/calavg.py 8 SNDAE $dataset $file_name >> $path
+python3 src/Other/calavg.py 10 DNN $dataset $file_name >> $path
+python3 src/Other/calavg.py 8 DE_DNN $dataset $file_name >> $path
+python3 src/Other/calavg.py 10 LSTM $dataset $file_name >> $path
+python3 src/Other/calavg.py 3 DE_LSTM $dataset $file_name >> $path
 #-----------------------------KDD99   dataset-----------------------------#

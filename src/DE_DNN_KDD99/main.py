@@ -7,6 +7,8 @@ import preprocess
 from mutation import mutation
 from crossover import crossover
 from selection import selection
+from update import update
+from testingfunction import testing
 import time
 
 # don't show warnings message
@@ -23,6 +25,10 @@ epoch = sys.argv[6]
 population = sys.argv[7]
 F = sys.argv[8]
 CR = sys.argv[9]
+number = sys.argv[10]
+
+# can use cuda or not
+cuda = torch.cuda.is_available()
 
 # load dataset
 train_noStringTemp_X = preprocess.loadDataset(trainData)
@@ -66,9 +72,7 @@ y_test_tensor = Variable(torch.from_numpy(test_noStringTemp_Y)).long()
 # end preprocess----------------------------------------------------------------------------------------------------------
 
 best = 0
-bestAccuracy = 0
-bestPrecision = 0
-bestRecall = 0
+bestModel = 0
 bestSolution = np.zeros(int(hiddenLayer)).astype(int)
 eachIterationLocalBest = []
 Ud = np.size(train_noStringTemp_X, 1)
@@ -83,9 +87,6 @@ for eachpopulationData_colum in range(int(population)):
 populationData = populationDataOriginal.copy() # copy populationDataOriginal to populationData
 
 for eachiteration in range(int(iteration)):
-    # if eachiteration != 0:
-    #     print(best)
-    #     print(bestSolution)
     # Mutation
     mutationData = mutation(populationData, float(F), Ud, Ld)
     
@@ -93,67 +94,16 @@ for eachiteration in range(int(iteration)):
     crossoverData = crossover(populationDataOriginal, mutationData, float(CR), Ud, Ld)
     
     # Selection
-    countOriginalOtherAccuracy = np.zeros((4, int(population)))
-    countCrossoverOtherAccuracy = np.zeros((4, int(population)))
-    selectionData = selection(populationDataOriginal, crossoverData, countOriginalOtherAccuracy, countCrossoverOtherAccuracy, int(hiddenLayer), int(outputLayer), int(epoch), train_noStringTemp_X, x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor)
+    countOriginalLossValue = np.zeros((4, int(population)))
+    countCrossoverLossValue = np.zeros((4, int(population)))
+    crossoverModel = []
+    originalModel = []
+    selectionData = selection(crossoverModel, originalModel, populationDataOriginal, crossoverData, countOriginalLossValue, countCrossoverLossValue, int(hiddenLayer), int(outputLayer), int(epoch), train_noStringTemp_X, x_train_tensor, y_train_tensor, cuda)
     
-    if eachiteration == 0:
-        # best = countCrossoverOtherAccuracy[1][0]
-        best = countCrossoverOtherAccuracy[0][0]
+    # Update
+    best, bestModel = update(best, bestModel, eachiteration, bestSolution, eachIterationLocalBest, int(population), countCrossoverLossValue, countOriginalLossValue, crossoverModel, originalModel, selectionData)
 
-    for i in range(np.size(countCrossoverOtherAccuracy, 1)):
-        # if best <= countCrossoverOtherAccuracy[1][i]:
-            # best = countCrossoverOtherAccuracy[1][i]
-        if best <= countCrossoverOtherAccuracy[0][i]:
-            best = countCrossoverOtherAccuracy[0][i]
-            # bestAccuracy = countCrossoverOtherAccuracy[0][i]
-            # bestPrecision = countCrossoverOtherAccuracy[2][i]
-            # bestRecall = countCrossoverOtherAccuracy[3][i]
-            for j in range(int(hiddenLayer)):
-                bestSolution[j] = selectionData[i][j]
-            
-    for i in range(np.size(countCrossoverOtherAccuracy, 1)):
-        # if best <= countOriginalOtherAccuracy[1][i]:
-        #     best = countOriginalOtherAccuracy[1][i]
-        if best <= countOriginalOtherAccuracy[0][i]:
-            best = countOriginalOtherAccuracy[0][i]
-            # bestAccuracy = countOriginalOtherAccuracy[0][i]
-            # bestPrecision = countOriginalOtherAccuracy[2][i]
-            # bestRecall = countOriginalOtherAccuracy[3][i]
-            for j in range(int(hiddenLayer)):
-                bestSolution[j] = selectionData[i][j]
-    
-    eachIterationLocalBest.append(bestSolution[0]) # save each iteration best local
-    index = 0
-    count = 0
-    total = 0
-    if eachiteration >= 4:
-        for j in range(len(eachIterationLocalBest)):
-            if eachIterationLocalBest[index] != eachIterationLocalBest[j]:
-                count = 0
-                index = j
-                count += 1
-            else:
-                count +=1
-        
-        if count >= 5: # five iteration same
-            for i in range(len(eachIterationLocalBest)):
-                total += eachIterationLocalBest[i]
-            total /= (eachiteration + 1)
+    # Save model
+    torch.save(bestModel, 'src/DE_DNN_KDD99/result/DE_DNN_' + outputLayer + '-' + number + '.pkl')
 
-            # reset
-            ran = rand.randint(0, int(population)-1)
-            populationDataOriginal = selectionData.copy()
-            populationData = selectionData.copy()
-            populationDataOriginal[ran] = int(total)
-            populationData[ran] = int(total)
-    else:    
-        # reset
-        populationDataOriginal = selectionData.copy()
-        populationData = selectionData.copy()
-
-# print(bestAccuracy)
-print(best)
-# print(bestSolution)
-# print(bestPrecision)
-# print(bestRecall)
+testing(outputLayer, hiddenLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, number)

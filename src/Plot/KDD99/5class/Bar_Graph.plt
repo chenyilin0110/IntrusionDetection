@@ -36,11 +36,12 @@ plot \
 "src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 2:xtic(1) with histogram linestyle 1 title "DAE",\
 "src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 3:xtic(1) with histogram linestyle 2 title "SNDAE",\
 "src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 4:xtic(1) with histogram linestyle 3 title "DNN",\
-"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 5:xtic(1) with histogram linestyle 4 title "HC-DNN",\
-"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 6:xtic(1) with histogram linestyle 5 title "DE-DNN",\
-"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 7:xtic(1) with histogram linestyle 6 title "LSTM",\
-"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 8:xtic(1) with histogram linestyle 7 title "HC-LSTM",\
-"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 9:xtic(1) with histogram linestyle 8 title "DE-LSTM"
+"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 5:xtic(1) with histogram linestyle 4 title "DE-DNN",\
+"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 6:xtic(1) with histogram linestyle 5 title "LSTM",\
+"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 7:xtic(1) with histogram linestyle 6 title "DE-LSTM",\
+"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 8:xtic(1) with histogram linestyle 7 title "Naive-Bayes",\
+"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 9:xtic(1) with histogram linestyle 8 title "Random-Forest",\
+"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 10:xtic(1) with histogram linestyle 9 title "SVM"
 
 set terminal png
 set output "src/Plot/KDD99/5class/5classAccuracy.png"

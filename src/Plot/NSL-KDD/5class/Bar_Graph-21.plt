@@ -53,9 +53,7 @@ plot \
 "src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg-21.txt" using 4:xtic(1) with histogram linestyle 3 title "DNN",\
 "src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg-21.txt" using 5:xtic(1) with histogram linestyle 5 title "DE-DNN",\
 "src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg-21.txt" using 6:xtic(1) with histogram linestyle 6 title "LSTM",\
-"src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg-21.txt" using 7:xtic(1) with histogram linestyle 8 title "DE-LSTM-1",\
-"src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg-21.txt" using 8:xtic(1) with histogram linestyle 9 title "DE-LSTM-2",\
-"src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg-21.txt" using 9:xtic(1) with histogram linestyle 10 title "EDE-LSTM",\
+"src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg-21.txt" using 7:xtic(1) with histogram linestyle 8 title "DE-LSTM",\
 "src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg-21.txt" using 10:xtic(1) with histogram linestyle 11 title "NaiveBayes",\
 "src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg-21.txt" using 11:xtic(1) with histogram linestyle 12 title "RandomForest",\
 "src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg-21.txt" using 12:xtic(1) with histogram linestyle 13 title "SVM"

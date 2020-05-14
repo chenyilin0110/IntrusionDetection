@@ -3,6 +3,50 @@ rm src/Plot/NSL-KDD/*/NSL-*
 rm src/Plot/*/*/ICS_*
 rm src/Plot/*/*/KDD*
 
+run="5"
+#-----------------------------DE_LSTM get each run accuracy-----------------------------#
+#------------------------delete avg file------------------------#
+rm src/DE_LSTM_ICS/result/experimental_result_2-1.txt
+rm src/DE_LSTM_ICS/result/experimental_result_2-2.txt
+rm src/DE_LSTM_ICS/result/experimental_result_2-3.txt
+rm src/DE_LSTM_ICS/result/experimental_result_3-1.txt
+rm src/DE_LSTM_ICS/result/experimental_result_3-2.txt
+rm src/DE_LSTM_ICS/result/experimental_result_3-3.txt
+rm src/DE_LSTM_ICS/result/experimental_result_41-1.txt
+rm src/DE_LSTM_ICS/result/experimental_result_41-2.txt
+rm src/DE_LSTM_ICS/result/experimental_result_41-3.txt
+rm src/DE_LSTM_KDD99/result/experimental_result_2.txt
+rm src/DE_LSTM_KDD99/result/experimental_result_5.txt
+rm src/DE_LSTM_NSL-KDD/result/experimental_result_2.txt
+rm src/DE_LSTM_NSL-KDD/result/experimental_result_2-21.txt
+rm src/DE_LSTM_NSL-KDD/result/experimental_result_5.txt
+rm src/DE_LSTM_NSL-KDD/result/experimental_result_5-21.txt
+#------------------------delete avg file------------------------#
+
+algorithm="DE_LSTM"
+
+dataset="ICS"
+datasetNumner="3" # ICS data1 to data3
+categories="2"
+python3 src/Other/getAccuracy.py $algorithm $dataset $categories $run $datasetNumner
+categories="3"
+python3 src/Other/getAccuracy.py $algorithm $dataset $categories $run $datasetNumner
+categories="41"
+python3 src/Other/getAccuracy.py $algorithm $dataset $categories $run $datasetNumner
+
+dataset="KDD99"
+categories="2"
+python3 src/Other/getAccuracy.py $algorithm $dataset $categories $run
+categories="5"
+python3 src/Other/getAccuracy.py $algorithm $dataset $categories $run
+
+dataset="NSL-KDD"
+categories="2"
+python3 src/Other/getAccuracy.py $algorithm $dataset $categories $run
+categories="5"
+python3 src/Other/getAccuracy.py $algorithm $dataset $categories $run
+#-----------------------------DE_LSTM get each run accuracy-----------------------------#
+
 #-----------------------------NSL-KDD dataset-----------------------------#
 dataset="NSL-KDD"
 # 2 categories
@@ -14,7 +58,7 @@ python3 src/Other/calavg.py 5 SNDAE $dataset $file_name >> $path
 python3 src/Other/calavg.py 15 DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 DE_DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 8 LSTM $dataset $file_name >> $path
-python3 src/Other/calavg.py 4 DE_LSTM_one_parameter $dataset $file_name >> $path
+python3 src/Other/calavg.py 5 DE_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 DE_LSTM_two_parameters $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 Naive_Bayes $dataset $file_name >> $path
@@ -30,7 +74,7 @@ python3 src/Other/calavg.py 5 SNDAE $dataset $file_name >> $path
 python3 src/Other/calavg.py 15 DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 DE_DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 8 LSTM $dataset $file_name >> $path
-python3 src/Other/calavg.py 4 DE_LSTM_one_parameter $dataset $file_name >> $path
+python3 src/Other/calavg.py 5 DE_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 DE_LSTM_two_parameters $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 Naive_Bayes $dataset $file_name >> $path
@@ -46,7 +90,7 @@ python3 src/Other/calavg.py 5 SNDAE $dataset $file_name >> $path
 python3 src/Other/calavg.py 15 DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 DE_DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 8 LSTM $dataset $file_name >> $path
-python3 src/Other/calavg.py 4 DE_LSTM_one_parameter $dataset $file_name >> $path
+python3 src/Other/calavg.py 5 DE_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 DE_LSTM_two_parameters $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 Naive_Bayes $dataset $file_name >> $path
@@ -60,9 +104,9 @@ echo -n '"'"NSL-KDD 5 categories-21"'" ' >> $path
 python3 src/Other/calavg.py 5 DAE $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 SNDAE $dataset $file_name >> $path
 python3 src/Other/calavg.py 15 DNN $dataset $file_name >> $path
-python3 src/Other/calavg.py 3 DE_DNN $dataset $file_name >> $path
+python3 src/Other/calavg.py 5 DE_DNN $dataset $file_name >> $path
 python3 src/Other/calavg.py 8 LSTM $dataset $file_name >> $path
-python3 src/Other/calavg.py 4 DE_LSTM_one_parameter $dataset $file_name >> $path
+python3 src/Other/calavg.py 5 DE_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 DE_LSTM_two_parameters $dataset $file_name >> $path
 python3 src/Other/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 Naive_Bayes $dataset $file_name >> $path

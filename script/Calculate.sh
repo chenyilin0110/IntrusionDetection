@@ -22,7 +22,6 @@ rm src/DE_LSTM_NSL-KDD/result/experimental_result_2-21.txt
 rm src/DE_LSTM_NSL-KDD/result/experimental_result_5.txt
 rm src/DE_LSTM_NSL-KDD/result/experimental_result_5-21.txt
 #------------------------delete avg file------------------------#
-
 algorithm="DE_LSTM"
 
 dataset="ICS"
@@ -201,4 +200,5 @@ python3 src/Other/calavg.py 3 DE_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 10 Naive_Bayes $dataset $file_name >> $path
 python3 src/Other/calavg.py 10 RandomForest $dataset $file_name >> $path
 python3 src/Other/calavg.py 10 SVM $dataset $file_name >> $path
+#-----------------------------KDD99   dataset-----------------------------#
 #-----------------------------KDD99   dataset-----------------------------#

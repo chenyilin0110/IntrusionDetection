@@ -136,6 +136,7 @@ do
     python3 src/Other/calavg.py $run Naive_Bayes $dataset $file_name >> $path
     python3 src/Other/calavg.py $run RandomForest $dataset $file_name >> $path
     python3 src/Other/calavg.py $run SVM $dataset $file_name >> $path
+    python3 src/Other/calavg.py $run KNN $dataset $file_name >> $path
     echo >> $path
 done
 
@@ -154,6 +155,7 @@ do
     python3 src/Other/calavg.py $run Naive_Bayes $dataset $file_name >> $path
     python3 src/Other/calavg.py $run RandomForest $dataset $file_name >> $path
     python3 src/Other/calavg.py $run SVM $dataset $file_name >> $path
+    python3 src/Other/calavg.py $run KNN $dataset $file_name >> $path
     echo >> $path
 done
 
@@ -172,6 +174,7 @@ do
     python3 src/Other/calavg.py $run Naive_Bayes $dataset $file_name >> $path
     python3 src/Other/calavg.py $run RandomForest $dataset $file_name >> $path
     python3 src/Other/calavg.py $run SVM $dataset $file_name >> $path
+    python3 src/Other/calavg.py $run KNN $dataset $file_name >> $path
     echo >> $path
 done
 #-----------------------------ICS     dataset-----------------------------#
@@ -191,6 +194,7 @@ python3 src/Other/calavg.py $run DE_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py $run Naive_Bayes $dataset $file_name >> $path
 python3 src/Other/calavg.py $run RandomForest $dataset $file_name >> $path
 python3 src/Other/calavg.py $run SVM $dataset $file_name >> $path
+python3 src/Other/calavg.py $run KNN $dataset $file_name >> $path
 
 # 5 categories
 file_name="experimental_result_5"
@@ -205,4 +209,5 @@ python3 src/Other/calavg.py $run DE_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py $run Naive_Bayes $dataset $file_name >> $path
 python3 src/Other/calavg.py $run RandomForest $dataset $file_name >> $path
 python3 src/Other/calavg.py $run SVM $dataset $file_name >> $path
+python3 src/Other/calavg.py $run KNN $dataset $file_name >> $path
 #-----------------------------KDD99   dataset-----------------------------#

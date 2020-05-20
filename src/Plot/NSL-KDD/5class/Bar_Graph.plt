@@ -45,18 +45,19 @@ set style line 12\
 set style line 13\
 	linecolor rgb "#D9725B"
 
-set ylabel "Accuracy" font ",17" offset -0.6,0.3
+set ylabel "Accuracy" font ",17" offset -0.6
 set xtics font ",17"
 plot \
 "src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg.txt" using 2:xtic(1) with histogram linestyle 1 title "DAE",\
 "src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg.txt" using 3:xtic(1) with histogram linestyle 2 title "SNDAE",\
 "src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg.txt" using 4:xtic(1) with histogram linestyle 3 title "DNN",\
-"src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg.txt" using 5:xtic(1) with histogram linestyle 5 title "DE-DNN",\
-"src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg.txt" using 6:xtic(1) with histogram linestyle 6 title "LSTM",\
-"src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg.txt" using 7:xtic(1) with histogram linestyle 8 title "DE-LSTM",\
-"src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg.txt" using 10:xtic(1) with histogram linestyle 11 title "NaiveBayes",\
-"src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg.txt" using 11:xtic(1) with histogram linestyle 12 title "RandomForest",\
-"src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg.txt" using 12:xtic(1) with histogram linestyle 13 title "SVM"
+"src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg.txt" using 5:xtic(1) with histogram linestyle 4 title "DE-DNN",\
+"src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg.txt" using 6:xtic(1) with histogram linestyle 5 title "LSTM",\
+"src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg.txt" using 7:xtic(1) with histogram linestyle 6 title "DE-LSTM",\
+"src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg.txt" using 8:xtic(1) with histogram linestyle 7 title "NaiveBayes",\
+"src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg.txt" using 9:xtic(1) with histogram linestyle 8 title "RandomForest",\
+"src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg.txt" using 10:xtic(1) with histogram linestyle 9 title "SVM",\
+"src/Plot/NSL-KDD/5class/NSL-KDD_5class_Avg.txt" using 11:xtic(1) with histogram linestyle 10 title "KNN"
 
 set terminal png
 set output "src/Plot/NSL-KDD/5class/5classAccuracy.png"

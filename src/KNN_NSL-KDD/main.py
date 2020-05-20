@@ -78,7 +78,7 @@ test_resultNormalize = preprocess.normalize(test_noStringTemp_X)
 knn = KNeighborsClassifier()
 
 # training
-knnTraining = knn.fit(train_resultNormalize, train_noStringTemp_Y)
+knn.fit(train_resultNormalize, train_noStringTemp_Y)
 
 # testing 
 y_test_prediction = knn.predict(test_resultNormalize)

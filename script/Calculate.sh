@@ -63,6 +63,7 @@ python3 src/Other/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 Naive_Bayes $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 RandomForest $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 SVM $dataset $file_name >> $path
+python3 src/Other/calavg.py 5 KNN $dataset $file_name >> $path
 
 # 5 categories
 file_name="experimental_result_5"
@@ -79,6 +80,7 @@ python3 src/Other/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 Naive_Bayes $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 RandomForest $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 SVM $dataset $file_name >> $path
+python3 src/Other/calavg.py 5 KNN $dataset $file_name >> $path
 
 # 2-21 categories
 file_name="experimental_result_2-21"
@@ -95,6 +97,7 @@ python3 src/Other/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 Naive_Bayes $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 RandomForest $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 SVM $dataset $file_name >> $path
+python3 src/Other/calavg.py 5 KNN $dataset $file_name >> $path
 
 # 5-21 categories
 file_name="experimental_result_5-21"
@@ -111,6 +114,8 @@ python3 src/Other/calavg.py 4 EDE_LSTM $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 Naive_Bayes $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 RandomForest $dataset $file_name >> $path
 python3 src/Other/calavg.py 5 SVM $dataset $file_name >> $path
+python3 src/Other/calavg.py 5 KNN $dataset $file_name >> $path
+
 #-----------------------------NSL-KDD dataset-----------------------------#
 
 #-----------------------------ICS     dataset-----------------------------#

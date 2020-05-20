@@ -29,6 +29,21 @@ set style line 7\
 
 set style line 8\
 	linecolor rgb "#F26D9E"
+
+set style line 9\
+	linecolor rgb "#85E7F2"
+
+set style line 10\
+	linecolor rgb "#7ED955"
+
+set style line 11\
+	linecolor rgb "#8D27F2"
+
+set style line 12\
+	linecolor rgb "#F2CD88"
+
+set style line 13\
+	linecolor rgb "#D9725B"
     
 set ylabel "Accuracy" font ",17" offset -0.6,0.3
 set xtics font ",17"

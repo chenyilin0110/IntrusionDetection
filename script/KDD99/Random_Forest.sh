@@ -6,7 +6,7 @@ estimators=10
 END=10
 max=`expr $END / 2`
 
-# DAE 2 categories
+# Random Forest 2 categories
 outputLayer="2"
 for i in $(seq 1 $END);
 do
@@ -20,7 +20,7 @@ do
     fi
 done
 
-# DAE 5 categories
+# Random Forest 5 categories
 outputLayer="5"
 for i in $(seq 1 $END);
 do

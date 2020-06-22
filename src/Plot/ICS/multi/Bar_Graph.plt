@@ -47,6 +47,9 @@ set style line 13\
 
 set ylabel "Accuracy" font ",17" offset -0.6
 set xtics font ",17"
+set terminal png
+set output "src/Plot/ICS/multi/multiAccuracy.png"
+
 plot \
 "src/Plot/ICS/multi/ICS_multi_Avg.txt" using 2:xtic(1) with histogram linestyle 1 title "DAE",\
 "src/Plot/ICS/multi/ICS_multi_Avg.txt" using 3:xtic(1) with histogram linestyle 2 title "SNDAE",\
@@ -58,10 +61,3 @@ plot \
 "src/Plot/ICS/multi/ICS_multi_Avg.txt" using 9:xtic(1) with histogram linestyle 8 title "RandomForest",\
 "src/Plot/ICS/multi/ICS_multi_Avg.txt" using 10:xtic(1) with histogram linestyle 9 title "SVM",\
 "src/Plot/ICS/2class/ICS_2class_Avg.txt" using 11:xtic(1) with histogram linestyle 10 title "KNN"
-
-set terminal png
-set output "src/Plot/ICS/multi/multiAccuracy.png"
-replot
-
-#output  ------------------------------------------------------------------------------------------------------------------------
-set output

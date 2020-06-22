@@ -47,6 +47,9 @@ set style line 13\
 
 set ylabel "Accuracy" font ",17" offset -0.6
 set xtics font ",17"
+set terminal png
+set output "src/Plot/NSL-KDD/2class/2classAccuracy-21.png"
+
 plot \
 "src/Plot/NSL-KDD/2class/NSL-KDD_2class_Avg-21.txt" using 2:xtic(1) with histogram linestyle 1 title "DAE",\
 "src/Plot/NSL-KDD/2class/NSL-KDD_2class_Avg-21.txt" using 3:xtic(1) with histogram linestyle 2 title "SNDAE",\
@@ -58,10 +61,3 @@ plot \
 "src/Plot/NSL-KDD/2class/NSL-KDD_2class_Avg-21.txt" using 9:xtic(1) with histogram linestyle 8 title "RandomForest",\
 "src/Plot/NSL-KDD/2class/NSL-KDD_2class_Avg-21.txt" using 10:xtic(1) with histogram linestyle 9 title "SVM",\
 "src/Plot/NSL-KDD/2class/NSL-KDD_2class_Avg-21.txt" using 11:xtic(1) with histogram linestyle 10 title "KNN"
-
-set terminal png
-set output "src/Plot/NSL-KDD/2class/2classAccuracy-21.png"
-replot
-
-#output  ------------------------------------------------------------------------------------------------------------------------
-set output

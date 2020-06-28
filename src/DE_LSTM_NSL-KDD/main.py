@@ -126,8 +126,8 @@ for eachiteration in range(int(iteration)):
     best, bestModel = update(best, bestModel, eachiteration, bestSolution, eachIterationLocalBest, int(population), countCrossoverLossValue, countOriginalLossValue, crossoverModel, originalModel, selectionData)
 
     if name == '0':
-        torch.save(bestModel, 'src/DE_LSTM_one_parameter_NSL-KDD/result/DE_LSTM_' + outputLayer + '_bs' + batchSize + '-' + number + '.pkl')
+        torch.save(bestModel, 'src/DE_LSTM_NSL-KDD/result/parameters/DE_LSTM_' + outputLayer + '_bs' + batchSize + 'F' + F + 'CR' + CR + '-' + number + '.pkl')
     else:
-        torch.save(bestModel, 'src/DE_LSTM_one_parameter_NSL-KDD/result/DE_LSTM_' + outputLayer + name + '_bs' + batchSize + '-' + number + '.pkl')
+        torch.save(bestModel, 'src/DE_LSTM_NSL-KDD/result/parameters/DE_LSTM_' + outputLayer + name + '_bs' + batchSize + 'F' + F + 'CR' + CR + '-' + number + '.pkl')
 
-testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, name, batchSize, number)
+testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, name, batchSize, number, F, CR)

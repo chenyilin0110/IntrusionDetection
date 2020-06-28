@@ -3,11 +3,11 @@ import torch.nn as nn
 import torch
 from accuracyfunction import accuracy
 
-def testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, name, batchSize, number):
+def testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, name, batchSize, number, F, CR):
     if name == '0':
-        lstm = torch.load('src/DE_LSTM_one_parameter_NSL-KDD/result/DE_LSTM_' + outputLayer + '_bs' + batchSize + '-' + number + '.pkl')
+        lstm = torch.load('src/DE_LSTM_NSL-KDD/result/parameters/DE_LSTM_' + outputLayer + '_bs' + batchSize + 'F' + F + 'CR' + CR + '-' + number + '.pkl')
     else:
-        lstm = torch.load('src/DE_LSTM_one_parameter_NSL-KDD/result/DE_LSTM_' + outputLayer + name + '_bs' + batchSize + '-' + number + '.pkl')
+        lstm = torch.load('src/DE_LSTM_NSL-KDD/result/parameters/DE_LSTM_' + outputLayer + name + '_bs' + batchSize + 'F' + F + 'CR' + CR + '-' + number + '.pkl')
 
     x_test = x_test_tensor.view(1, -1, np.size(train_noStringTemp_X, 1))
 
@@ -21,4 +21,4 @@ def testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cud
     y_test_list_predic = np.argmax(pred, axis=1)
     
     accuracyvalue = accuracy(y_test_tensor, y_test_list_predic)
-    print("ACC", accuracyvalue)
+    print(accuracyvalue)

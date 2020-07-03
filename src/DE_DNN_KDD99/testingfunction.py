@@ -18,5 +18,5 @@ def testing(outputLayer, hiddenLayer, train_noStringTemp_X, x_test_tensor, y_tes
     pred = pred.reshape(-1, int(outputLayer))
     y_test_list_predic = np.argmax(pred, axis=1)
     
-    accuracyvalue = accuracy(y_test_tensor, y_test_list_predic)
-    print(accuracyvalue)
+    accuracyvalue, precision, recall = accuracy(y_test_tensor, y_test_list_predic)
+    print(accuracyvalue, precision, recall)

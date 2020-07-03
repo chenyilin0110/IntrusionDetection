@@ -12,5 +12,5 @@ def testing(hiddenLayer, outputLayer, x_test_tensor, y_test_tensor, name):
     pred = y_test_predic.detach().numpy()
     y_test_list_predic = np.argmax(pred, axis=1)
 
-    accuracyvalue = accuracy(y_test_tensor, y_test_list_predic)
-    print(accuracyvalue)
+    accuracyvalue, precision, recall = accuracy(y_test_tensor, y_test_list_predic)
+    print(accuracyvalue, precision, recall)

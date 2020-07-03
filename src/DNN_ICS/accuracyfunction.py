@@ -6,13 +6,13 @@ from sklearn.metrics import classification_report
 
 def accuracy(y_test_ture, y_test_predic):
     # accuarcy
-    print(accuracy_score(y_test_ture, y_test_predic))
+    print(accuracy_score(y_test_ture, y_test_predic),end=" ")
 
     # f1_score
-    print(f1_score(y_test_ture, y_test_predic, average='macro'))
+    # print(f1_score(y_test_ture, y_test_predic, average='macro'))
 
     # precision_score
-    print(precision_score(y_test_ture, y_test_predic, average='macro'))
+    print(precision_score(y_test_ture, y_test_predic, average='macro'),end=" ")
 
     # recall_score
     print(recall_score(y_test_ture, y_test_predic, average='macro'))

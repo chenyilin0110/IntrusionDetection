@@ -17,11 +17,10 @@ warnings.filterwarnings("ignore")
 # set filename outputLayer testing epoch
 trainData = sys.argv[1]
 testData = sys.argv[2]
-testData_21 = sys.argv[3]
-hiddenLayer = sys.argv[4]
-hiddenNeural = sys.argv[5]
-outputLayer = sys.argv[6]
-epoch = sys.argv[7]
+hiddenLayer = sys.argv[3]
+hiddenNeural = sys.argv[4]
+outputLayer = sys.argv[5]
+epoch = sys.argv[6]
 
 
 # load trainData
@@ -107,8 +106,3 @@ pred = y_test_predic.detach().numpy()#training's cannot impact testing
 y_test_list_predic = np.argmax(pred, axis=1)
 
 accuracyfunction.accuracy(y_test_tensor, y_test_list_predic)
-
-# training 
-#y_train_predict = net(x_train_tensor)
-#pred = y_train_predict.detach().numpy()# testing's cannot impact testing
-#print("The training accuracy is", accuracy_score(y_train_tensor, np.argmax(pred, axis=1)))

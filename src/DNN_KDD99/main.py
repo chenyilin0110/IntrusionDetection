@@ -60,7 +60,7 @@ x_test_tensor = Variable(torch.from_numpy(test_resultNormalize)).float()
 y_test_tensor = Variable(torch.from_numpy(test_noStringTemp_Y)).long()
 
 # end preprocess----------------------------------------------------------------------------------------------------------
-
+# net = torch.load('src/DNN_KDD99/result/dnn' + outputLayer + '.pkl')
 # build network
 net = Net(np.size(train_noStringTemp_X,1), int(outputLayer), int(hiddenLayer), int(hiddenNeural))
 
@@ -83,6 +83,6 @@ y_test_predic = net(x_test_tensor, int(hiddenLayer))
 pred = y_test_predic.detach().numpy()#training's cannot impact testing
 y_test_list_predic = np.argmax(pred, axis=1)
 
-accuracyvalue = accuracy(y_test_tensor, y_test_list_predic)
-print(accuracyvalue)
+accuracyvalue, precision, recall = accuracy(y_test_tensor, y_test_list_predic)
+print(accuracyvalue, precision, recall)
 torch.save(net, 'src/DNN_KDD99/result/dnn' + outputLayer + '.pkl')

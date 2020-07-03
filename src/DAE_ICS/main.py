@@ -62,36 +62,36 @@ y_test_tensor = Variable(torch.from_numpy(y_test)).long()
 
 # end preprocess----------------------------------------------------------------------------------------------------------
 
-# bulid DeepAutoEncoder
-DAE = DeepAutoEncoder(np.size(noStringTemp_X,1), int(outputLayer))
+# # bulid DeepAutoEncoder
+# DAE = DeepAutoEncoder(np.size(noStringTemp_X,1), int(outputLayer))
 
-# set optimizer and lossFunction
-optimizer = optim.Adam(DAE.parameters(), lr=0.05)
-lossFunction = nn.CrossEntropyLoss()
+# # set optimizer and lossFunction
+# optimizer = optim.Adam(DAE.parameters(), lr=0.05)
+# lossFunction = nn.CrossEntropyLoss()
 
-if cuda == True:
-    DAE.cuda()
+# if cuda == True:
+#     DAE.cuda()
 
-# traning
-for eachepoch in range(int(epoch)):
-    batch_x = x_train_tensor.view(1, -1, np.size(noStringTemp_X, 1)) # seq_len batch_size input_dim
+# # traning
+# for eachepoch in range(int(epoch)):
+#     batch_x = x_train_tensor.view(1, -1, np.size(noStringTemp_X, 1)) # seq_len batch_size input_dim
     
-    if cuda == True:
-        y_prediction = DAE(batch_x.cuda())
-    else:
-        y_prediction = DAE(batch_x)
+#     if cuda == True:
+#         y_prediction = DAE(batch_x.cuda())
+#     else:
+#         y_prediction = DAE(batch_x)
 
-    y_prediction = y_prediction.view(np.size(batch_x.numpy(), 1), -1) # reshape from 3 dimention to 2 dimention
+#     y_prediction = y_prediction.view(np.size(batch_x.numpy(), 1), -1) # reshape from 3 dimention to 2 dimention
 
-    if cuda == True:
-        loss = lossFunction(y_prediction, y_train_tensor.cuda())
-    else:
-        loss = lossFunction(y_prediction, y_train_tensor)
-    # print(loss.item())
-    optimizer.zero_grad()# clean optimizer
-    loss.backward(retain_graph=True)# calculate new parameters
-    optimizer.step()# update parameters
-
+#     if cuda == True:
+#         loss = lossFunction(y_prediction, y_train_tensor.cuda())
+#     else:
+#         loss = lossFunction(y_prediction, y_train_tensor)
+#     # print(loss.item())
+#     optimizer.zero_grad()# clean optimizer
+#     loss.backward(retain_graph=True)# calculate new parameters
+#     optimizer.step()# update parameters
+DAE = torch.load('src/DAE_ICS/result/DAE' + outputLayer + '-' + number + '.pkl')
 x_test = x_test_tensor.view(1, -1, np.size(noStringTemp_X, 1))
 
 if cuda == True:
@@ -103,6 +103,6 @@ pred = y_test_predic.detach().cpu().numpy()
 pred = pred.reshape(-1, int(outputLayer))
 y_test_list_predic = np.argmax(pred, axis=1)
 
-accuracyvalue = accuracy(y_test_tensor, y_test_list_predic)
-print(accuracyvalue)
-torch.save(DAE, 'src/DAE_ICS/result/DAE' + outputLayer + '-' + number + '.pkl')
+accuracyvalue, precision, recall = accuracy(y_test_tensor, y_test_list_predic)
+print(accuracyvalue, precision, recall)
+# torch.save(DAE, 'src/DAE_ICS/result/DAE' + outputLayer + '-' + number + '.pkl')

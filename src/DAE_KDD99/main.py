@@ -62,23 +62,23 @@ y_test_tensor = Variable(torch.from_numpy(test_noStringTemp_Y)).long()
 # end preprocess----------------------------------------------------------------------------------------------------------
 
 # bulid autoencoder
-autdoencoder = AutoEncoder(np.size(train_noStringTemp_X,1), int(outputLayer))
+autoencoder = AutoEncoder(np.size(train_noStringTemp_X,1), int(outputLayer))
 
 # set optimizer and lossFunction
-optimizer = optim.Adam(autdoencoder.parameters(), lr=0.05)
+optimizer = optim.Adam(autoencoder.parameters(), lr=0.05)
 lossFunction = nn.CrossEntropyLoss()
 
 if cuda == True:
-    autdoencoder.cuda()
+    autoencoder.cuda()
 
 # traning
 for eachepoch in range(int(epoch)):
     batch_x = x_train_tensor.view(1, -1, np.size(train_noStringTemp_X, 1)) # seq_len batch_size input_dim
     
     if cuda == True:
-        y_prediction = autdoencoder(batch_x.cuda())
+        y_prediction = autoencoder(batch_x.cuda())
     else:
-        y_prediction = autdoencoder(batch_x)
+        y_prediction = autoencoder(batch_x)
 
     y_prediction = y_prediction.view(np.size(batch_x.numpy(), 1), -1) # reshape from 3 dimention to 2 dimention
 
@@ -90,18 +90,18 @@ for eachepoch in range(int(epoch)):
     optimizer.zero_grad()# clean optimizer
     loss.backward(retain_graph=True)# calculate new parameters
     optimizer.step()# update parameters
-
+# autoencoder = torch.load('src/DAE_KDD99/result/autoencoder' + outputLayer + '.pkl')
 x_test = x_test_tensor.view(1, -1, np.size(train_noStringTemp_X, 1))
 
 if cuda == True:
-    y_test_predic = autdoencoder(x_test.cuda())
+    y_test_predic = autoencoder(x_test.cuda())
 else:
-    y_test_predic = autdoencoder(x_test)
+    y_test_predic = autoencoder(x_test)
 
 pred = y_test_predic.detach().cpu().numpy()
 pred = pred.reshape(-1, int(outputLayer))
 y_test_list_predic = np.argmax(pred, axis=1)
 
-accuracyvalue = accuracy(y_test_tensor, y_test_list_predic)
-print(accuracyvalue)
-torch.save(autdoencoder, 'src/DAE_KDD99/result/autoencoder' + outputLayer + '.pkl')
+accuracyvalue, precision, recall = accuracy(y_test_tensor, y_test_list_predic)
+print(accuracyvalue, precision, recall)
+torch.save(autoencoder, 'src/DAE_KDD99/result/autoencoder' + outputLayer + '.pkl')

@@ -50,7 +50,7 @@ test_noStringTemp_Y = []
 test_noStringTemp_Y = preprocess.distinguishNaturalAttack(test_temp, test_noStringTemp_Y, int(outputLayer))
 
 # np can't dynamic add number so use list
-train_noStringTemp_X = train_noStringTemp_X.tolist() 
+train_noStringTemp_X = train_noStringTemp_X.tolist()
 test_noStringTemp_X = test_noStringTemp_X.tolist()
 
 # replace text with onehotencoded number
@@ -87,23 +87,23 @@ y_test_tensor = Variable(torch.from_numpy(test_noStringTemp_Y)).long()
 # end preprocess----------------------------------------------------------------------------------------------------------
 
 # bulid autoencoder
-autdoencoder = AutoEncoder(np.size(train_noStringTemp_X,1), int(outputLayer))
+DAE = AutoEncoder(np.size(train_noStringTemp_X,1), int(outputLayer))
 
 # set optimizer and lossFunction
-optimizer = optim.RMSprop(autdoencoder.parameters(), lr=float(learning_rate))
+optimizer = optim.RMSprop(DAE.parameters(), lr=float(learning_rate))
 lossFunction = nn.CrossEntropyLoss()
 
 if cuda == True:
-    autdoencoder.cuda()
+    DAE.cuda()
 
 # traning
 for eachepoch in range(int(epoch)):
     batch_x = x_train_tensor.view(1, -1, np.size(train_noStringTemp_X, 1)) # seq_len batch_size input_dim
-    
+
     if cuda == True:
-        y_prediction = autdoencoder(batch_x.cuda())
+        y_prediction = DAE(batch_x.cuda())
     else:
-        y_prediction = autdoencoder(batch_x)
+        y_prediction = DAE(batch_x)
 
     y_prediction = y_prediction.view(np.size(batch_x.numpy(), 1), -1) # reshape from 3 dimention to 2 dimention
 
@@ -119,13 +119,14 @@ for eachepoch in range(int(epoch)):
 x_test = x_test_tensor.view(1, -1, np.size(train_noStringTemp_X, 1))
 
 if cuda == True:
-    y_test_predic = autdoencoder(x_test.cuda())
+    y_test_predic = DAE(x_test.cuda())
 else:
-    y_test_predic = autdoencoder(x_test)
+    y_test_predic = DAE(x_test)
 
 pred = y_test_predic.detach().cpu().numpy()
 pred = pred.reshape(-1, int(outputLayer))
 y_test_list_predic = np.argmax(pred, axis=1)
 
-accuracyvalue = accuracy(y_test_tensor, y_test_list_predic)
-print(accuracyvalue)
+accuracyvalue, precision, recall = accuracy(y_test_tensor, y_test_list_predic)
+print(accuracyvalue, precision, recall)
+torch.save(DAE, 'src/DAE_NSL-KDD/result/DAE' + outputLayer + '.pkl')

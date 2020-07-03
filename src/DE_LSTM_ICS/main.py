@@ -68,39 +68,39 @@ y_test_tensor = Variable(torch.from_numpy(y_test)).long()
 
 # end preprocess----------------------------------------------------------------------------------------------------------
 
-best = 0
-bestModel = 0
-bestSolution = np.zeros(int(hiddenLayer)).astype(int)
-eachIterationLocalBest = []
-Ud = np.size(train_noStringTemp_X, 1)
-Ld = int(outputLayer)
+# best = 0
+# bestModel = 0
+# bestSolution = np.zeros(int(hiddenLayer)).astype(int)
+# eachIterationLocalBest = []
+# Ud = np.size(train_noStringTemp_X, 1)
+# Ld = int(outputLayer)
 
-# Initial
-populationDataOriginal = np.zeros((int(population), len(bestSolution)), dtype=np.int)
-for eachpopulationData_colum in range(int(population)):
-    for eachpopulationData_row in range(np.size(populationDataOriginal, 1)):
-        r = rand.random()
-        populationDataOriginal[eachpopulationData_colum][eachpopulationData_row] = int(((Ud - Ld) * r) + Ld)
-populationData = populationDataOriginal.copy() # copy populationDataOriginal to populationData
+# # Initial
+# populationDataOriginal = np.zeros((int(population), len(bestSolution)), dtype=np.int)
+# for eachpopulationData_colum in range(int(population)):
+#     for eachpopulationData_row in range(np.size(populationDataOriginal, 1)):
+#         r = rand.random()
+#         populationDataOriginal[eachpopulationData_colum][eachpopulationData_row] = int(((Ud - Ld) * r) + Ld)
+# populationData = populationDataOriginal.copy() # copy populationDataOriginal to populationData
 
-for eachiteration in range(int(iteration)):
-    # Mutation
-    mutationData = mutation(populationData, float(F), Ud, Ld)
+# for eachiteration in range(int(iteration)):
+#     # Mutation
+#     mutationData = mutation(populationData, float(F), Ud, Ld)
     
-    # Crossover
-    crossoverData = crossover(populationDataOriginal, mutationData, float(CR), Ud, Ld)
+#     # Crossover
+#     crossoverData = crossover(populationDataOriginal, mutationData, float(CR), Ud, Ld)
     
-    # Selection
-    countOriginalLossValue = np.zeros((4, int(population)))
-    countCrossoverLossValue = np.zeros((4, int(population)))
-    crossoverModel = []
-    originalModel = []
-    selectionData = selection(crossoverModel, originalModel, populationDataOriginal, crossoverData, countOriginalLossValue, countCrossoverLossValue, int(hiddenLayer), int(outputLayer), int(epoch), int(batchSize), train_noStringTemp_X, x_train_tensor, y_train_tensor, cuda)
+#     # Selection
+#     countOriginalLossValue = np.zeros((4, int(population)))
+#     countCrossoverLossValue = np.zeros((4, int(population)))
+#     crossoverModel = []
+#     originalModel = []
+#     selectionData = selection(crossoverModel, originalModel, populationDataOriginal, crossoverData, countOriginalLossValue, countCrossoverLossValue, int(hiddenLayer), int(outputLayer), int(epoch), int(batchSize), train_noStringTemp_X, x_train_tensor, y_train_tensor, cuda)
 
-    # Update
-    best, bestModel = update(best, bestModel, eachiteration, bestSolution, eachIterationLocalBest, int(population), countCrossoverLossValue, countOriginalLossValue, crossoverModel, originalModel, selectionData)
+#     # Update
+#     best, bestModel = update(best, bestModel, eachiteration, bestSolution, eachIterationLocalBest, int(population), countCrossoverLossValue, countOriginalLossValue, crossoverModel, originalModel, selectionData)
 
-    # Save model
-    torch.save(bestModel, 'src/DE_LSTM_ICS/result/DE_LSTM_' + outputLayer + '-' + datasetNumber + '_bs' + batchSize + '-' + number + '.pkl')
+#     # Save model
+#     torch.save(bestModel, 'src/DE_LSTM_ICS/result/DE_LSTM_' + outputLayer + '-' + datasetNumber + '_bs' + batchSize + '-' + number + '.pkl')
 
 testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, batchSize, datasetNumber, number)

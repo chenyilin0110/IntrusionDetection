@@ -18,10 +18,10 @@ warnings.filterwarnings("ignore")
 # set filename outputLayer testing iteration
 trainData = sys.argv[1]
 testData = sys.argv[2]
-testData_21 = sys.argv[3]
-outputLayer = sys.argv[4]
-tree_number = sys.argv[5]
-learning_rate = sys.argv[6]
+outputLayer = sys.argv[3]
+tree_number = sys.argv[4]
+learning_rate = sys.argv[5]
+name = sys.argv[6]
 
 # load trainData
 train_temp = preprocess.loadDataset(trainData)
@@ -101,6 +101,11 @@ sndae_test = sndae(x_test_tensor)
 sndae_test = sndae_test.data.numpy()
 y_test_predic = random_forest.predict(sndae_test)
 
-accuracy = accuracy(test_noStringTemp_Y, y_test_predic)
-print(accuracy)
-# torch.save(sndae, 'src/SNDAE_NSL-KDD/result/sndae' + outputLayer + '.pkl')
+accuracy, precision, recall = accuracy(test_noStringTemp_Y, y_test_predic)
+print(accuracy, precision, recall)
+if name == "0":
+    torch.save(sndae, 'src/SNDAE_NSL-KDD/result/sndae' + outputLayer + '.pkl')
+    torch.save(random_forest, 'src/SNDAE_NSL-KDD/result/rf' + outputLayer + '.pkl')
+else:
+    torch.save(sndae, 'src/SNDAE_NSL-KDD/result/sndae' + outputLayer + name + '.pkl')
+    torch.save(random_forest, 'src/SNDAE_NSL-KDD/result/rf' + outputLayer + name + '.pkl')

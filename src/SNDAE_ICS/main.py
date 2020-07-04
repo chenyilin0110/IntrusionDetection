@@ -69,12 +69,13 @@ lossFunction = nn.CrossEntropyLoss()
 sndae_train = sndae(x_train_tensor)
 sndae_train = sndae_train.data.numpy() # tensor to numpy
 random_forest = random_forest.fit(sndae_train, y_train)
- 
+
 # testing
 sndae_test = sndae(x_test_tensor)
 sndae_test = sndae_test.data.numpy()
 y_test_predic = random_forest.predict(sndae_test)
 
-accuracy = accuracy(y_test, y_test_predic)
-print(accuracy)
-torch.save(random_forest, 'src/SNDAE_ICS/result/sndae' + outputLayer + '-' + number + '.pkl')
+accuracy, precision, recall = accuracy(y_test, y_test_predic)
+print(accuracy, precision, recall)
+torch.save(sndae, 'src/SNDAE_ICS/result/sndae' + outputLayer + '-' + number + '.pkl')
+torch.save(random_forest, 'src/SNDAE_ICS/result/rf' + outputLayer + '-' + number + '.pkl')

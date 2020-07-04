@@ -49,5 +49,5 @@ forestFit = forest.fit(x_train, y_train)
 # testing
 y_test_prediction = forest.predict(x_test)
 
-accuracyValue = accuracyfunction.accuracy(y_test, y_test_prediction)
-print(accuracyValue)
+accuracyValue, precision, recall = accuracyfunction.accuracy(y_test, y_test_prediction)
+print(accuracyValue, precision, recall)

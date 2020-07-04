@@ -33,14 +33,14 @@ set style line 8\
 set ylabel "Accuracy" font ",17" offset -0.6,0.3
 set xtics font ",17"
 plot \
-"src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg.txt" using 2:xtic(1) with histogram linestyle 1 title "DAE",\
-"src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg.txt" using 3:xtic(1) with histogram linestyle 2 title "SNDAE",\
-"src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg.txt" using 4:xtic(1) with histogram linestyle 3 title "DNN",\
+"src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg.txt" using 2:xtic(1) with histogram linestyle 1 fillstyle pattern 6 title "DAE",\
+"src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg.txt" using 3:xtic(1) with histogram linestyle 2 fillstyle pattern 6 title "SNDAE",\
+"src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg.txt" using 4:xtic(1) with histogram linestyle 3 fillstyle pattern 6 title "DNN",\
 "src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg.txt" using 5:xtic(1) with histogram linestyle 4 title "HC-DNN",\
-"src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg.txt" using 6:xtic(1) with histogram linestyle 5 title "DE-DNN",\
+"src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg.txt" using 6:xtic(1) with histogram linestyle 5 fillstyle pattern 6 title "DE-DNN",\
 "src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg.txt" using 7:xtic(1) with histogram linestyle 6 title "LSTM",\
-"src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg.txt" using 8:xtic(1) with histogram linestyle 7 title "HC-LSTM",\
-"src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg.txt" using 9:xtic(1) with histogram linestyle 8 title "DE-LSTM"
+"src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg.txt" using 8:xtic(1) with histogram linestyle 7 fillstyle pattern 6 title "HC-LSTM",\
+"src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg.txt" using 9:xtic(1) with histogram linestyle 8 fillstyle pattern 6 title "DE-LSTM"
 
 set terminal pdf
 set output "src/Plot/NSL-KDD-1parameter/5class/5classAccuracy.pdf"

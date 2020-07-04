@@ -1,8 +1,8 @@
 reset
-set terminal wxt size 400,400
+# # set terminal wxt size 400,400
 set encoding utf8
 set style fill solid
-set key outside bottom center horizontal font ",17"
+set key outside bottom horizontal font ",15"
 set yrange [0.68 : 0.93]
 set ytics 0,0.03 font ",15"
 
@@ -47,8 +47,8 @@ set style line 13\
     
 set ylabel "Accuracy" font ",17" offset -0.6,0.3
 set xtics font ",17"
-set terminal png
-set output "src/Plot/KDD99/2class/2classAccuracy.png"
+set terminal pdf
+set output "src/Plot/KDD99/2class/2classAccuracy.pdf"
 
 plot \
 "src/Plot/KDD99/2class/KDD99_2class_Avg.txt" using 8:xtic(1) with histogram linestyle 7 title "Naive-Bayes",\

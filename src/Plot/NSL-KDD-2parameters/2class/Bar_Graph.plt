@@ -1,8 +1,8 @@
 reset
-set terminal wxt size 400,400
+# set terminal wxt size 400,400
 set encoding utf8
 set style fill solid
-set key outside bottom center horizontal font ",17"
+set key outside bottom horizontal font ",15"
 set yrange [0.74 : 0.83]
 set ytics 0,0.02 font ",15"
 
@@ -29,8 +29,8 @@ plot "src/Plot/NSL-KDD-2parameters/2class/NSL-KDD-2parameters_2class_Avg.txt" us
 "src/Plot/NSL-KDD-2parameters/2class/NSL-KDD-2parameters_2class_Avg.txt" using 5:xtic(1) with histogram linestyle 4 title "GA-DNN",\
 "src/Plot/NSL-KDD-2parameters/2class/NSL-KDD-2parameters_2class_Avg.txt" using 6:xtic(1) with histogram linestyle 5 title "PSO-Optimizer"
 
-set terminal png
-set output "src/Plot/NSL-KDD-2parameters/2class/2classAccuracy.png"
+set terminal pdf
+set output "src/Plot/NSL-KDD-2parameters/2class/2classAccuracy.pdf"
 replot
 
 #output  ------------------------------------------------------------------------------------------------------------------------

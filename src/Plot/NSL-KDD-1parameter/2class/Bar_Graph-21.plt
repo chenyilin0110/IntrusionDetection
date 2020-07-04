@@ -1,8 +1,8 @@
 reset
-set terminal wxt size 400,400
+# set terminal wxt size 400,400
 set encoding utf8
 set style fill solid
-set key outside bottom center horizontal font ",17"
+set key outside bottom horizontal font ",15"
 set yrange [0.43 : 0.65]
 set ytics 0,0.05 font ",15"
 
@@ -41,8 +41,8 @@ plot \
 "src/Plot/NSL-KDD-1parameter/2class/NSL-KDD_2class_Avg-21.txt" using 7:xtic(1) with histogram linestyle 6 title "LSTM",\
 "src/Plot/NSL-KDD-1parameter/2class/NSL-KDD_2class_Avg-21.txt" using 8:xtic(1) with histogram linestyle 7 title "HC-LSTM",\
 "src/Plot/NSL-KDD-1parameter/2class/NSL-KDD_2class_Avg-21.txt" using 9:xtic(1) with histogram linestyle 8 title "DE-LSTM"
-set terminal png
-set output "src/Plot/NSL-KDD-1parameter/2class/2classAccuracy-21.png"
+set terminal pdf
+set output "src/Plot/NSL-KDD-1parameter/2class/2classAccuracy-21.pdf"
 replot
 
 #output  ------------------------------------------------------------------------------------------------------------------------

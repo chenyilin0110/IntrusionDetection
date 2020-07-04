@@ -1,8 +1,8 @@
 reset
-set terminal wxt size 400,400
+# set terminal wxt size 400,400
 set encoding utf8
 set style fill solid
-set key outside bottom center horizontal font ",17"
+set key outside bottom horizontal font ",15"
 set yrange [0.2 : 0.99]
 set ytics 0,0.1 font ",15"
 
@@ -64,8 +64,8 @@ plot \
 "src/Plot/ICS/2class/ICS_2class_Avg.txt" using 9:xtic(1) with linespoints linestyle 8 title "RandomForest",\
 "src/Plot/ICS/2class/ICS_2class_Avg.txt" using 10:xtic(1) with linespoints linestyle 9 title "SVM"
 
-set terminal png
-set output "src/Plot/ICS/2class/2classAccuracy.png"
+set terminal pdf
+set output "src/Plot/ICS/2class/2classAccuracy.pdf"
 replot
 
 #output  ------------------------------------------------------------------------------------------------------------------------

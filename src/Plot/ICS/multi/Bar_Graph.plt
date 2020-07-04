@@ -1,8 +1,8 @@
 reset
-set terminal wxt size 400,400
+# set terminal wxt size 400,400
 set encoding utf8
 set style fill solid
-set key outside bottom center horizontal font ",17"
+set key outside bottom horizontal font ",15"
 set yrange [0.0 : 0.99]
 set ytics 0,0.1 font ",15"
 
@@ -47,8 +47,8 @@ set style line 13\
 
 set ylabel "Accuracy" font ",17" offset -0.6
 set xtics font ",17"
-set terminal png
-set output "src/Plot/ICS/multi/multiAccuracy.png"
+set terminal pdf
+set output "src/Plot/ICS/multi/multiAccuracy.pdf"
 
 plot \
 "src/Plot/ICS/multi/ICS_multi_Avg.txt" using 2:xtic(1) with histogram linestyle 1 title "DAE",\

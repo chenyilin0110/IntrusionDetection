@@ -51,13 +51,14 @@ set terminal png
 set output "src/Plot/ICS/2class/2classAccuracy.png"
 
 plot \
-"src/Plot/ICS/2class/ICS_2class_Avg.txt" using 2:xtic(1) with histogram linestyle 1 title "DAE",\
-"src/Plot/ICS/2class/ICS_2class_Avg.txt" using 3:xtic(1) with histogram linestyle 2 title "SNDAE",\
-"src/Plot/ICS/2class/ICS_2class_Avg.txt" using 4:xtic(1) with histogram linestyle 3 title "DNN",\
-"src/Plot/ICS/2class/ICS_2class_Avg.txt" using 5:xtic(1) with histogram linestyle 4 title "DE-DNN",\
-"src/Plot/ICS/2class/ICS_2class_Avg.txt" using 6:xtic(1) with histogram linestyle 5 title "LSTM",\
-"src/Plot/ICS/2class/ICS_2class_Avg.txt" using 7:xtic(1) with histogram linestyle 6 title "DE-LSTM",\
 "src/Plot/ICS/2class/ICS_2class_Avg.txt" using 8:xtic(1) with histogram linestyle 7 title "NaiveBayes",\
-"src/Plot/ICS/2class/ICS_2class_Avg.txt" using 9:xtic(1) with histogram linestyle 8 title "RandomForest",\
+"src/Plot/ICS/2class/ICS_2class_Avg.txt" using 4:xtic(1) with histogram linestyle 3 title "DNN",\
+"src/Plot/ICS/2class/ICS_2class_Avg.txt" using 2:xtic(1) with histogram linestyle 1 title "DAE",\
 "src/Plot/ICS/2class/ICS_2class_Avg.txt" using 10:xtic(1) with histogram linestyle 9 title "SVM",\
-"src/Plot/ICS/2class/ICS_2class_Avg.txt" using 11:xtic(1) with histogram linestyle 10 title "KNN"
+"src/Plot/ICS/2class/ICS_2class_Avg.txt" using 11:xtic(1) with histogram linestyle 10 title "KNN",\
+"src/Plot/ICS/2class/ICS_2class_Avg.txt" using 6:xtic(1) with histogram linestyle 5 title "LSTM",\
+"src/Plot/ICS/2class/ICS_2class_Avg.txt" using 5:xtic(1) with histogram linestyle 4 fillstyle pattern 6 title "DE-DNN",\
+"src/Plot/ICS/2class/ICS_2class_Avg.txt" using 3:xtic(1) with histogram linestyle 2 title "SNDAE",\
+"src/Plot/ICS/2class/ICS_2class_Avg.txt" using 7:xtic(1) with histogram linestyle 6 fillstyle pattern 6 title "DE-LSTM",\
+"src/Plot/ICS/2class/ICS_2class_Avg.txt" using 9:xtic(1) with histogram linestyle 8 title "RandomForest"
+

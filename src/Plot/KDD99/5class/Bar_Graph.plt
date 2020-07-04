@@ -3,8 +3,8 @@ set terminal wxt size 400,400
 set encoding utf8
 set style fill solid
 set key outside bottom center horizontal font ",17"
-set yrange [0.783 : 0.925]
-set ytics 0,0.01 font ",15"
+set yrange [0.783 : 0.93]
+set ytics 0,0.03 font ",15"
 
 set style line 1\
 	linecolor rgb "#49434a"
@@ -51,13 +51,13 @@ set terminal png
 set output "src/Plot/KDD99/5class/5classAccuracy.png"
 
 plot \
-"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 2:xtic(1) with histogram linestyle 1 title "DAE",\
-"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 3:xtic(1) with histogram linestyle 2 title "SNDAE",\
-"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 4:xtic(1) with histogram linestyle 3 title "DNN",\
-"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 5:xtic(1) with histogram linestyle 4 title "DE-DNN",\
-"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 6:xtic(1) with histogram linestyle 5 title "LSTM",\
-"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 7:xtic(1) with histogram linestyle 6 title "DE-LSTM",\
 "src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 8:xtic(1) with histogram linestyle 7 title "Naive-Bayes",\
-"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 9:xtic(1) with histogram linestyle 8 title "Random-Forest",\
+"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 2:xtic(1) with histogram linestyle 1 title "DAE",\
+"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 4:xtic(1) with histogram linestyle 3 title "DNN",\
+"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 5:xtic(1) with histogram linestyle 4 fillstyle pattern 6 title "DE-DNN",\
+"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 3:xtic(1) with histogram linestyle 2 title "SNDAE",\
+"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 11:xtic(1) with histogram linestyle 10 title "KNN",\
+"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 6:xtic(1) with histogram linestyle 5 title "LSTM",\
+"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 7:xtic(1) with histogram linestyle 6 fillstyle pattern 6 title "DE-LSTM",\
 "src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 10:xtic(1) with histogram linestyle 9 title "SVM",\
-"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 11:xtic(1) with histogram linestyle 10 title "KNN"
+"src/Plot/KDD99/5class/KDD99_5class_Avg.txt" using 9:xtic(1) with histogram linestyle 8 title "Random-Forest"

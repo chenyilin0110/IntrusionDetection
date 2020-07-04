@@ -73,7 +73,7 @@ for eachepoch in range(int(epoch)):
         optimizer.zero_grad()# clean optimizer
         loss.backward(retain_graph=True)# calculate new parameters
         optimizer.step()# update parameters
-
+# lstm = torch.load('src/LSTM_ICS/result/lstm_' + outputlayer + '_bs' + batchSize + '-' + number + '.pkl')
 # testing
 x_test_tensor = x_test_tensor.view(1, -1, np.size(resultNormalize, 1))
 y_test_predic = lstm(x_test_tensor)
@@ -81,6 +81,6 @@ pred = y_test_predic.detach().numpy()
 pred = pred.reshape(-1, int(outputlayer))
 y_test_list_predic = np.argmax(pred, axis=1)
 
-accuracyValue = accuracyfunction.accuracy(y_test_tensor, y_test_list_predic)
-print(accuracyValue)
+accuracyValue, precision, recall = accuracyfunction.accuracy(y_test_tensor, y_test_list_predic)
+print(accuracyValue, precision, recall)
 torch.save(lstm, 'src/LSTM_ICS/result/lstm_'+ outputlayer + '_bs' + batchSize + '-' + number + '.pkl')

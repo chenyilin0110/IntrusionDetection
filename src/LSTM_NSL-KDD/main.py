@@ -17,11 +17,14 @@ warnings.filterwarnings("ignore")
 # set filename outputLayer testing iteration
 trainData = sys.argv[1]
 testData = sys.argv[2]
-testData_21 = sys.argv[3]
-hiddenLayer = sys.argv[4]
-outputLayer = sys.argv[5]
-batchSize = sys.argv[6]
-epoch = sys.argv[7]
+hiddenLayer = sys.argv[3]
+outputLayer = sys.argv[4]
+batchSize = sys.argv[5]
+epoch = sys.argv[6]
+name = sys.argv[7]
+
+# can use cuda or not
+cuda = torch.cuda.is_available()
 
 # load trainData
 train_temp = preprocess.loadDataset(trainData)
@@ -85,6 +88,8 @@ y_test_tensor = Variable(torch.from_numpy(test_noStringTemp_Y)).long()
 
 # bulid lstm
 lstm = LSTM(np.size(train_resultNormalize,1), int(outputLayer))
+if cuda == True:
+    lstm.cuda()
 
 # set optimizer and lossFunction
 optimizer = optim.RMSprop(lstm.parameters(), lr=0.05)
@@ -96,34 +101,41 @@ train_loader = torch.utils.data.DataLoader(batch_train_dataset, batch_size=int(b
 
 # traning
 for eachepoch in range(int(epoch)):
-    h = torch.Tensor(1, int(batchSize), 80).zero_() # hiddenLayerNumber, batchSize, hiddenSize
-    c = torch.Tensor(1, int(batchSize), 80).zero_()
     for step, (batch_x, batch_y) in enumerate (train_loader):
         batch_x = batch_x.view(1, -1, np.size(train_resultNormalize, 1)) # seq_len batch_size input_dim
-        if len(batch_x[0]) != int(batchSize):
-            h = h.detach().numpy()
-            c = c.detach().numpy()
-            h = h[:,:len(batch_x[0]),:]
-            c = c[:,:len(batch_x[0]),:]
-            h = torch.from_numpy(h)
-            c = torch.from_numpy(c)
-        y_prediction, (h,c) = lstm(batch_x, h, c)
+        if cuda == True:
+            y_prediction = lstm(batch_x.cuda())
+        else:
+            y_prediction = lstm(batch_x)
+
         y_prediction = y_prediction.view(np.size(batch_x.numpy(), 1), -1) # reshape from 3 dimention to 2 dimention
-        loss = lossFunction(y_prediction, batch_y)
+        
+        if cuda == True:
+            loss = lossFunction(y_prediction, batch_y.cuda())
+        else:
+            loss = lossFunction(y_prediction, batch_y)
+        
         optimizer.zero_grad()# clean optimizer
         loss.backward(retain_graph=True)# calculate new parameters
         optimizer.step()# update parameters
 
-h = torch.Tensor(1, len(x_test_tensor), 80).zero_()
-c = torch.Tensor(1, len(x_test_tensor), 80).zero_()
-
 # testing
 x_test_tensor = x_test_tensor.view(1, -1, np.size(train_resultNormalize, 1))
-y_test_predic, _ = lstm(x_test_tensor, h, c)
-pred = y_test_predic.detach().numpy()
+
+if cuda == True:
+    y_test_predic = lstm(x_test_tensor.cuda())
+    pred = y_test_predic.detach().cpu().numpy()
+else:
+    y_test_predic = lstm(x_test_tensor)
+    pred = y_test_predic.detach().numpy()
+
 pred = pred.reshape(-1, int(outputLayer))
 y_test_list_predic = np.argmax(pred, axis=1)
 
-accuracy = accuracy(y_test_tensor, y_test_list_predic)
-print(accuracy)
-torch.save(lstm, 'lstm.pkl')
+accuracy, precision, recall = accuracy(y_test_tensor, y_test_list_predic)
+print(accuracy, precision, recall)
+if name == '0':
+    torch.save(lstm, 'src/LSTM_NSL-KDD/result/lstm' + outputLayer + '.pkl')
+else:
+    torch.save(lstm, 'src/LSTM_NSL-KDD/result/lstm' + outputLayer + '-' + name + '.pkl')
+

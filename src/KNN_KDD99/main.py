@@ -63,5 +63,5 @@ knn.fit(train_resultNormalize, train_noStringTemp_Y)
 # testing 
 y_test_prediction = knn.predict(test_resultNormalize)
 
-accuracy_value = accuracy(test_noStringTemp_Y, y_test_prediction)
-print(accuracy_value)
+accuracy_value, precision, recall = accuracy(test_noStringTemp_Y, y_test_prediction)
+print(accuracy_value, precision, recall)

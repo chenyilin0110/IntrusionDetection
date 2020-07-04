@@ -49,8 +49,8 @@ x_train, x_test, y_train, y_test = train_test_split(resultNormalize, noStringTem
 # training
 knn.fit(x_train, y_train)
 
-# testing 2132131
+# testing
 y_test_prediction = knn.predict(x_test)
 
-accuracyValue = accuracyfunction.accuracy(y_test, y_test_prediction)
-print(accuracyValue)
+accuracyValue, precision, recall = accuracyfunction.accuracy(y_test, y_test_prediction)
+print(accuracyValue, precision, recall)

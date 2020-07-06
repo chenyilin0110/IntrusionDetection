@@ -3,7 +3,7 @@ reset
 set encoding utf8
 set style fill solid
 set key outside bottom horizontal font ",15"
-set yrange [0.27 : 0.56]
+set yrange [0.27 : 0.48]
 set ytics 0,0.03 font ",15"
 
 set style line 1\

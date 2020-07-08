@@ -47,8 +47,8 @@ set style line 13\
 
 set ylabel "Precision" font ",17" offset -0.6
 set xtics font ",17"
-set terminal pdf
-set output "src/Plot/NSL-KDD/2class/2classPrecision.pdf"
+set terminal png
+set output "src/Plot/NSL-KDD/2class/2classPrecision.png"
 
 plot \
 "src/Plot/NSL-KDD/2class/NSL-KDD_2class_precision_Avg.txt" using 8:xtic(1) with histogram linestyle 7 fillstyle pattern 6 title "NaiveBayes",\

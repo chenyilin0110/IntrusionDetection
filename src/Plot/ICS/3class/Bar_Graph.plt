@@ -47,8 +47,8 @@ set style line 13\
 
 set ylabel "Accuracy" font ",17" offset -0.6
 set xtics font ",17"
-set terminal pdf
-set output "src/Plot/ICS/3class/3classAccuracy.pdf"
+set terminal png
+set output "src/Plot/ICS/3class/3classAccuracy.png"
 
 plot \
 "src/Plot/ICS/3class/ICS_3class_Avg.txt" using 8:xtic(1) with histogram linestyle 7 fillstyle pattern 6 title "NaiveBayes",\

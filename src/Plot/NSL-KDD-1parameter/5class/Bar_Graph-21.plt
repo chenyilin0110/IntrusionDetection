@@ -42,8 +42,8 @@ plot \
 "src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg-21.txt" using 8:xtic(1) with histogram linestyle 7 fillstyle pattern 6 title "HC-LSTM",\
 "src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg-21.txt" using 9:xtic(1) with histogram linestyle 8 fillstyle pattern 6 title "DE-LSTM"
 
-set terminal pdf
-set output "src/Plot/NSL-KDD-1parameter/5class/5classAccuracy-21.pdf"
+set terminal png
+set output "src/Plot/NSL-KDD-1parameter/5class/5classAccuracy-21.png"
 replot
 
 #output  ------------------------------------------------------------------------------------------------------------------------

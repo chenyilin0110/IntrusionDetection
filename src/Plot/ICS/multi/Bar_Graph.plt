@@ -47,8 +47,8 @@ set style line 13\
 
 set ylabel "Accuracy" font ",17" offset -0.6
 set xtics font ",17"
-set terminal pdf
-set output "src/Plot/ICS/multi/multiAccuracy.pdf"
+set terminal png
+set output "src/Plot/ICS/multi/multiAccuracy.png"
 
 plot \
 "src/Plot/ICS/multi/ICS_multi_Avg.txt" using 2:xtic(1) with histogram linestyle 1 fillstyle pattern 6 title "DAE",\

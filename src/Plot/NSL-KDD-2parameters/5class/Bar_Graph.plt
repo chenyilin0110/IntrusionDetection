@@ -25,8 +25,8 @@ plot "src/Plot/NSL-KDD-2parameters/5class/NSL-KDD-2parameters_5class_Avg.txt" us
 "src/Plot/NSL-KDD-2parameters/5class/NSL-KDD-2parameters_5class_Avg.txt" using 3:xtic(1) with histogram linestyle 2 fillstyle pattern 6 title "HC-DNN",\
 "src/Plot/NSL-KDD-2parameters/5class/NSL-KDD-2parameters_5class_Avg.txt" using 4:xtic(1) with histogram linestyle 3 fillstyle pattern 6 title "SA-DNN",\
 "src/Plot/NSL-KDD-2parameters/5class/NSL-KDD-2parameters_5class_Avg.txt" using 5:xtic(1) with histogram linestyle 4 title "GA-DNN"
-set terminal pdf
-set output "src/Plot/NSL-KDD-2parameters/5class/5classAccuracy.pdf"
+set terminal png
+set output "src/Plot/NSL-KDD-2parameters/5class/5classAccuracy.png"
 replot
 
 #output  ------------------------------------------------------------------------------------------------------------------------

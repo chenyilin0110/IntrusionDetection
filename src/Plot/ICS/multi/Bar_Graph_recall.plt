@@ -47,18 +47,18 @@ set style line 13\
 
 set ylabel "Recall" font ",17" offset -0.6
 set xtics font ",17"
-set terminal pdf
-set output "src/Plot/ICS/multi/multiRecall.pdf"
+set terminal png
+set output "src/Plot/ICS/multi/multiRecall.png"
 
 plot \
-"src/Plot/ICS/multi/ICS_multi_Recall_Avg.txt" using 8:xtic(1) with histogram linestyle 7 fillstyle pattern 6 title "NaiveBayes",\
-"src/Plot/ICS/multi/ICS_multi_Recall_Avg.txt" using 4:xtic(1) with histogram linestyle 3 fillstyle pattern 6 title "DNN",\
-"src/Plot/ICS/multi/ICS_multi_Recall_Avg.txt" using 2:xtic(1) with histogram linestyle 1 fillstyle pattern 6 title "DAE",\
-"src/Plot/ICS/multi/ICS_multi_Recall_Avg.txt" using 10:xtic(1) with histogram linestyle 9 fillstyle pattern 6 title "SVM",\
-"src/Plot/ICS/multi/ICS_multi_Recall_Avg.txt" using 11:xtic(1) with histogram linestyle 10 fillstyle pattern 6 title "KNN",\
-"src/Plot/ICS/multi/ICS_multi_Recall_Avg.txt" using 6:xtic(1) with histogram linestyle 5 fillstyle pattern 6 title "LSTM",\
-"src/Plot/ICS/multi/ICS_multi_Recall_Avg.txt" using 5:xtic(1) with histogram linestyle 4 title "DE-DNN",\
-"src/Plot/ICS/multi/ICS_multi_Recall_Avg.txt" using 3:xtic(1) with histogram linestyle 2 fillstyle pattern 6 title "SNDAE",\
-"src/Plot/ICS/multi/ICS_multi_Recall_Avg.txt" using 7:xtic(1) with histogram linestyle 6 title "DE-LSTM",\
-"src/Plot/ICS/multi/ICS_multi_Recall_Avg.txt" using 9:xtic(1) with histogram linestyle 8 fillstyle pattern 6 title "RandomForest"
+"src/Plot/ICS/multi/ICS_multi_recall_Avg.txt" using 8:xtic(1) with histogram linestyle 7 fillstyle pattern 6 title "NaiveBayes",\
+"src/Plot/ICS/multi/ICS_multi_recall_Avg.txt" using 4:xtic(1) with histogram linestyle 3 fillstyle pattern 6 title "DNN",\
+"src/Plot/ICS/multi/ICS_multi_recall_Avg.txt" using 2:xtic(1) with histogram linestyle 1 fillstyle pattern 6 title "DAE",\
+"src/Plot/ICS/multi/ICS_multi_recall_Avg.txt" using 10:xtic(1) with histogram linestyle 9 fillstyle pattern 6 title "SVM",\
+"src/Plot/ICS/multi/ICS_multi_recall_Avg.txt" using 11:xtic(1) with histogram linestyle 10 fillstyle pattern 6 title "KNN",\
+"src/Plot/ICS/multi/ICS_multi_recall_Avg.txt" using 6:xtic(1) with histogram linestyle 5 fillstyle pattern 6 title "LSTM",\
+"src/Plot/ICS/multi/ICS_multi_recall_Avg.txt" using 5:xtic(1) with histogram linestyle 4 title "DE-DNN",\
+"src/Plot/ICS/multi/ICS_multi_recall_Avg.txt" using 3:xtic(1) with histogram linestyle 2 fillstyle pattern 6 title "SNDAE",\
+"src/Plot/ICS/multi/ICS_multi_recall_Avg.txt" using 7:xtic(1) with histogram linestyle 6 title "DE-LSTM",\
+"src/Plot/ICS/multi/ICS_multi_recall_Avg.txt" using 9:xtic(1) with histogram linestyle 8 fillstyle pattern 6 title "RandomForest"
 

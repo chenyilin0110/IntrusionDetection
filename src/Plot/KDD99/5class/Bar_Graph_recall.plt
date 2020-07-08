@@ -47,17 +47,17 @@ set style line 13\
     
 set ylabel "Recall" font ",17" offset -0.6,0.3
 set xtics font ",17"
-set terminal pdf
-set output "src/Plot/KDD99/5class/5classRecall.pdf"
+set terminal png
+set output "src/Plot/KDD99/5class/5classRecall.png"
 
 plot \
-"src/Plot/KDD99/5class/KDD99_5class_Recall_Avg.txt" using 8:xtic(1) with histogram linestyle 7 fillstyle pattern 6 title "Naive-Bayes",\
-"src/Plot/KDD99/5class/KDD99_5class_Recall_Avg.txt" using 2:xtic(1) with histogram linestyle 1 fillstyle pattern 6 title "DAE",\
-"src/Plot/KDD99/5class/KDD99_5class_Recall_Avg.txt" using 4:xtic(1) with histogram linestyle 3 fillstyle pattern 6 title "DNN",\
-"src/Plot/KDD99/5class/KDD99_5class_Recall_Avg.txt" using 5:xtic(1) with histogram linestyle 4 title "DE-DNN",\
-"src/Plot/KDD99/5class/KDD99_5class_Recall_Avg.txt" using 3:xtic(1) with histogram linestyle 2 fillstyle pattern 6 title "SNDAE",\
-"src/Plot/KDD99/5class/KDD99_5class_Recall_Avg.txt" using 10:xtic(1) with histogram linestyle 9 fillstyle pattern 6 title "SVM",\
-"src/Plot/KDD99/5class/KDD99_5class_Recall_Avg.txt" using 6:xtic(1) with histogram linestyle 5 fillstyle pattern 6 title "LSTM",\
-"src/Plot/KDD99/5class/KDD99_5class_Recall_Avg.txt" using 11:xtic(1) with histogram linestyle 10 fillstyle pattern 6 title "KNN",\
-"src/Plot/KDD99/5class/KDD99_5class_Recall_Avg.txt" using 9:xtic(1) with histogram linestyle 8 fillstyle pattern 6 title "Random-Forest",\
-"src/Plot/KDD99/5class/KDD99_5class_Recall_Avg.txt" using 7:xtic(1) with histogram linestyle 6 title "DE-LSTM"
+"src/Plot/KDD99/5class/KDD99_5class_recall_Avg.txt" using 8:xtic(1) with histogram linestyle 7 fillstyle pattern 6 title "Naive-Bayes",\
+"src/Plot/KDD99/5class/KDD99_5class_recall_Avg.txt" using 2:xtic(1) with histogram linestyle 1 fillstyle pattern 6 title "DAE",\
+"src/Plot/KDD99/5class/KDD99_5class_recall_Avg.txt" using 4:xtic(1) with histogram linestyle 3 fillstyle pattern 6 title "DNN",\
+"src/Plot/KDD99/5class/KDD99_5class_recall_Avg.txt" using 5:xtic(1) with histogram linestyle 4 title "DE-DNN",\
+"src/Plot/KDD99/5class/KDD99_5class_recall_Avg.txt" using 3:xtic(1) with histogram linestyle 2 fillstyle pattern 6 title "SNDAE",\
+"src/Plot/KDD99/5class/KDD99_5class_recall_Avg.txt" using 10:xtic(1) with histogram linestyle 9 fillstyle pattern 6 title "SVM",\
+"src/Plot/KDD99/5class/KDD99_5class_recall_Avg.txt" using 6:xtic(1) with histogram linestyle 5 fillstyle pattern 6 title "LSTM",\
+"src/Plot/KDD99/5class/KDD99_5class_recall_Avg.txt" using 11:xtic(1) with histogram linestyle 10 fillstyle pattern 6 title "KNN",\
+"src/Plot/KDD99/5class/KDD99_5class_recall_Avg.txt" using 9:xtic(1) with histogram linestyle 8 fillstyle pattern 6 title "Random-Forest",\
+"src/Plot/KDD99/5class/KDD99_5class_recall_Avg.txt" using 7:xtic(1) with histogram linestyle 6 title "DE-LSTM"

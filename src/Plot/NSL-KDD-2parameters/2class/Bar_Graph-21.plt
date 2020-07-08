@@ -29,8 +29,8 @@ plot "src/Plot/NSL-KDD-2parameters/2class/NSL-KDD-2parameters_2class_Avg-21.txt"
 "src/Plot/NSL-KDD-2parameters/2class/NSL-KDD-2parameters_2class_Avg-21.txt" using 5:xtic(1) with histogram linestyle 4 title "GA-DNN",\
 "src/Plot/NSL-KDD-2parameters/2class/NSL-KDD-2parameters_2class_Avg-21.txt" using 6:xtic(1) with histogram linestyle 5 fillstyle pattern 6 title "PSO-Optimizer"
 
-set terminal pdf
-set output "src/Plot/NSL-KDD-2parameters/2class/2classAccuracy-21.pdf"
+set terminal png
+set output "src/Plot/NSL-KDD-2parameters/2class/2classAccuracy-21.png"
 replot
 
 #output  ------------------------------------------------------------------------------------------------------------------------

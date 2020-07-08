@@ -2,9 +2,9 @@
 
 train="train"
 test="test"
-c="1000"
+c="1"
 
-END=5
+END=2
 
 # SVM_NSL-KDD 2 categories
 outputLayer="2"

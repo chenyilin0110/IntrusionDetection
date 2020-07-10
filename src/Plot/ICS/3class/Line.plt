@@ -64,8 +64,8 @@ plot \
 "src/Plot/ICS/3class/ICS_3class_Avg.txt" using 9:xtic(1) with linespoints linestyle 8 fillstyle pattern 6 title "RandomForest",\
 "src/Plot/ICS/3class/ICS_3class_Avg.txt" using 10:xtic(1) with linespoints linestyle 9 fillstyle pattern 6 title "SVM"
 
-set terminal png
-set output "src/Plot/ICS/3class/3classAccuracy.png"
+set terminal pdf
+set output "src/Plot/ICS/3class/3classAccuracy.pdf"
 replot
 
 #output  ------------------------------------------------------------------------------------------------------------------------

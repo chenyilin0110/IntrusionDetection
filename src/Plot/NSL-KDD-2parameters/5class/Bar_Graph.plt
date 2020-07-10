@@ -10,10 +10,10 @@ set style line 1\
 	linecolor rgb "#49434a"
 
 set style line 2\
-	linecolor rgb "#a5cdd4"
+	linecolor rgb "#0C3559"
 	
 set style line 3\
-	linecolor rgb "#ffea75"
+	linecolor rgb "#BF05F2"
 
 set style line 4\
 	linecolor rgb "#F22727"
@@ -25,8 +25,8 @@ plot "src/Plot/NSL-KDD-2parameters/5class/NSL-KDD-2parameters_5class_Avg.txt" us
 "src/Plot/NSL-KDD-2parameters/5class/NSL-KDD-2parameters_5class_Avg.txt" using 3:xtic(1) with histogram linestyle 2 fillstyle pattern 6 title "HC-DNN",\
 "src/Plot/NSL-KDD-2parameters/5class/NSL-KDD-2parameters_5class_Avg.txt" using 4:xtic(1) with histogram linestyle 3 fillstyle pattern 6 title "SA-DNN",\
 "src/Plot/NSL-KDD-2parameters/5class/NSL-KDD-2parameters_5class_Avg.txt" using 5:xtic(1) with histogram linestyle 4 title "GA-DNN"
-set terminal png
-set output "src/Plot/NSL-KDD-2parameters/5class/5classAccuracy.png"
+set terminal pdf
+set output "src/Plot/NSL-KDD-2parameters/5class/5classAccuracy.pdf"
 replot
 
 #output  ------------------------------------------------------------------------------------------------------------------------

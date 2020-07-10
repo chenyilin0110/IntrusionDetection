@@ -10,16 +10,16 @@ set style line 1\
 	linecolor rgb "#49434a"
 
 set style line 2\
-	linecolor rgb "#a5cdd4"
+	linecolor rgb "#0C3559"
 	
 set style line 3\
-	linecolor rgb "#ffea75"
+	linecolor rgb "#BF05F2"
 
 set style line 4\
 	linecolor rgb "#F22727"
 
 set style line 5\
-	linecolor rgb "#dfc3e6"
+	linecolor rgb "#8E2800"
 
 set style line 6\
 	linecolor rgb "#034001"
@@ -42,8 +42,8 @@ plot \
 "src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg-21.txt" using 8:xtic(1) with histogram linestyle 7 fillstyle pattern 6 title "HC-LSTM",\
 "src/Plot/NSL-KDD-1parameter/5class/NSL-KDD_5class_Avg-21.txt" using 9:xtic(1) with histogram linestyle 8 fillstyle pattern 6 title "DE-LSTM"
 
-set terminal png
-set output "src/Plot/NSL-KDD-1parameter/5class/5classAccuracy-21.png"
+set terminal pdf
+set output "src/Plot/NSL-KDD-1parameter/5class/5classAccuracy-21.pdf"
 replot
 
 #output  ------------------------------------------------------------------------------------------------------------------------

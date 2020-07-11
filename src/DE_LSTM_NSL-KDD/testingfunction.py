@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch
 from accuracyfunction import accuracy
 
-def testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, name, batchSize, number):
+def testing(outputLayer, train_noStringTemp_X, x_test_tensor, y_test_tensor, cuda, name, batchSize, number, F, CR):
     if name == '0':
         lstm = torch.load('src/DE_LSTM_NSL-KDD/result/DE_LSTM_' + outputLayer + '_bs' + batchSize + '-' + number + '.pkl')
     else:

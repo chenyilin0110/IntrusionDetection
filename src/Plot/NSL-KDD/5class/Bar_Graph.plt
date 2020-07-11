@@ -10,16 +10,16 @@ set style line 1\
 	linecolor rgb "#49434a"
 
 set style line 2\
-	linecolor rgb "#a5cdd4"
+	linecolor rgb "#0C3559"
 	
 set style line 3\
-	linecolor rgb "#ffea75"
+	linecolor rgb "#BF05F2"
 
 set style line 4\
 	linecolor rgb "#F22727"
 
 set style line 5\
-	linecolor rgb "#dfc3e6"
+	linecolor rgb "#8E2800"
 
 set style line 6\
 	linecolor rgb "#034001"
@@ -31,7 +31,7 @@ set style line 8\
 	linecolor rgb "#F26D9E"
 
 set style line 9\
-	linecolor rgb "#85E7F2"
+	linecolor rgb "#F2845C"
 
 set style line 10\
 	linecolor rgb "#7ED955"

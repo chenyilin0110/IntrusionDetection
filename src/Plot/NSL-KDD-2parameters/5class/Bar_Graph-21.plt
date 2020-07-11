@@ -10,10 +10,10 @@ set style line 1\
 	linecolor rgb "#49434a"
 
 set style line 2\
-	linecolor rgb "#a5cdd4"
+	linecolor rgb "#0C3559"
 	
 set style line 3\
-	linecolor rgb "#ffea75"
+	linecolor rgb "#BF05F2"
 
 set style line 4\
 	linecolor rgb "#F22727"

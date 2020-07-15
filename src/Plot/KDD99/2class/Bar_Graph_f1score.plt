@@ -51,13 +51,13 @@ set terminal pdf
 set output "src/Plot/KDD99/2class/2classF1-score.pdf"
 
 plot \
-"src/Plot/KDD99/2class/f1-score.txt" using 8:xtic(1) with histogram linestyle 7 fillstyle pattern 6 title "Naive-Bayes",\
-"src/Plot/KDD99/2class/f1-score.txt" using 2:xtic(1) with histogram linestyle 1 fillstyle pattern 6 title "DAE",\
-"src/Plot/KDD99/2class/f1-score.txt" using 4:xtic(1) with histogram linestyle 3 fillstyle pattern 6 title "DNN",\
-"src/Plot/KDD99/2class/f1-score.txt" using 5:xtic(1) with histogram linestyle 4 title "DE-DNN",\
-"src/Plot/KDD99/2class/f1-score.txt" using 3:xtic(1) with histogram linestyle 2 fillstyle pattern 6 title "SNDAE",\
-"src/Plot/KDD99/2class/f1-score.txt" using 10:xtic(1) with histogram linestyle 9 fillstyle pattern 6 title "SVM",\
-"src/Plot/KDD99/2class/f1-score.txt" using 6:xtic(1) with histogram linestyle 5 fillstyle pattern 6 title "LSTM",\
-"src/Plot/KDD99/2class/f1-score.txt" using 11:xtic(1) with histogram linestyle 10 fillstyle pattern 6 title "KNN",\
-"src/Plot/KDD99/2class/f1-score.txt" using 9:xtic(1) with histogram linestyle 8 fillstyle pattern 6 title "Random-Forest",\
-"src/Plot/KDD99/2class/f1-score.txt" using 7:xtic(1) with histogram linestyle 6 title "DE-LSTM"
+"src/Plot/KDD99/2class/KDD99_2class_f1-score.txt" using 8:xtic(1) with histogram linestyle 7 fillstyle pattern 6 title "Naive-Bayes",\
+"src/Plot/KDD99/2class/KDD99_2class_f1-score.txt" using 2:xtic(1) with histogram linestyle 1 fillstyle pattern 6 title "DAE",\
+"src/Plot/KDD99/2class/KDD99_2class_f1-score.txt" using 4:xtic(1) with histogram linestyle 3 fillstyle pattern 6 title "DNN",\
+"src/Plot/KDD99/2class/KDD99_2class_f1-score.txt" using 5:xtic(1) with histogram linestyle 4 title "DE-DNN",\
+"src/Plot/KDD99/2class/KDD99_2class_f1-score.txt" using 3:xtic(1) with histogram linestyle 2 fillstyle pattern 6 title "SNDAE",\
+"src/Plot/KDD99/2class/KDD99_2class_f1-score.txt" using 10:xtic(1) with histogram linestyle 9 fillstyle pattern 6 title "SVM",\
+"src/Plot/KDD99/2class/KDD99_2class_f1-score.txt" using 6:xtic(1) with histogram linestyle 5 fillstyle pattern 6 title "LSTM",\
+"src/Plot/KDD99/2class/KDD99_2class_f1-score.txt" using 11:xtic(1) with histogram linestyle 10 fillstyle pattern 6 title "KNN",\
+"src/Plot/KDD99/2class/KDD99_2class_f1-score.txt" using 9:xtic(1) with histogram linestyle 8 fillstyle pattern 6 title "Random-Forest",\
+"src/Plot/KDD99/2class/KDD99_2class_f1-score.txt" using 7:xtic(1) with histogram linestyle 6 title "DE-LSTM"

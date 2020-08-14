@@ -18,10 +18,9 @@ warnings.filterwarnings("ignore")
 # set filename outputLayer testing iteration
 trainData = sys.argv[1]
 testData = sys.argv[2]
-testData_21 = sys.argv[3]
-outputLayer = sys.argv[4]
-epoch = sys.argv[5]
-learning_rate = sys.argv[6]
+outputLayer = sys.argv[3]
+epoch = sys.argv[4]
+learning_rate = sys.argv[5]
 
 # can use cuda or not
 cuda = torch.cuda.is_available()

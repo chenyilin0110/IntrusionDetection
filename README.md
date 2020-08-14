@@ -23,8 +23,7 @@
 >> #### NSL-KDD：
 >> NSL-KDD 已經將資料分割成 **三** 個檔案，分別為一個訓練資料和兩個測試資料。
 >>> * trainData：訓練資料 ex:train
->>> * testData：測試資料 ex:test
->>> * testData_21：測試資料 ex:test-21
+>>> * testData：測試資料 ex:test or test-21(A subset of the KDDTest+)
 
 >> #### CIDDS-001：
 >> CIDDS-001 已經將資料分割成 **三** 個檔案，分別為一個訓練資料和兩個測試資料。
